@@ -21,6 +21,7 @@
 
 #include <QFileDialog>
 #include <QFile>
+#include <QMessageBox>
 
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
@@ -246,4 +247,25 @@ void Dialog::on_pushButtonSettings_clicked()
     restoreSettings();
 }
 
+void Dialog::on_pushButtonInfo_clicked()
+{
+    QMessageBox msgBox(this);
 
+    msgBox.setWindowTitle("Info DLTRelais");
+    msgBox.setTextFormat(Qt::RichText);
+
+    QString text;
+    text += "Information and Documentation can be found here:<br>";
+    text += "<br>";
+    text += "<a href='https://github.com/alexmucde/DLTRelais'>https://github.com/alexmucde/DLTRelais</a><br>";
+    text += "<br>";
+    text += "This SW is licensed under GPLv3.<br>";
+    text += "<br>";
+    text += "(C) 2021 Alexander Wenzel <alex@eli2.de>";
+
+    msgBox.setText(text);
+
+    msgBox.setStandardButtons(QMessageBox::Ok);
+
+    msgBox.exec();
+}

@@ -61,6 +61,8 @@ private slots:
 
     void on_pushButtonSettings_clicked();
 
+    void on_pushButtonInfo_clicked();
+
 private:
     Ui::Dialog *ui;
 
