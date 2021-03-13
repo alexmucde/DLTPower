@@ -9,16 +9,22 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    dltminiserver.cpp \
+    dltrelais.cpp \
     main.cpp \
     dialog.cpp \
-    settings.cpp
+    settingsdialog.cpp
 
 HEADERS += \
     dialog.h \
-    settings.h
+    dltminiserver.h \
+    dltrelais.h \
+    settingsdialog.h \
+    version.h
 
 FORMS += \
-    dialog.ui
+    dialog.ui \
+    settingsdialog.ui
 
 TRANSLATIONS += \
     DLTMultimeter_en_DE.ts

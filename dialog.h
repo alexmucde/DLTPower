@@ -1,3 +1,18 @@
+/**
+ * @licence app begin@
+ * Copyright (C) 2021 Alexander Wenzel
+ *
+ * This file is part of the DLT Relais project.
+ *
+ * \copyright
+ * See LICENSE file.
+ *
+ * \author Alexander Wenzel <alexander.wenzel@eli2.de> 2021
+ *
+ * \file dialog.h
+ * @licence end@
+ */
+
 #ifndef DIALOG_H
 #define DIALOG_H
 
@@ -5,6 +20,10 @@
 #include <QSerialPort>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QSettings>
+
+#include "dltrelais.h"
+#include "dltminiserver.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -19,53 +38,37 @@ public:
     ~Dialog();
 
 private slots:
-    void on_pushButtonUpdate_clicked();
 
-    void on_pushButtonConnect_clicked();
-
-    void on_pushButtonDisconnect_clicked();
-
-    void readData();
-
-    void on_pushButtonOpenDLT_clicked();
-
-    void on_pushButtonCloseDLT_clicked();
-
-    void newConnection();
-    void connected();
-    void disconnected();
-
-    void on_pushButtonRelais1On_clicked();
-
-    void on_pushButtonRelais1Off_clicked();
-
+    void on_checkBoxRelais1_clicked(bool checked);
     void on_pushButtonRelais1Trigger_clicked();
 
-    void on_pushButtonRelais2On_clicked();
-
-    void on_pushButtonRelais2Off_clicked();
-
+    void on_checkBoxRelais2_clicked(bool checked);
     void on_pushButtonRelais2Trigger_clicked();
 
-    void on_pushButtonRelais3On_clicked();
-
-    void on_pushButtonRelais3Off_clicked();
-
+    void on_checkBoxRelais3_clicked(bool checked);
     void on_pushButtonRelais3Trigger_clicked();
+
+    void statusRelais(QString text);
+    void statusDlt(QString text);
+
+    void on_pushButtonDefaultSettings_clicked();
+
+    void on_pushButtonLoadSettings_clicked();
+
+    void on_pushButtonSaveSettings_clicked();
+
+    void on_pushButtonStart_clicked();
+    void on_pushButtonStop_clicked();
+
+    void on_pushButtonSettings_clicked();
 
 private:
     Ui::Dialog *ui;
 
-    QSerialPort serialPort;
-    QByteArray rawData;
-    float value,lastValue;
-    QString unit;
-    QTcpServer tcpServer;
-    QTcpSocket *tcpSocket;
+    DLTRelais dltRelais;
+    DLTMiniServer dltMiniServer;
 
-    void calculateValue();
-    int calculateNumber(unsigned char a,unsigned char b);
-    void sendValue(QString text);
-    void sendValue2(QString text1,QString text2);
+    void restoreSettings();
+    void updateSettings();
 };
 #endif // DIALOG_H
