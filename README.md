@@ -44,7 +44,7 @@ https://github.com/sponsors/alexmucde
 
 Paypal Donation:
 
-https://www.paypal.com/donate?hosted_button_id=YBWSNXYWJJP2Q 
+[![Donations](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?hosted_button_id=YBWSNXYWJJP2Q)https://www.paypal.com/donate?hosted_button_id=YBWSNXYWJJP2Q
 
 ## Copyright
 
