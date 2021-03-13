@@ -4,10 +4,9 @@
  *
  * This file is part of the DLT Relais project.
  *
- * \copyright
- * See LICENSE file.
+ * \copyright This code is licensed under GPLv3.
  *
- * \author Alexander Wenzel <alexander.wenzel@eli2.de> 2021
+ * \author Alexander Wenzel <alex@eli2.de>
  *
  * \file main.h
  * @licence end@
