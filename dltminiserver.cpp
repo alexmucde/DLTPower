@@ -36,11 +36,19 @@ void DLTMiniServer::start()
         return;
 
     tcpServer.setMaxPendingConnections(1);
-    tcpServer.listen(QHostAddress::Any,port);
-    connect(&tcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
+    if(tcpServer.listen(QHostAddress::Any,port)==true)
+    {
+        connect(&tcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
 
-    status(QString("listening"));
-    qDebug() << "DLTMiniServer: listening" << port;
+        status("listening");
+        qDebug() << "DLTMiniServer: listening" << port;
+    }
+    else
+    {
+        status("error");
+
+        qDebug() << "DLTMiniServer: errorg" << port;
+    }
 }
 
 void DLTMiniServer::stop()
@@ -55,7 +63,7 @@ void DLTMiniServer::stop()
     disconnect(&tcpServer, SIGNAL(newConnection()), this, SLOT(newConnection()));
     tcpServer.close();
 
-    status(QString("stopped"));
+    status("stopped");
     qDebug() << "DLTMiniServer: stopped" << port;
 }
 
@@ -144,7 +152,7 @@ void DLTMiniServer::newConnection()
     connect(tcpSocket, SIGNAL(disconnected()), this, SLOT(disconnected()));
     tcpServer.pauseAccepting();
 
-    status("Connected");
+    status("connected");
 }
 
 void DLTMiniServer::connected()
@@ -161,7 +169,7 @@ void DLTMiniServer::disconnected()
     tcpSocket = 0;
     tcpServer.resumeAccepting();
 
-    status("Listening");
+    status("listening");
 }
 
 void DLTMiniServer::sendValue(QString text)
