@@ -40,28 +40,22 @@ private slots:
 
     void on_checkBoxRelais1_clicked(bool checked);
     void on_pushButtonRelais1Trigger_clicked();
-
     void on_checkBoxRelais2_clicked(bool checked);
     void on_pushButtonRelais2Trigger_clicked();
-
     void on_checkBoxRelais3_clicked(bool checked);
     void on_pushButtonRelais3Trigger_clicked();
 
     void statusRelais(QString text);
     void statusDlt(QString text);
 
+    void on_pushButtonSettings_clicked();
     void on_pushButtonDefaultSettings_clicked();
-
     void on_pushButtonLoadSettings_clicked();
-
     void on_pushButtonSaveSettings_clicked();
+    void on_pushButtonInfo_clicked();
 
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
-
-    void on_pushButtonSettings_clicked();
-
-    void on_pushButtonInfo_clicked();
 
 private:
     Ui::Dialog *ui;

@@ -13,20 +13,20 @@
  */
 
 #include <QSerialPortInfo>
+#include <QFileDialog>
+#include <QFile>
+#include <QMessageBox>
 
 #include "dialog.h"
 #include "ui_dialog.h"
 #include "settingsdialog.h"
 #include "version.h"
 
-#include <QFileDialog>
-#include <QFile>
-#include <QMessageBox>
-
 Dialog::Dialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
     , dltRelais(this)
+    , dltMiniServer(this)
 {
     ui->setupUi(this);
 
@@ -240,11 +240,11 @@ void Dialog::on_pushButtonSettings_clicked()
 
     dlg.restoreSettings(&dltRelais, &dltMiniServer);
 
-    dlg.exec();
-
-    dlg.backupSettings(&dltRelais, &dltMiniServer);
-
-    restoreSettings();
+    if(dlg.exec()==QDialog::Accepted)
+    {
+        dlg.backupSettings(&dltRelais, &dltMiniServer);
+        restoreSettings();
+    }
 }
 
 void Dialog::on_pushButtonInfo_clicked()
@@ -255,9 +255,11 @@ void Dialog::on_pushButtonInfo_clicked()
     msgBox.setTextFormat(Qt::RichText);
 
     QString text;
+    text += QString("Version: %1<br>").arg(DLT_RELAIS_VERSION);
+    text += "<br>";
     text += "Information and Documentation can be found here:<br>";
     text += "<br>";
-    text += "<a href='https://github.com/alexmucde/DLTRelais'>https://github.com/alexmucde/DLTRelais</a><br>";
+    text += "<a href='https://github.com/alexmucde/DLTRelais'>Github DLTRelais</a><br>";
     text += "<br>";
     text += "This SW is licensed under GPLv3.<br>";
     text += "<br>";

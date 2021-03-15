@@ -45,7 +45,8 @@ void DLTRelais::start()
     else
     {
         qDebug() << "DLTRelais: Failed to open interface" << interface;
-        status(QString("interface error"));
+        status(QString("error"));
+        return;
     }
 
     status(QString("started"));
