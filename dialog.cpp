@@ -110,11 +110,55 @@ void Dialog::on_pushButtonStop_clicked()
 void Dialog::statusRelais(QString text)
 {
     ui->lineEditStatus->setText(text);
+
+    if(text == "" || text == "stopped")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::white);
+        ui->lineEditStatus->setPalette(palette);
+    }
+    if(text == "started")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::green);
+        ui->lineEditStatus->setPalette(palette);
+    }
+    if(text == "error")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::red);
+        ui->lineEditStatus->setPalette(palette);
+    }
 }
 
 void Dialog::statusDlt(QString text)
 {
     ui->lineEditStatusDLT->setText(text);
+
+    if(text == "" || text == "stopped")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::white);
+        ui->lineEditStatusDLT->setPalette(palette);
+    }
+    if(text == "listening")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::yellow);
+        ui->lineEditStatusDLT->setPalette(palette);
+    }
+    if(text == "connected")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::green);
+        ui->lineEditStatusDLT->setPalette(palette);
+    }
+    if(text == "error")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::red);
+        ui->lineEditStatusDLT->setPalette(palette);
+    }
 }
 
 void Dialog::on_checkBoxRelais1_clicked(bool checked)
