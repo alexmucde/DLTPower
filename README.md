@@ -32,7 +32,30 @@ The Arduino SW is based on the Wemos Library:
 
 Compile, upload and run the SW with the [Arduino IDE](https://www.arduino.cc/en/software).
 
-Copy the Wemos Library into the Arduino Libraries folder before compiling the [DLTRelais.ino](https://github.com/alexmucde/DLTRelais/blob/main/arduino/DLTRelais/DLTRelais.ino) sketch.
+Clone or copy the Wemos Library into the Arduino Libraries folder before compiling the [DLTRelais.ino](https://github.com/alexmucde/DLTRelais/blob/main/arduino/DLTRelais/DLTRelais.ino) sketch.
+
+### Features
+
+The Arduino SW provides the following Features:
+
+* Activate and deactivate three Relais
+* Trigger the Relais for short time (500ms)
+* If a button shield is connected, a short press triggers the Relais connected to pin D1
+* If a button shield is connected, a long ppress toggles the Relais connected to pin D2
+
+### Protocol
+
+The Wemos D1 Mini is connected by a virtual serial device on USB. The serial port settings are 115.200 Baud with 8N1 and no handshake.
+
+A USB driver is needed which can be found here:
+
+https://www.wemos.cc/en/latest/ch340_driver.html
+
+The Arduino SW understands the following commands:
+
+* "D11\n", "D21\n"  or "D61\n"  Activate Relais connected to pin D1, D2 or D6
+* "D10\n", "D20\n"  or "D60\n" Deactivate Relais connected to pin D1, D2 or D6
+* "D1T\n", "D2T\n"  or "D6T\n" Trigger Relais connected to pin D1, D2 or D6 for 500ms
 
 ## Installation
 
