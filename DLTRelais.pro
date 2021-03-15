@@ -26,7 +26,8 @@ HEADERS += \
 
 FORMS += \
     dialog.ui \
-    infodialog.ui
+    infodialog.ui \
+    settingsdialog.ui
 
 TRANSLATIONS += \
     DLTMultimeter_en_DE.ts
@@ -41,4 +42,3 @@ DISTFILES += \
     DLTRelais_en_DE.ts \
     LICENSE \
     README.md \
-    settingsdialog.ui
