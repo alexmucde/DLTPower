@@ -11,7 +11,6 @@ CONFIG += c++11
 SOURCES += \
     dltminiserver.cpp \
     dltrelais.cpp \
-    infodialog.cpp \
     main.cpp \
     dialog.cpp \
     settingsdialog.cpp
@@ -20,13 +19,11 @@ HEADERS += \
     dialog.h \
     dltminiserver.h \
     dltrelais.h \
-    infodialog.h \
     settingsdialog.h \
     version.h
 
 FORMS += \
     dialog.ui \
-    infodialog.ui \
     settingsdialog.ui
 
 TRANSLATIONS += \
