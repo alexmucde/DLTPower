@@ -14,11 +14,11 @@ https://github.com/GENIVI/dlt-viewer
 
 The following parts are needed to setup a Relais board:
 
-* Wemos D1 Mini [Amazon Germany](https://amzn.to/3thvzYd) [AliExpress](https://best.aliexpress.com)
-* 1-3 Wemos Relais Shields [Amazon Germany](https://amzn.to/3csEJdE) [AliExpress](https://best.aliexpress.com)
-* Tripler Base or Dual Base [Amazon Germany](https://amzn.to/3eyI9Ov) [AliExpress](https://best.aliexpress.com)
-* Optional: 1-Button Shield [AliExpress](https://best.aliexpress.com)
-* Optional: Buzzer Shield [AliExpress](https://best.aliexpress.com)
+* Wemos D1 Mini [Amazon Germany](https://amzn.to/3thvzYd) [AliExpress](https://s.click.aliexpress.com/e/_AXoYOK)
+* 1-3 Wemos Relais Shields [Amazon Germany](https://amzn.to/3csEJdE) [AliExpress](https://s.click.aliexpress.com/e/_9JeBua)
+* Triple Base or Dual Base [Amazon Germany](https://amzn.to/3eyI9Ov) [AliExpress Triple Base](https://s.click.aliexpress.com/e/_AXI4VC) [AliExpress Dual Base](https://s.click.aliexpress.com/e/_9In2Z0)
+* Optional: 1-Button Shield [AliExpress](https://best.aliexpress.com) [AliExpress](https://s.click.aliexpress.com/e/_9INwTG)
+* Optional: Buzzer Shield [AliExpress](https://best.aliexpress.com) [AliExpress](https://s.click.aliexpress.com/e/_A7sRs2)
 
 If more than one Relais Shields are used, the pin D1 must be removed and connected to D2 (second Relais) or D6 (third Relais).
 
@@ -77,7 +77,7 @@ If you find this SW useful and you want to donate my work please select one of t
 
 Paypal Donation:
 
-[![Donations](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?hosted_button_id=YBWSNXYWJJP2Q)https://www.paypal.com/donate?hosted_button_id=YBWSNXYWJJP2Q
+[![Donations](https://www.paypalobjects.com/en_US/DK/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate?hosted_button_id=YBWSNXYWJJP2Q)
 
 Github Sponsors:
 
