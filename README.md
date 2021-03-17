@@ -17,8 +17,8 @@ The following parts are needed to setup a Relais board:
 * Wemos D1 Mini [Amazon Germany](https://amzn.to/3thvzYd) [AliExpress](https://s.click.aliexpress.com/e/_AXoYOK)
 * 1-3 Wemos Relais Shields [Amazon Germany](https://amzn.to/3csEJdE) [AliExpress](https://s.click.aliexpress.com/e/_9JeBua)
 * Triple Base or Dual Base [Amazon Germany](https://amzn.to/3eyI9Ov) [AliExpress Triple Base](https://s.click.aliexpress.com/e/_AXI4VC) [AliExpress Dual Base](https://s.click.aliexpress.com/e/_9In2Z0)
-* Optional: 1-Button Shield [AliExpress](https://best.aliexpress.com) [AliExpress](https://s.click.aliexpress.com/e/_9INwTG)
-* Optional: Buzzer Shield [AliExpress](https://best.aliexpress.com) [AliExpress](https://s.click.aliexpress.com/e/_A7sRs2)
+* Optional: 1-Button Shield [AliExpress](https://s.click.aliexpress.com/e/_9INwTG)
+* Optional: Buzzer Shield [AliExpress](https://s.click.aliexpress.com/e/_A7sRs2)
 
 If more than one Relais Shields are used, the pin D1 must be removed and connected to D2 (second Relais) or D6 (third Relais).
 
