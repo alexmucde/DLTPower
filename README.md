@@ -6,6 +6,8 @@ It provides an interface to DLT for Logging and Test Automation.
 
 ![Image of DLTRelais](https://github.com/alexmucde/DLTRelais/blob/main/doc/images/DLTRelais.jpg)
 
+![Image of Wemos Relais Board](https://github.com/alexmucde/DLTRelais/blob/main/doc/images/WemosRelaisBoard.jpg)
+
 For further information about DLT visit the DLT Viewer project:
 
 https://github.com/GENIVI/dlt-viewer
