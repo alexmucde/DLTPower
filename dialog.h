@@ -38,32 +38,32 @@ public:
 
 private slots:
 
+    // Relais control
     void on_checkBoxRelais1_clicked(bool checked);
     void on_pushButtonRelais1Trigger_clicked();
     void on_checkBoxRelais2_clicked(bool checked);
     void on_pushButtonRelais2Trigger_clicked();
     void on_checkBoxRelais3_clicked(bool checked);
     void on_pushButtonRelais3Trigger_clicked();
+    void on_checkBoxRelais4_clicked(bool checked);
+    void on_pushButtonRelais4Trigger_clicked();
+    void on_checkBoxRelais5_clicked(bool checked);
+    void on_pushButtonRelais5Trigger_clicked();
 
+    // Status of Relais and DLT connection
     void statusRelais(QString text);
     void statusDlt(QString text);
 
+    // Settings and Info
     void on_pushButtonSettings_clicked();
     void on_pushButtonDefaultSettings_clicked();
     void on_pushButtonLoadSettings_clicked();
     void on_pushButtonSaveSettings_clicked();
     void on_pushButtonInfo_clicked();
 
+    // Start and stop communication
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
-
-    void on_pushButtonRelais4Trigger_clicked();
-
-    void on_pushButtonRelais5Trigger_clicked();
-
-    void on_checkBoxRelais4_clicked(bool checked);
-
-    void on_checkBoxRelais5_clicked(bool checked);
 
 private:
     Ui::Dialog *ui;
@@ -71,6 +71,7 @@ private:
     DLTRelais dltRelais;
     DLTMiniServer dltMiniServer;
 
+    // Settings
     void restoreSettings();
     void updateSettings();
 };
