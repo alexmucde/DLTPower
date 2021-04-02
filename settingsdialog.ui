@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>342</width>
-    <height>279</height>
+    <width>385</width>
+    <height>373</height>
    </rect>
   </property>
   <property name="font">
@@ -130,6 +130,26 @@
        </item>
        <item>
         <widget class="QLineEdit" name="lineEditRelaisName3"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>Relais Name 4:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditRelaisName4"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Relais Name 5:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditRelaisName5"/>
        </item>
        <item>
         <spacer name="verticalSpacer_2">

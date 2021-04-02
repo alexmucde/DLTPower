@@ -74,6 +74,8 @@ void Dialog::restoreSettings()
     ui->lineEditRelaisName1->setText(dltRelais.getRelaisName(1));
     ui->lineEditRelaisName2->setText(dltRelais.getRelaisName(2));
     ui->lineEditRelaisName3->setText(dltRelais.getRelaisName(3));
+    ui->lineEditRelaisName4->setText(dltRelais.getRelaisName(4));
+    ui->lineEditRelaisName5->setText(dltRelais.getRelaisName(5));
 
 }
 
@@ -109,25 +111,80 @@ void Dialog::on_pushButtonStop_clicked()
 
 void Dialog::statusRelais(QString text)
 {
-    ui->lineEditStatus->setText(text);
-
-    if(text == "" || text == "stopped")
+    if(text=="R10\r\n")
+    {
+        ui->checkBoxRelais1->setChecked(false);
+        return;
+    }
+    else if(text=="R11\r\n")
+    {
+        ui->checkBoxRelais1->setChecked(true);
+        return;
+    }
+    else if(text=="R1T\r\n")
+    {
+        return;
+    }
+    else if(text=="R20\r\n")
+    {
+        ui->checkBoxRelais2->setChecked(false);
+        return;
+    }
+    else if(text=="R21\r\n")
+    {
+        ui->checkBoxRelais2->setChecked(true);
+        return;
+    }
+    else if(text=="R30\r\n")
+    {
+        ui->checkBoxRelais3->setChecked(false);
+        return;
+    }
+    else if(text=="R31\r\n")
+    {
+        ui->checkBoxRelais3->setChecked(true);
+        return;
+    }
+    else if(text=="R40\r\n")
+    {
+        ui->checkBoxRelais4->setChecked(false);
+        return;
+    }
+    else if(text=="R41\r\n")
+    {
+        ui->checkBoxRelais4->setChecked(true);
+        return;
+    }
+    else if(text=="R50\r\n")
+    {
+        ui->checkBoxRelais5->setChecked(false);
+        return;
+    }
+    else if(text=="R51\r\n")
+    {
+        ui->checkBoxRelais5->setChecked(true);
+        return;
+    }
+    else if(text == "" || text == "stopped")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::white);
         ui->lineEditStatus->setPalette(palette);
+        ui->lineEditStatus->setText(text);
     }
-    if(text == "started")
+    else if(text == "started")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::green);
         ui->lineEditStatus->setPalette(palette);
+        ui->lineEditStatus->setText(text);
     }
-    if(text == "error")
+    else if(text == "error")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::red);
         ui->lineEditStatus->setPalette(palette);
+        ui->lineEditStatus->setText(text);
     }
 }
 
@@ -141,19 +198,19 @@ void Dialog::statusDlt(QString text)
         palette.setColor(QPalette::Base,Qt::white);
         ui->lineEditStatusDLT->setPalette(palette);
     }
-    if(text == "listening")
+    else if(text == "listening")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::yellow);
         ui->lineEditStatusDLT->setPalette(palette);
     }
-    if(text == "connected")
+    else if(text == "connected")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::green);
         ui->lineEditStatusDLT->setPalette(palette);
     }
-    if(text == "error")
+    else if(text == "error")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::red);
@@ -224,6 +281,47 @@ void Dialog::on_pushButtonRelais3Trigger_clicked()
     dltMiniServer.sendValue2(dltRelais.getRelaisName(3),"Trigger");
 }
 
+void Dialog::on_pushButtonRelais4Trigger_clicked()
+{
+    dltRelais.trigger(4);
+    ui->checkBoxRelais4->setChecked(false);
+    dltMiniServer.sendValue2(dltRelais.getRelaisName(4),"Trigger");
+}
+
+void Dialog::on_pushButtonRelais5Trigger_clicked()
+{
+    dltRelais.trigger(5);
+    ui->checkBoxRelais5->setChecked(false);
+    dltMiniServer.sendValue2(dltRelais.getRelaisName(5),"Trigger");
+}
+
+void Dialog::on_checkBoxRelais4_clicked(bool checked)
+{
+    if(checked)
+    {
+        dltRelais.on(4);
+        dltMiniServer.sendValue2(dltRelais.getRelaisName(4),"On");
+    }
+    else
+    {
+        dltRelais.off(4);
+        dltMiniServer.sendValue2(dltRelais.getRelaisName(4),"Off");
+    }
+}
+
+void Dialog::on_checkBoxRelais5_clicked(bool checked)
+{
+    if(checked)
+    {
+        dltRelais.on(5);
+        dltMiniServer.sendValue2(dltRelais.getRelaisName(5),"On");
+    }
+    else
+    {
+        dltRelais.off(5);
+        dltMiniServer.sendValue2(dltRelais.getRelaisName(5),"Off");
+    }
+}
 void Dialog::on_pushButtonDefaultSettings_clicked()
 {
     dltRelais.clearSettings();
@@ -315,3 +413,4 @@ void Dialog::on_pushButtonInfo_clicked()
 
     msgBox.exec();
 }
+

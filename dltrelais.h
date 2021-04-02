@@ -19,6 +19,7 @@
 #include <QXmlStreamWriter>
 #include <QXmlStreamReader>
 #include <QSerialPort>
+#include <QTimer>
 
 class DLTRelais : public QObject
 {
@@ -37,8 +38,8 @@ public:
     QString getInterface() { return interface; }
     void setInterface(QString interface) { this->interface = interface; }
 
-    QString getRelaisName(int num) { if(num>0 && num<4) return relaisName[num-1]; else return QString(); }
-    void setRelaisName(int num,const QString &name) { if(num>0 && num<4) this->relaisName[num-1] = name; }
+    QString getRelaisName(int num) { if(num>0 && num<6) return relaisName[num-1]; else return QString(); }
+    void setRelaisName(int num,const QString &name) { if(num>0 && num<6) this->relaisName[num-1] = name; }
 
     void clearSettings();
     void writeSettings(QXmlStreamWriter &xml);
@@ -52,12 +53,18 @@ private slots:
 
     void readyRead();
 
+    void timeout();
+
 private:
 
     QSerialPort serialPort;
 
     QString interface;
-    QString relaisName[3];
+    QString relaisName[5];
+
+    unsigned int watchDogCounter,watchDogCounterLast;
+
+    QTimer timer;
 };
 
 #endif // DLT_RELAIS_H
