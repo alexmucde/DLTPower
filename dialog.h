@@ -57,6 +57,14 @@ private slots:
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
 
+    void on_pushButtonRelais4Trigger_clicked();
+
+    void on_pushButtonRelais5Trigger_clicked();
+
+    void on_checkBoxRelais4_clicked(bool checked);
+
+    void on_checkBoxRelais5_clicked(bool checked);
+
 private:
     Ui::Dialog *ui;
 

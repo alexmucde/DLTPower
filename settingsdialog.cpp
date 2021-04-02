@@ -72,6 +72,8 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais, DLTMiniServer *dltMin
     ui->lineEditRelaisName1->setText(dltRelais->getRelaisName(1));
     ui->lineEditRelaisName2->setText(dltRelais->getRelaisName(2));
     ui->lineEditRelaisName3->setText(dltRelais->getRelaisName(3));
+    ui->lineEditRelaisName4->setText(dltRelais->getRelaisName(4));
+    ui->lineEditRelaisName5->setText(dltRelais->getRelaisName(5));
     ui->comboBoxSerialPort->setCurrentText(dltRelais->getInterface());
 
     /* DLTMiniServer */
@@ -87,6 +89,8 @@ void SettingsDialog::backupSettings(DLTRelais *dltRelais, DLTMiniServer *dltMini
     dltRelais->setRelaisName(1,ui->lineEditRelaisName1->text());
     dltRelais->setRelaisName(2,ui->lineEditRelaisName2->text());
     dltRelais->setRelaisName(3,ui->lineEditRelaisName3->text());
+    dltRelais->setRelaisName(4,ui->lineEditRelaisName4->text());
+    dltRelais->setRelaisName(5,ui->lineEditRelaisName5->text());
 
     /* DLTMiniServer */
     dltMiniServer->setPort(ui->lineEditPort->text().toUShort());
