@@ -55,9 +55,13 @@ https://www.wemos.cc/en/latest/ch340_driver.html
 
 The Arduino SW understands the following commands:
 
-* "D11\n", "D21\n"  or "D61\n"  Activate Relais connected to pin D1, D2 or D6
-* "D10\n", "D20\n"  or "D60\n" Deactivate Relais connected to pin D1, D2 or D6
-* "D1T\n", "D2T\n"  or "D6T\n" Trigger Relais connected to pin D1, D2 or D6 for 500ms
+* "R11\n", "R21\n", "R31\n", "R41\n", "R51\n" Activates Relais connected to pin D1, D2, D6, D7 and D8
+* "R10\n", "R20\n", "R30\n", "R40\n", "R50\n" Deactivates Relais connected to pin D1, D2, D6, D7 and D8
+* "R1T\n", "R2T\n", "R3T\n", "R4T\n", "R5T\n" Trigger Relais connected to pin D1, D2, D6, D7 and D8 for 500ms
+
+The Arduino board sends the status of Relais, when it was triggered with the button with the same command.
+
+The Arduino board sends every second a watchdog signal "WD\n".
 
 ## Installation
 
@@ -84,6 +88,15 @@ Paypal Donation:
 Github Sponsors:
 
 [:heart: Sponsor](https://github.com/sponsors/alexmucde)
+
+## Changes
+
+v0.0.3:
+
+* Support up to 5 Relais
+* Changed communication protocol with Arduino board
+* Added Watchdog
+* Fixed startup problem with Arduino Flash Mode
 
 ## Copyright
 

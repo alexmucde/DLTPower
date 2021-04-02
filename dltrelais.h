@@ -28,43 +28,51 @@ public:
     explicit DLTRelais(QObject *parent = nullptr);
     ~DLTRelais();
 
+    // Start and stop connection
     void start();
     void stop();
 
+    // Trigger Relais
     void trigger(int num);
     void on(int num);
     void off(int num);
 
+    // Interface name
     QString getInterface() { return interface; }
     void setInterface(QString interface) { this->interface = interface; }
 
+    // Relais names
     QString getRelaisName(int num) { if(num>0 && num<6) return relaisName[num-1]; else return QString(); }
     void setRelaisName(int num,const QString &name) { if(num>0 && num<6) this->relaisName[num-1] = name; }
 
+    // Settings
     void clearSettings();
     void writeSettings(QXmlStreamWriter &xml);
     void readSettings(const QString &filename);
 
 signals:
 
+    // Called when status changed
     void status(QString text);
 
 private slots:
 
+    // Serial data available
     void readyRead();
 
+    // Watchdog Timeout
     void timeout();
 
 private:
 
+    // Temporary variables
     QSerialPort serialPort;
-
-    QString interface;
-    QString relaisName[5];
-
+    QTimer timer;
     unsigned int watchDogCounter,watchDogCounterLast;
 
-    QTimer timer;
+    // Settings
+    QString interface;
+    QString relaisName[5];
 };
 
 #endif // DLT_RELAIS_H

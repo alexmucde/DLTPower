@@ -29,6 +29,9 @@ DLTRelais::~DLTRelais()
 
 void DLTRelais::start()
 {
+    // start communication
+
+    // set serial port parameters
     serialPort.setBaudRate(QSerialPort::Baud115200);
     serialPort.setDataBits(QSerialPort::Data8);
     serialPort.setParity(QSerialPort::NoParity);
@@ -36,19 +39,29 @@ void DLTRelais::start()
     serialPort.setFlowControl(QSerialPort::NoFlowControl);
     serialPort.setPortName(interface);
 
+    // open serial port
     if(serialPort.open(QIODevice::ReadWrite)==true)
     {
+        // open with success
+
+        // prevent flash mode of Wemos D1 mini
         serialPort.setDataTerminalReady(false);
-        status(QString("started"));
+
+        // connect slot to receive data from serial port
         connect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
+
+        status(QString("started"));
         qDebug() << "DLTRelais: started" << interface;
     }
     else
     {
+        // open failed
+
         qDebug() << "DLTRelais: Failed to open interface" << interface;
         status(QString("error"));
     }
 
+    // connect slot watchdog timer and start watchdog timer
     connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
     timer.start(3000);
     watchDogCounter = 0;
@@ -57,79 +70,108 @@ void DLTRelais::start()
 
 void DLTRelais::stop()
 {
+    // stop communication
+    status(QString("stopped"));
+    qDebug() << "DLTRelais: stopped" << interface;
 
+    // close serial port, if it is open
     if(serialPort.isOpen())
     {
         serialPort.close();
+
+        // disconnect slot to receive data from serial port
         disconnect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
     }
 
+    // stop watchdog timer
     timer.stop();
     disconnect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
 
-    status(QString("stopped"));
-    qDebug() << "DLTRelais: stopped" << interface;
 }
 
 void DLTRelais::readyRead()
 {
+    // data on serial port was received
+
+    // loop as long as data is available
     while(serialPort.bytesAvailable())
     {
         char data[256];
+
+        // read one line form serial port
         qint64 size = serialPort.readLine(data,sizeof(data));
 
         if(size>0)
+        {
+            // line is not empty
             qDebug() << "DLTRelais: readLine" << data;
 
-
-        if(QString(data) == "WD\r\n")
-        {
-            watchDogCounter++;
-        }
-        else
-        {
-            status(QString(data));
+            if(QString(data) == "WD\r\n")
+            {
+                // watchdog message received
+                watchDogCounter++;
+            }
+            else
+            {
+                // all other messages forward to status signal
+                status(QString(data));
+            }
         }
     }
 }
 
 void DLTRelais::timeout()
 {
+    // watchdog timeout
+
+    // check if watchdog was triggered between last call
     if(watchDogCounter==watchDogCounterLast)
     {
-        qDebug() << "DLTRelais: Watchdog expired try reconnect" ;
+        // no watchdog was received
+        qDebug() << "DLTRelais: Watchdog expired try to reconnect" ;
 
+        // if serial port is open close serial port
         if(serialPort.isOpen())
         {
             serialPort.close();
             disconnect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
         }
 
+        // try to reopen serial port
         if(serialPort.open(QIODevice::ReadWrite)==true)
         {
+            // retry was succesful
+
+            // prevent flash mode of Wemos D1 mini
             serialPort.setDataTerminalReady(false);
+
+            // connect slot to receive data from serial port
             connect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
+
             status(QString("started"));
             qDebug() << "DLTRelais: started" << interface;
         }
         else
         {
+            // retry failed
+
             qDebug() << "DLTRelais: Failed to open interface" << interface;
             status(QString("error"));
         }
+        watchDogCounterLast = watchDogCounter;
     }
-    watchDogCounterLast = watchDogCounter;
 }
 
 void DLTRelais::clearSettings()
 {
+    // clear settings
     for(int num=0;num<5;num++)
         relaisName[num] = QString("Relais%1").arg(num+1);
 }
 
 void DLTRelais::writeSettings(QXmlStreamWriter &xml)
 {
-    /* Write project settings */
+    // Write project settings to XML file
     xml.writeStartElement("DLTRelais");
         xml.writeTextElement("relaisName1",relaisName[0]);
         xml.writeTextElement("relaisName2",relaisName[1]);
@@ -142,6 +184,7 @@ void DLTRelais::writeSettings(QXmlStreamWriter &xml)
 
 void DLTRelais::readSettings(const QString &filename)
 {
+    // read settings from XML file
     bool isDLTRelais = false;
 
     QFile file(filename);
@@ -208,6 +251,9 @@ void DLTRelais::readSettings(const QString &filename)
 
 void DLTRelais::trigger(int num)
 {
+    // trigger a Relais for 500ms
+    qDebug() << "DLTRelais: trigger" << num;
+
     if(num==1)
         serialPort.write("R1T\n");
     else if(num==2)
@@ -218,12 +264,13 @@ void DLTRelais::trigger(int num)
         serialPort.write("R4T\n");
     else if(num==5)
         serialPort.write("R5T\n");
-
-    qDebug() << "DLTRelais: trigger" << num;
 }
 
 void DLTRelais::on(int num)
 {
+    // set Relais to on
+    qDebug() << "DLTRelais: on" << num;
+
     if(num==1)
         serialPort.write("R11\n");
     else if(num==2)
@@ -234,12 +281,13 @@ void DLTRelais::on(int num)
         serialPort.write("R41\n");
     else if(num==5)
         serialPort.write("R51\n");
-
-    qDebug() << "DLTRelais: on" << num;
 }
 
 void DLTRelais::off(int num)
 {
+    // set Relais to off
+    qDebug() << "DLTRelais: off" << num;
+
     if(num==1)
         serialPort.write("R10\n");
     else if(num==2)
@@ -250,6 +298,4 @@ void DLTRelais::off(int num)
         serialPort.write("R40\n");
     else if(num==5)
         serialPort.write("R50\n");
-
-    qDebug() << "DLTRelais: off" << num;
 }

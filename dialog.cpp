@@ -30,22 +30,26 @@ Dialog::Dialog(QWidget *parent)
 {
     ui->setupUi(this);
 
+    // clear settings
     on_pushButtonDefaultSettings_clicked();
 
+    // set window title with version information
     setWindowTitle(QString("DLTRelais %1").arg(DLT_RELAIS_VERSION));
 
+    // disable stop button at startup
     ui->pushButtonStop->setDisabled(true);
 
+    // connect status slots
     connect(&dltRelais, SIGNAL(status(QString)), this, SLOT(statusRelais(QString)));
     connect(&dltMiniServer, SIGNAL(status(QString)), this, SLOT(statusDlt(QString)));
 
-    /*  load global settings */
+    //  load global settings from registry
     QSettings settings;
     QString filename = settings.value("autoload/filename").toString();
     bool autoload = settings.value("autoload/checked").toBool();
     bool autostart = settings.value("autostart/checked").toBool();
 
-    /* autoload settings */
+    // autoload settings, when activated in global settings
     if(autoload)
     {
         dltRelais.readSettings(filename);
@@ -53,7 +57,7 @@ Dialog::Dialog(QWidget *parent)
         restoreSettings();
     }
 
-    /* autostart */
+    // autostart, when activated in global settings
     if(autostart)
     {
         on_pushButtonStart_clicked();
@@ -62,6 +66,8 @@ Dialog::Dialog(QWidget *parent)
 
 Dialog::~Dialog()
 {
+
+    // disconnect status slots
     disconnect(&dltRelais, SIGNAL(status(QString)), this, SLOT(statusRelais(QString)));
     disconnect(&dltMiniServer, SIGNAL(status(QString)), this, SLOT(statusDlt(QString)));
 
@@ -70,7 +76,7 @@ Dialog::~Dialog()
 
 void Dialog::restoreSettings()
 {
-    /* DLTRelais */
+    // update names of Relais
     ui->lineEditRelaisName1->setText(dltRelais.getRelaisName(1));
     ui->lineEditRelaisName2->setText(dltRelais.getRelaisName(2));
     ui->lineEditRelaisName3->setText(dltRelais.getRelaisName(3));
@@ -85,11 +91,15 @@ void Dialog::updateSettings()
 
 void Dialog::on_pushButtonStart_clicked()
 {
+    // start communication
     updateSettings();
 
+    // start Relais and DLT communication
     dltRelais.start();
     dltMiniServer.start();
 
+    // disable settings and start button
+    // enable stop button
     ui->pushButtonStart->setDisabled(true);
     ui->pushButtonStop->setDisabled(false);
     ui->pushButtonDefaultSettings->setDisabled(true);
@@ -99,9 +109,14 @@ void Dialog::on_pushButtonStart_clicked()
 
 void Dialog::on_pushButtonStop_clicked()
 {
+    // stop communication
+
+    // stop Relais and DLT communication
     dltRelais.stop();
     dltMiniServer.stop();
 
+    // enable settings and start button
+    // disable stop button
     ui->pushButtonStart->setDisabled(false);
     ui->pushButtonStop->setDisabled(true);
     ui->pushButtonDefaultSettings->setDisabled(false);
@@ -111,6 +126,9 @@ void Dialog::on_pushButtonStop_clicked()
 
 void Dialog::statusRelais(QString text)
 {
+    // status from Relais
+
+    // Relais status changed on Arduino board
     if(text=="R10\r\n")
     {
         ui->checkBoxRelais1->setChecked(false);
@@ -165,6 +183,8 @@ void Dialog::statusRelais(QString text)
         ui->checkBoxRelais5->setChecked(true);
         return;
     }
+
+    // status of Relais communication changed
     else if(text == "" || text == "stopped")
     {
         QPalette palette;
@@ -190,8 +210,10 @@ void Dialog::statusRelais(QString text)
 
 void Dialog::statusDlt(QString text)
 {
+    // status from DLT Mini Server
     ui->lineEditStatusDLT->setText(text);
 
+    // status of DLT communication changed
     if(text == "" || text == "stopped")
     {
         QPalette palette;
@@ -217,6 +239,9 @@ void Dialog::statusDlt(QString text)
         ui->lineEditStatusDLT->setPalette(palette);
     }
 }
+
+// The following functions are called, when the Relais Checkboxes are triggered or the Trigger
+// button is pressed
 
 void Dialog::on_checkBoxRelais1_clicked(bool checked)
 {
@@ -322,8 +347,10 @@ void Dialog::on_checkBoxRelais5_clicked(bool checked)
         dltMiniServer.sendValue2(dltRelais.getRelaisName(5),"Off");
     }
 }
+
 void Dialog::on_pushButtonDefaultSettings_clicked()
 {
+    // Reset settings to default
     dltRelais.clearSettings();
     dltMiniServer.clearSettings();
 
@@ -332,14 +359,18 @@ void Dialog::on_pushButtonDefaultSettings_clicked()
 
 void Dialog::on_pushButtonLoadSettings_clicked()
 {
+    // Load settings from XML file
+
     QString fileName = QFileDialog::getOpenFileName(this,
         tr("Open Settings"), "", tr("DLTRelais Settings (*.xml);;All files (*.*)"));
 
     if(fileName.isEmpty())
     {
+        // No file was selected or cancel was pressed
         return;
     }
 
+    // read the settings from XML file
     dltRelais.readSettings(fileName);
     dltMiniServer.readSettings(fileName);
 
@@ -348,6 +379,8 @@ void Dialog::on_pushButtonLoadSettings_clicked()
 
 void Dialog::on_pushButtonSaveSettings_clicked()
 {
+    // Save settings into XML file
+
     updateSettings();
 
     QString fileName = QFileDialog::getSaveFileName(this,
@@ -355,15 +388,23 @@ void Dialog::on_pushButtonSaveSettings_clicked()
 
     if(fileName.isEmpty())
     {
+        // No file was selected or cancel was pressed
         return;
     }
 
+    // read the settings from XML file
     QFile file(fileName);
     if (!file.open(QFile::WriteOnly | QFile::Text))
-             return;
+    {
+        // Cannot open the file for writing
+        return;
+    }
 
     QXmlStreamWriter xml(&file);
     xml.setAutoFormatting(true);
+
+    // FIXME: Cannot read data from XML file, which contains a start document
+    // So currently do not call StartDocument
     //xml.writeStartDocument();
 
     xml.writeStartElement("DLTRelaisSettings");
@@ -371,6 +412,8 @@ void Dialog::on_pushButtonSaveSettings_clicked()
         dltMiniServer.writeSettings(xml);
     xml.writeEndElement(); // DLTRelaisSettings
 
+    // FIXME: Cannot read data from XML file, which contains a end document
+    // So currently do not call EndDocument
     //xml.writeEndDocument();
     file.close();
 
@@ -378,10 +421,10 @@ void Dialog::on_pushButtonSaveSettings_clicked()
 
 void Dialog::on_pushButtonSettings_clicked()
 {
+    // Open settings dialog
     SettingsDialog dlg(this);
 
     dlg.restoreSettings(&dltRelais, &dltMiniServer);
-
     if(dlg.exec()==QDialog::Accepted)
     {
         dlg.backupSettings(&dltRelais, &dltMiniServer);
@@ -391,6 +434,7 @@ void Dialog::on_pushButtonSettings_clicked()
 
 void Dialog::on_pushButtonInfo_clicked()
 {
+    // Open information window
     QMessageBox msgBox(this);
 
     msgBox.setWindowTitle("Info DLTRelais");
