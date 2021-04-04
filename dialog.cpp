@@ -22,7 +22,7 @@
 #include "settingsdialog.h"
 #include "version.h"
 
-Dialog::Dialog(QWidget *parent)
+Dialog::Dialog(bool autostart,QString configuration,QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::Dialog)
     , dltRelais(this)
@@ -48,7 +48,7 @@ Dialog::Dialog(QWidget *parent)
     QSettings settings;
     QString filename = settings.value("autoload/filename").toString();
     bool autoload = settings.value("autoload/checked").toBool();
-    bool autostart = settings.value("autostart/checked").toBool();
+    bool autostartGlobal = settings.value("autostart/checked").toBool();
 
     // autoload settings, when activated in global settings
     if(autoload)
@@ -58,8 +58,16 @@ Dialog::Dialog(QWidget *parent)
         restoreSettings();
     }
 
-    // autostart, when activated in global settings
-    if(autostart)
+    // autoload settings, when provided by command line
+    if(!configuration.isEmpty())
+    {
+        dltRelais.readSettings(configuration);
+        dltMiniServer.readSettings(configuration);
+        restoreSettings();
+    }
+
+    // autostart, when activated in global settings or by command line
+    if(autostartGlobal || autostart)
     {
         on_pushButtonStart_clicked();
     }
