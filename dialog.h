@@ -33,7 +33,7 @@ class Dialog : public QDialog
     Q_OBJECT
 
 public:
-    Dialog(QWidget *parent = nullptr);
+    Dialog(bool autostart,QString configuration,QWidget *parent = nullptr);
     ~Dialog();
 
 private slots:
@@ -74,5 +74,6 @@ private:
     // Settings
     void restoreSettings();
     void updateSettings();
+
 };
 #endif // DIALOG_H
