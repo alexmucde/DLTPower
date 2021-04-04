@@ -63,7 +63,7 @@ void DLTRelais::start()
 
     // connect slot watchdog timer and start watchdog timer
     connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
-    timer.start(3000);
+    timer.start(5000);
     watchDogCounter = 0;
     watchDogCounterLast = 0;
 }

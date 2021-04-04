@@ -69,7 +69,15 @@ To build this SW the Qt Toolchain must be used.
 
 ## Usage
 
-DLTRelais.exe
+* DLTRelais.exe [options] configuration
+
+* Options:
+*  -?, -h, --help          Help
+*  -v, --version           Version
+*  -a                      Autostart Communication
+
+* Arguments:
+*  configuration           Configuration file
 
 ## Contributing
 
@@ -97,6 +105,7 @@ v0.0.3:
 * Changed communication protocol with Arduino board
 * Added Watchdog
 * Fixed startup problem with Arduino Flash Mode
+* Added command line options autoload and configuration file
 
 ## Copyright
 
