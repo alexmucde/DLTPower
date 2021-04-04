@@ -125,7 +125,12 @@ void DLTRelais::timeout()
     // watchdog timeout
 
     // check if watchdog was triggered between last call
-    if(watchDogCounter==watchDogCounterLast)
+    if(watchDogCounter!=watchDogCounterLast)
+    {
+        watchDogCounterLast = watchDogCounter;
+        status(QString("started"));
+    }
+    else
     {
         // no watchdog was received
         qDebug() << "DLTRelais: Watchdog expired try to reconnect" ;
@@ -148,8 +153,8 @@ void DLTRelais::timeout()
             // connect slot to receive data from serial port
             connect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
 
-            status(QString("started"));
-            qDebug() << "DLTRelais: started" << interface;
+            status(QString("reconnect"));
+            qDebug() << "DLTRelais: reconnect" << interface;
         }
         else
         {
@@ -158,7 +163,6 @@ void DLTRelais::timeout()
             qDebug() << "DLTRelais: Failed to open interface" << interface;
             status(QString("error"));
         }
-        watchDogCounterLast = watchDogCounter;
     }
 }
 

@@ -208,6 +208,13 @@ void Dialog::statusRelais(QString text)
         ui->lineEditStatus->setPalette(palette);
         ui->lineEditStatus->setText(text);
     }
+    else if(text == "reconnect")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::yellow);
+        ui->lineEditStatus->setPalette(palette);
+        ui->lineEditStatus->setText(text);
+    }
     else if(text == "error")
     {
         QPalette palette;
