@@ -35,6 +35,7 @@ Dialog::Dialog(QWidget *parent)
 
     // set window title with version information
     setWindowTitle(QString("DLTRelais %1").arg(DLT_RELAIS_VERSION));
+    setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint);
 
     // disable stop button at startup
     ui->pushButtonStop->setDisabled(true);
