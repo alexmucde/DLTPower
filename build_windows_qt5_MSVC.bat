@@ -118,15 +118,21 @@ echo ************************************
 echo ***         Create SDK           ***
 echo ************************************
 
-if not exist %INSTALLATION_DIR% mkdir %INSTALLATION_DIR%
 echo *** Create directories %INSTALLATION_DIR% ***
-rem mkdir %INSTALLATION_DIR%
+
+if not exist %INSTALLATION_DIR% mkdir %INSTALLATION_DIR%
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
 mkdir %INSTALLATION_DIR%\platforms
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
 mkdir %INSTALLATION_DIR%\doc
+if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
+
+mkdir %INSTALLATION_DIR%\arduino
+if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
+
+mkdir %INSTALLATION_DIR%\arduino\DLTRelais
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
 echo *** Copy files ***
@@ -158,6 +164,9 @@ copy %QTDIR%\bin\Qt5SerialPort.dll %INSTALLATION_DIR%
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
 copy %QTDIR%\plugins\platforms\qwindows.dll %INSTALLATION_DIR%\platforms
+if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
+
+copy %SOURCE_DIR%\arduino\DLTRelais\DLTRelais.ino %INSTALLATION_DIR%\arduino\DLTRelais
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
 copy %BUILD_DIR%\%NAME%.exe %INSTALLATION_DIR%
