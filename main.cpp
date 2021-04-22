@@ -25,11 +25,11 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setOrganizationName("alexmucde");
     QCoreApplication::setOrganizationDomain("github.com");
-    QCoreApplication::setApplicationName("DLTRelais");
-    QCoreApplication::setApplicationVersion(DLT_RELAIS_VERSION);
+    QCoreApplication::setApplicationName("DLTPower");
+    QCoreApplication::setApplicationVersion(DLT_POWER_VERSION);
 
     QCommandLineParser parser;
-    parser.setApplicationDescription("Control Relais in a test automation.");
+    parser.setApplicationDescription("Control Power in a test automation.");
     const QCommandLineOption helpOption = parser.addHelpOption();
     parser.addVersionOption();
     parser.addPositionalArgument("configuration", QCoreApplication::translate("main", "Configuration file."));

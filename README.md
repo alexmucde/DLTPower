@@ -1,12 +1,12 @@
-# DLTRelais
+# DLTPower
 
-DLTRelais is used to control Relais for Test Automation.
+DLTPower is used to control Power Supplies, Multimeter and Relais for Test Automation.
 It is developed for an Arduino SW running on a Wemos Mini D1 HW and several shields.
 It provides an interface to DLT for Logging and Test Automation.
 
-![Image of DLTRelais](https://github.com/alexmucde/DLTRelais/blob/main/doc/images/DLTRelais.jpg)
+![Image of DLTPower](https://github.com/alexmucde/DLTPower/blob/main/doc/images/DLTPower.jpg)
 
-![Image of Wemos Relais Board](https://github.com/alexmucde/DLTRelais/blob/main/doc/images/WemosRelaisBoard.jpg)
+![Image of Wemos Relais Board](https://github.com/alexmucde/DLTPower/blob/main/doc/images/WemosRelaisBoard.jpg)
 
 For further information about DLT visit the DLT Viewer project:
 
@@ -69,7 +69,7 @@ To build this SW the Qt Toolchain must be used.
 
 ## Usage
 
-* DLTRelais.exe [options] configuration
+* DLTPower.exe [options] configuration
 
 * Options:
 *  -?, -h, --help          Help
@@ -83,7 +83,7 @@ To build this SW the Qt Toolchain must be used.
 
 Contibutions are always welcome! Please provide a Pull Request on Github.
 
-https://github.com/alexmucde/DLTRelais
+https://github.com/alexmucde/DLTPower
 
 ## Donation
 
@@ -98,6 +98,10 @@ Github Sponsors:
 [:heart: Sponsor](https://github.com/sponsors/alexmucde)
 
 ## Changes
+
+v0.0.4:
+
+* Rename from DLTRelais to DLTPower
 
 v0.0.3:
 
