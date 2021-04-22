@@ -23,6 +23,8 @@ DLTMultimeter::DLTMultimeter(QObject *parent) : QObject(parent)
 
     value = 0;
     lastValue = -1;
+    type = 0;
+    powerName = "Power";
 }
 
 DLTMultimeter::~DLTMultimeter()
@@ -36,7 +38,10 @@ void DLTMultimeter::start()
     lastValue = -1;
 
     // set serial port parameters
-    serialPort.setBaudRate(QSerialPort::Baud2400);
+    if(type==0) // Holdpeak HP-90EPC
+        serialPort.setBaudRate(QSerialPort::Baud2400);
+    else if(type==1) // Mason HCS-3302 USB
+        serialPort.setBaudRate(QSerialPort::Baud9600);
     serialPort.setDataBits(QSerialPort::Data8);
     serialPort.setParity(QSerialPort::NoParity);
     serialPort.setStopBits(QSerialPort::OneStop);
@@ -61,6 +66,14 @@ void DLTMultimeter::start()
         status(QString("error"));
     }
 
+    if(type==1) // Mason HCS-3302 USB
+    {
+        timerRequest.start(1000);
+        connect(&timerRequest, SIGNAL(timeout()), this, SLOT(timeoutRequest()));
+    }
+
+    serialData.clear();
+
     // connect slot watchdog timer and start watchdog timer
     connect(&timer, SIGNAL(timeout()), this, SLOT(timeout()));
     timer.start(5000);
@@ -73,6 +86,12 @@ void DLTMultimeter::stop()
     // stop communication
     status(QString("stopped"));
     qDebug() << "DLTMultimeter: stopped" << interface;
+
+    if(type==1) // Mason HCS-3302 USB
+    {
+        timerRequest.stop();
+        disconnect(&timerRequest, SIGNAL(timeout()), this, SLOT(timeoutRequest()));
+    }
 
     // close serial port, if it is open
     if(serialPort.isOpen())
@@ -91,34 +110,72 @@ void DLTMultimeter::stop()
 
 void DLTMultimeter::readyRead()
 {
-    QByteArray data = serialPort.readAll();
-
-    for(int num=0;num<data.length();num++)
+    if(type==0) // Holdpeak HP-90EPC
     {
-        switch(data[num]&0xf0)
+        QByteArray data = serialPort.readAll();
+        for(int num=0;num<data.length();num++)
         {
-            case 0x10:
-                rawData.clear();
-                rawData+=data[num];
-                break;
-            case 0xe0:
-                data.clear();
-                rawData+=data[num];
-                qDebug() << "DLTMultimeter: Raw Data " << rawData.toHex();
-                calculateValue();
-                if(lastValue!=value)
-                {
-                    valueMultimeter(QString("%1").arg(value),unit);
-                    lastValue = value;
-                }
-                watchDogCounter++;
-                qDebug() << "DLTMultimeter: Value received" << interface << value << unit;
-                break;
-            default:
-                rawData+=data[num];
-                break;
+            switch(data[num]&0xf0)
+            {
+                case 0x10:
+                    rawData.clear();
+                    rawData+=data[num];
+                    break;
+                case 0xe0:
+                    data.clear();
+                    rawData+=data[num];
+                    qDebug() << "DLTMultimeter: Raw Data " << rawData.toHex();
+                    calculateValue();
+                    if(lastValue!=value)
+                    {
+                        valueMultimeter(QString("%1").arg(value),unit);
+                        lastValue = value;
+                    }
+                    watchDogCounter++;
+                    qDebug() << "DLTMultimeter: Value received" << interface << value << unit;
+                    break;
+                default:
+                    rawData+=data[num];
+                    break;
+            }
         }
     }
+    else if(type==1) // Mason HCS-3302 USB
+    {
+        // loop as long as data is available
+        while(serialPort.bytesAvailable())
+        {
+            // read one line form serial port
+            serialData += serialPort.readAll();
+
+            int pos;
+            pos = serialData.indexOf('\r');
+            while(pos!=-1)
+            {
+                QString line(serialData.mid(0,pos));
+
+                qDebug() << "DLTMultimeter: readLine" << line;
+
+                if(line=="OK")
+                {
+                    watchDogCounter++;
+                }
+                else if(line.length()==9)
+                {
+                    valueMultimeter(QString("%1%2.%3%4").arg(line[4]).arg(line[5]).arg(line[6]).arg(line[7]),"A");
+                }
+
+
+                serialData.remove(0,pos+1);
+                pos = serialData.indexOf('\r');
+            }
+        }
+    }
+}
+
+void DLTMultimeter::timeoutRequest()
+{
+    serialPort.write("GETD\r");
 }
 
 void DLTMultimeter::timeout()
@@ -142,6 +199,8 @@ void DLTMultimeter::timeout()
             serialPort.close();
             disconnect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
         }
+
+        serialData.clear();
 
         // try to reopen serial port
         if(serialPort.open(QIODevice::ReadWrite)==true)
@@ -167,6 +226,8 @@ void DLTMultimeter::timeout()
 
 void DLTMultimeter::clearSettings()
 {
+    type = 0;
+    powerName = "Power";
 }
 
 void DLTMultimeter::writeSettings(QXmlStreamWriter &xml)
@@ -174,6 +235,8 @@ void DLTMultimeter::writeSettings(QXmlStreamWriter &xml)
     /* Write project settings */
     xml.writeStartElement("DLTMultimeter");
         xml.writeTextElement("interface",interface);
+        xml.writeTextElement("type",QString("%1").arg(type));
+        xml.writeTextElement("powerName",powerName);
     xml.writeEndElement(); // DLTMultimeter
 }
 
@@ -199,6 +262,14 @@ void DLTMultimeter::readSettings(const QString &filename)
                   if(xml.name() == QString("interface"))
                   {
                       interface = xml.readElementText();
+                  }
+                  else if(xml.name() == QString("type"))
+                  {
+                      type = xml.readElementText().toInt();
+                  }
+                  else if(xml.name() == QString("powerName"))
+                  {
+                      powerName = xml.readElementText();
                   }
               }
               else if(xml.name() == QString("DLTMultimeter"))
@@ -272,5 +343,17 @@ int DLTMultimeter::calculateNumber(unsigned char a,unsigned char b)
         return 8;
     else if(a==0x3 && b==0x0f)
         return 9;
+    else
+        return 0;
 
+}
+
+void DLTMultimeter::on()
+{
+    serialPort.write("SOUT0\r");
+}
+
+void DLTMultimeter::off()
+{
+    serialPort.write("SOUT1\r");
 }

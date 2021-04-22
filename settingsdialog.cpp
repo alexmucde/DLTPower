@@ -79,6 +79,8 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais, DLTMultimeter *dltMul
 
     /* DLTMultimeter */
     ui->comboBoxSerialPortMultimeter->setCurrentText(dltMultimeter->getInterface());
+    ui->comboBoxType->setCurrentIndex(dltMultimeter->getType());
+    ui->lineEditPowerName->setText(dltMultimeter->getPowerName());
 
     /* DLTMiniServer */
     ui->lineEditPort->setText(QString("%1").arg(dltMiniServer->getPort()));
@@ -100,6 +102,8 @@ void SettingsDialog::backupSettings(DLTRelais *dltRelais, DLTMultimeter *dltMult
 
     /* DLTMultimeter */
     dltMultimeter->setInterface(ui->comboBoxSerialPortMultimeter->currentText());
+    dltMultimeter->setType(ui->comboBoxType->currentIndex());
+    dltMultimeter->setPowerName(ui->lineEditPowerName->text());
 
     /* DLTMiniServer */
     dltMiniServer->setPort(ui->lineEditPort->text().toUShort());

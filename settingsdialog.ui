@@ -172,6 +172,27 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>Type:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxType">
+         <item>
+          <property name="text">
+           <string>Holdpeak HP-90EPC</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Manson HCS-3302</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_10">
          <property name="text">
           <string>Serial Port:</string>
@@ -180,6 +201,16 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboBoxSerialPortMultimeter"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>Power Supply Name:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditPowerName"/>
        </item>
        <item>
         <spacer name="verticalSpacer_4">
