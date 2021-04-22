@@ -102,6 +102,7 @@ Github Sponsors:
 v0.0.4:
 
 * Rename from DLTRelais to DLTPower
+* Integrate DLTMUltimeter
 
 v0.0.3:
 

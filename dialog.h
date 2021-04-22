@@ -23,6 +23,7 @@
 
 #include "dltrelais.h"
 #include "dltminiserver.h"
+#include "dltmultimeter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class Dialog; }
@@ -52,7 +53,11 @@ private slots:
 
     // Status of Relais and DLT connection
     void statusRelais(QString text);
+    void statusMultimeter(QString text);
     void statusDlt(QString text);
+
+    // value from Multimeter or Power Supply
+    void valueMultimeter(QString value,QString unit);
 
     // Settings and Info
     void on_pushButtonSettings_clicked();
@@ -69,6 +74,7 @@ private:
     Ui::Dialog *ui;
 
     DLTRelais dltRelais;
+    DLTMultimeter dltMultimeter;
     DLTMiniServer dltMiniServer;
 
     // Settings

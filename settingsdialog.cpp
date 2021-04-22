@@ -32,6 +32,7 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
     for(int num = 0; num<availablePorts.length();num++)
     {
         ui->comboBoxSerialPort->addItem(availablePorts[num].portName());
+        ui->comboBoxSerialPortMultimeter->addItem(availablePorts[num].portName());
     }
 
     /*  load global settings */
@@ -66,7 +67,7 @@ void SettingsDialog::on_pushButtonAutoload_clicked()
     settings.setValue("autoload/filename",fileName);
 }
 
-void SettingsDialog::restoreSettings(DLTRelais *dltRelais, DLTMiniServer *dltMiniServer)
+void SettingsDialog::restoreSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer)
 {
     /* DLTRelais */
     ui->lineEditRelaisName1->setText(dltRelais->getRelaisName(1));
@@ -76,13 +77,18 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais, DLTMiniServer *dltMin
     ui->lineEditRelaisName5->setText(dltRelais->getRelaisName(5));
     ui->comboBoxSerialPort->setCurrentText(dltRelais->getInterface());
 
+    /* DLTMultimeter */
+    ui->comboBoxSerialPortMultimeter->setCurrentText(dltMultimeter->getInterface());
+
     /* DLTMiniServer */
     ui->lineEditPort->setText(QString("%1").arg(dltMiniServer->getPort()));
     ui->lineEditApplicationId->setText(dltMiniServer->getApplicationId());
     ui->lineEditContextId->setText(dltMiniServer->getContextId());
+
+
 }
 
-void SettingsDialog::backupSettings(DLTRelais *dltRelais, DLTMiniServer *dltMiniServer)
+void SettingsDialog::backupSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer)
 {
     /* DLTRelais */
     dltRelais->setInterface(ui->comboBoxSerialPort->currentText());
@@ -91,6 +97,9 @@ void SettingsDialog::backupSettings(DLTRelais *dltRelais, DLTMiniServer *dltMini
     dltRelais->setRelaisName(3,ui->lineEditRelaisName3->text());
     dltRelais->setRelaisName(4,ui->lineEditRelaisName4->text());
     dltRelais->setRelaisName(5,ui->lineEditRelaisName5->text());
+
+    /* DLTMultimeter */
+    dltMultimeter->setInterface(ui->comboBoxSerialPortMultimeter->currentText());
 
     /* DLTMiniServer */
     dltMiniServer->setPort(ui->lineEditPort->text().toUShort());
