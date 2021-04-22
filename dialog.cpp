@@ -34,7 +34,7 @@ Dialog::Dialog(bool autostart,QString configuration,QWidget *parent)
     on_pushButtonDefaultSettings_clicked();
 
     // set window title with version information
-    setWindowTitle(QString("DLTRelais %1").arg(DLT_RELAIS_VERSION));
+    setWindowTitle(QString("DLTPower %1").arg(DLT_POWER_VERSION));
     setWindowFlags(windowFlags() | Qt::WindowMinimizeButtonHint);
 
     // disable stop button at startup
@@ -453,11 +453,11 @@ void Dialog::on_pushButtonInfo_clicked()
     // Open information window
     QMessageBox msgBox(this);
 
-    msgBox.setWindowTitle("Info DLTRelais");
+    msgBox.setWindowTitle("Info DLTPower");
     msgBox.setTextFormat(Qt::RichText);
 
     QString text;
-    text += QString("Version: %1<br>").arg(DLT_RELAIS_VERSION);
+    text += QString("Version: %1<br>").arg(DLT_POWER_VERSION);
     text += "<br>";
     text += "Information and Documentation can be found here:<br>";
     text += "<br>";
