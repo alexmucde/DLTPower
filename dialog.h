@@ -70,6 +70,8 @@ private slots:
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
 
+    void on_checkBoxPower_clicked(bool checked);
+
 private:
     Ui::Dialog *ui;
 

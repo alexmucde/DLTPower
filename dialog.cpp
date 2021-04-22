@@ -101,6 +101,9 @@ void Dialog::restoreSettings()
     ui->lineEditRelaisName4->setText(dltRelais.getRelaisName(4));
     ui->lineEditRelaisName5->setText(dltRelais.getRelaisName(5));
 
+    // DLTMultimeter
+    ui->lineEditPowerName->setText(dltMultimeter.getPowerName());
+
 }
 
 void Dialog::updateSettings()
@@ -524,4 +527,13 @@ void Dialog::valueMultimeter(QString value,QString unit)
     ui->lineEditValue->setText(value);
 
     dltMiniServer.sendValue2(value,unit);
+}
+
+void Dialog::on_checkBoxPower_clicked(bool checked)
+{
+    if(checked)
+        dltMultimeter.on();
+    else
+        dltMultimeter.off();
+
 }

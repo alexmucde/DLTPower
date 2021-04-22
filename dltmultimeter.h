@@ -34,9 +34,18 @@ public:
     QString getInterface() { return interface; }
     void setInterface(QString interface) { this->interface = interface; }
 
+    int getType() { return type; }
+    void setType(int type) { this->type = type; }
+
     void clearSettings();
     void writeSettings(QXmlStreamWriter &xml);
     void readSettings(const QString &filename);
+
+    void on();
+    void off();
+
+    QString getPowerName() { return powerName; }
+    void setPowerName(const QString &powerName) { this->powerName = powerName; }
 
 signals:
 
@@ -50,13 +59,20 @@ private slots:
     // Watchdog Timeout
     void timeout();
 
+    void timeoutRequest();
+
 private:
 
     QSerialPort serialPort;
     QTimer timer;
+    QTimer timerRequest;
     unsigned int watchDogCounter,watchDogCounterLast;
 
+    int type;
     QString interface;
+    QString powerName;
+
+    QByteArray serialData;
 
     QByteArray rawData;
     float value,lastValue;
