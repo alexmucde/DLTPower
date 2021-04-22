@@ -19,6 +19,7 @@
 
 #include "dltminiserver.h"
 #include "dltrelais.h"
+#include "dltmultimeter.h"
 
 namespace Ui {
 class SettingsDialog;
@@ -32,8 +33,8 @@ public:
     explicit SettingsDialog(QWidget *parent = nullptr);
     ~SettingsDialog();
 
-    void restoreSettings(DLTRelais *dltRelais, DLTMiniServer *dltMiniServer);
-    void backupSettings(DLTRelais *dltRelais, DLTMiniServer *dltMiniServer);
+    void restoreSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer);
+    void backupSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer);
 
 private slots:
 

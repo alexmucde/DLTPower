@@ -42,7 +42,11 @@ Dialog::Dialog(bool autostart,QString configuration,QWidget *parent)
 
     // connect status slots
     connect(&dltRelais, SIGNAL(status(QString)), this, SLOT(statusRelais(QString)));
+    connect(&dltMultimeter, SIGNAL(status(QString)), this, SLOT(statusMultimeter(QString)));
     connect(&dltMiniServer, SIGNAL(status(QString)), this, SLOT(statusDlt(QString)));
+
+    //connect value slots from Multimeter
+    connect(&dltMultimeter, SIGNAL(valueMultimeter(QString,QString)), this, SLOT(valueMultimeter(QString,QString)));
 
     //  load global settings from registry
     QSettings settings;
@@ -54,6 +58,7 @@ Dialog::Dialog(bool autostart,QString configuration,QWidget *parent)
     if(autoload)
     {
         dltRelais.readSettings(filename);
+        dltMultimeter.readSettings(filename);
         dltMiniServer.readSettings(filename);
         restoreSettings();
     }
@@ -62,6 +67,7 @@ Dialog::Dialog(bool autostart,QString configuration,QWidget *parent)
     if(!configuration.isEmpty())
     {
         dltRelais.readSettings(configuration);
+        dltMultimeter.readSettings(configuration);
         dltMiniServer.readSettings(configuration);
         restoreSettings();
     }
@@ -76,9 +82,12 @@ Dialog::Dialog(bool autostart,QString configuration,QWidget *parent)
 Dialog::~Dialog()
 {
 
-    // disconnect status slots
+    // disconnect all slots
     disconnect(&dltRelais, SIGNAL(status(QString)), this, SLOT(statusRelais(QString)));
     disconnect(&dltMiniServer, SIGNAL(status(QString)), this, SLOT(statusDlt(QString)));
+
+    disconnect(&dltMultimeter, SIGNAL(status(QString)), this, SLOT(statusMultimeter(QString)));
+    disconnect(&dltMultimeter, SIGNAL(valueMultimeter(QString,QString)), this, SLOT(valueMultimeter(QString,QString)));
 
     delete ui;
 }
@@ -105,6 +114,7 @@ void Dialog::on_pushButtonStart_clicked()
 
     // start Relais and DLT communication
     dltRelais.start();
+    dltMultimeter.start();
     dltMiniServer.start();
 
     // disable settings and start button
@@ -122,6 +132,7 @@ void Dialog::on_pushButtonStop_clicked()
 
     // stop Relais and DLT communication
     dltRelais.stop();
+    dltMultimeter.stop();
     dltMiniServer.stop();
 
     // enable settings and start button
@@ -221,6 +232,36 @@ void Dialog::statusRelais(QString text)
         palette.setColor(QPalette::Base,Qt::red);
         ui->lineEditStatus->setPalette(palette);
         ui->lineEditStatus->setText(text);
+    }
+}
+
+void Dialog::statusMultimeter(QString text)
+{
+    ui->lineEditStatusMultimeter->setText(text);
+
+    if(text == "" || text == "stopped")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::white);
+        ui->lineEditStatusMultimeter->setPalette(palette);
+    }
+    if(text == "reconnect")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::yellow);
+        ui->lineEditStatusMultimeter->setPalette(palette);
+    }
+    if(text == "started")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::green);
+        ui->lineEditStatusMultimeter->setPalette(palette);
+    }
+    if(text == "error")
+    {
+        QPalette palette;
+        palette.setColor(QPalette::Base,Qt::red);
+        ui->lineEditStatusMultimeter->setPalette(palette);
     }
 }
 
@@ -369,6 +410,7 @@ void Dialog::on_pushButtonDefaultSettings_clicked()
     // Reset settings to default
     dltRelais.clearSettings();
     dltMiniServer.clearSettings();
+    dltMultimeter.clearSettings();
 
     restoreSettings();
 }
@@ -378,7 +420,7 @@ void Dialog::on_pushButtonLoadSettings_clicked()
     // Load settings from XML file
 
     QString fileName = QFileDialog::getOpenFileName(this,
-        tr("Open Settings"), "", tr("DLTRelais Settings (*.xml);;All files (*.*)"));
+        tr("Open Settings"), "", tr("DLTPower Settings (*.xml);;All files (*.*)"));
 
     if(fileName.isEmpty())
     {
@@ -388,6 +430,7 @@ void Dialog::on_pushButtonLoadSettings_clicked()
 
     // read the settings from XML file
     dltRelais.readSettings(fileName);
+    dltMultimeter.readSettings(fileName);
     dltMiniServer.readSettings(fileName);
 
     restoreSettings();
@@ -425,6 +468,7 @@ void Dialog::on_pushButtonSaveSettings_clicked()
 
     xml.writeStartElement("DLTRelaisSettings");
         dltRelais.writeSettings(xml);
+        dltMultimeter.writeSettings(xml);
         dltMiniServer.writeSettings(xml);
     xml.writeEndElement(); // DLTRelaisSettings
 
@@ -440,10 +484,10 @@ void Dialog::on_pushButtonSettings_clicked()
     // Open settings dialog
     SettingsDialog dlg(this);
 
-    dlg.restoreSettings(&dltRelais, &dltMiniServer);
+    dlg.restoreSettings(&dltRelais, &dltMultimeter, &dltMiniServer);
     if(dlg.exec()==QDialog::Accepted)
     {
-        dlg.backupSettings(&dltRelais, &dltMiniServer);
+        dlg.backupSettings(&dltRelais, &dltMultimeter, &dltMiniServer);
         restoreSettings();
     }
 }
@@ -474,3 +518,10 @@ void Dialog::on_pushButtonInfo_clicked()
     msgBox.exec();
 }
 
+void Dialog::valueMultimeter(QString value,QString unit)
+{
+    ui->lineEditUnit->setText(unit);
+    ui->lineEditValue->setText(value);
+
+    dltMiniServer.sendValue2(value,unit);
+}
