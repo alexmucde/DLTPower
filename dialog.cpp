@@ -532,8 +532,13 @@ void Dialog::valueMultimeter(QString value,QString unit)
 void Dialog::on_checkBoxPower_clicked(bool checked)
 {
     if(checked)
+    {
         dltMultimeter.on();
+        dltMiniServer.sendValue2(dltMultimeter.getPowerName(),"On");
+    }
     else
+    {
         dltMultimeter.off();
-
+        dltMiniServer.sendValue2(dltMultimeter.getPowerName(),"Off");
+    }
 }

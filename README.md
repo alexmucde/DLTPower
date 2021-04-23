@@ -1,7 +1,8 @@
 # DLTPower
 
 DLTPower is used to control Power Supplies, Multimeter and Relais for Test Automation.
-It is developed for an Arduino SW running on a Wemos Mini D1 HW and several shields.
+It is developed for an Arduino SW running on a Wemos Mini D1 HW, several shields.
+Differenr Multimeters and Power supplies are supported.
 It provides an interface to DLT for Logging and Test Automation.
 
 ![Image of DLTPower](https://github.com/alexmucde/DLTPower/blob/main/doc/images/DLTPower.jpg)
@@ -11,6 +12,14 @@ It provides an interface to DLT for Logging and Test Automation.
 For further information about DLT visit the DLT Viewer project:
 
 https://github.com/GENIVI/dlt-viewer
+
+## Supported Hardware
+
+The following Hardware is currently supported:
+
+* Relais Boards: Arduino Wemos Mini D1 + Relais Shields
+* Multimeter: Holdpeak HP-90EPC or compatible
+* Power supply: Manson HCS-3302 or compatible (e.g. Voltcraft)
 
 ## Wemos Mini D1 Hardware
 
