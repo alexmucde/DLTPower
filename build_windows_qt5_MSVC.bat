@@ -9,7 +9,7 @@ echo ************************************
 echo ***         Configuration        ***
 echo ************************************
 
-set NAME=DLTRelais
+set NAME=DLTPower
 set TARGET_NAME=%NAME%
 
 rem parameter of this batch script can be either x86 or x86_amd64

@@ -33,6 +33,7 @@ public:
 
     void sendValue(QString text);
     void sendValue2(QString text1,QString text2);
+    void sendValue3(QString text1,QString text2,QString text3);
 
     unsigned short getPort() { return port; }
     void setPort(unsigned short port) { this->port = port; }

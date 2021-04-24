@@ -18,8 +18,13 @@ https://github.com/GENIVI/dlt-viewer
 The following Hardware is currently supported:
 
 * Relais Boards: Arduino Wemos Mini D1 + Relais Shields
-* Multimeter: Holdpeak HP-90EPC or compatible
-* Power supply: Manson HCS-3302 or compatible (e.g. Voltcraft)
+* Multimeter: HoldPeak HP-90EPC [Amazon Germany](https://amzn.to/3bIsPwT) [AliExpress](https://s.click.aliexpress.com/e/_AM1Vsi)
+  * Interface: USB Serial
+  * Protocol: https://sigrok.org/wiki/Multimeter_ICs#Fortune_Semiconductor_FS9721_LP3
+  * USB Driver: https://www.holdpeak.de/download/
+* Power supply: Manson HCS-3302 or compatible (e.g. Voltcraft) [Amazon Germany](https://amzn.to/2QUWQ4D)
+  * Interface: USB Serial
+  * Protocol: See user manual
 
 ## Wemos Mini D1 Hardware
 

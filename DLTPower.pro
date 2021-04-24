@@ -41,3 +41,4 @@ DISTFILES += \
     DLTRelais_en_DE.ts \
     LICENSE \
     README.md \
+    build_windows_qt5_MSVC.bat
