@@ -127,6 +127,21 @@ void Dialog::on_pushButtonStart_clicked()
     ui->pushButtonDefaultSettings->setDisabled(true);
     ui->pushButtonLoadSettings->setDisabled(true);
     ui->pushButtonSettings->setDisabled(true);
+
+    ui->checkBoxPower->setChecked(false);
+    dltMultimeter.off();
+
+    ui->checkBoxRelais1->setChecked(false);
+    dltRelais.off(1);
+    ui->checkBoxRelais2->setChecked(false);
+    dltRelais.off(2);
+    ui->checkBoxRelais3->setChecked(false);
+    dltRelais.off(3);
+    ui->checkBoxRelais4->setChecked(false);
+    dltRelais.off(4);
+    ui->checkBoxRelais5->setChecked(false);
+    dltRelais.off(5);
+
 }
 
 void Dialog::on_pushButtonStop_clicked()
@@ -526,7 +541,7 @@ void Dialog::valueMultimeter(QString value,QString unit)
     ui->lineEditUnit->setText(unit);
     ui->lineEditValue->setText(value);
 
-    dltMiniServer.sendValue2(value,unit);
+    dltMiniServer.sendValue3(dltMultimeter.getPowerName(),value,unit);
 }
 
 void Dialog::on_checkBoxPower_clicked(bool checked)

@@ -76,7 +76,7 @@
    <item row="10" column="0">
     <widget class="QGroupBox" name="groupBox_7">
      <property name="title">
-      <string>Multimeter Value</string>
+      <string>Power Supply Value</string>
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>

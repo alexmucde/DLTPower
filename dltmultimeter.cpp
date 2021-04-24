@@ -350,10 +350,16 @@ int DLTMultimeter::calculateNumber(unsigned char a,unsigned char b)
 
 void DLTMultimeter::on()
 {
-    serialPort.write("SOUT0\r");
+    if(type==1) // Mason HCS-3302 USB
+    {
+        serialPort.write("SOUT0\r");
+    }
 }
 
 void DLTMultimeter::off()
 {
-    serialPort.write("SOUT1\r");
+    if(type==1) // Mason HCS-3302 USB
+    {
+        serialPort.write("SOUT1\r");
+    }
 }

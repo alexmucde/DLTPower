@@ -271,3 +271,73 @@ void DLTMiniServer::sendValue2(QString text1,QString text2)
     tcpSocket->write(data);
 
 }
+
+void DLTMiniServer::sendValue3(QString text1,QString text2,QString text3)
+{
+    if(tcpSocket==0 || !tcpSocket->isOpen())
+    {
+        return;
+    }
+
+    QByteArray data;
+
+    // Standard Header (4 Byte)
+    data += 0x21; // htyp: Use extended header, version 0x1
+    data += (char)0x00; // message counter
+    data += (char)0x00; // length high byte
+    data += (char)4+10+4+2+text1.length()+4+2+text2.length()+4+2+text3.length(); // length low byte
+
+    // Extended Header (10 Byte)
+    data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
+    data += (char)0x02; // NOAR
+    data += applicationId[0].toLatin1(); // APID
+    data += applicationId[1].toLatin1(); // APID
+    data += applicationId[2].toLatin1(); // APID
+    data += applicationId[3].toLatin1(); // APID
+    data += contextId[0].toLatin1(); // CTID
+    data += contextId[1].toLatin1(); // CTID
+    data += contextId[2].toLatin1(); // CTID
+    data += contextId[3].toLatin1(); // CTID
+
+    // Payload Type Info (4 Byte)
+    data += (char)0x00;
+    data += (char)0x02; // String
+    data += (char)0x00;
+    data += (char)0x00;
+
+    // Payload Type Data Length
+    data += ((char)text1.length()); // length low byte
+    data += ((char)0x00); // length high byte
+
+    // Payload Type Data
+    data += text1.toUtf8();
+
+    // Payload Type Info (4 Byte)
+    data += (char)0x00;
+    data += (char)0x02; // String
+    data += (char)0x00;
+    data += (char)0x00;
+
+    // Payload Type Data Length
+    data += ((char)text2.length()); // length low byte
+    data += ((char)0x00); // length high byte
+
+    // Payload Type Data
+    data += text2.toUtf8();
+
+    // Payload Type Info (4 Byte)
+    data += (char)0x00;
+    data += (char)0x02; // String
+    data += (char)0x00;
+    data += (char)0x00;
+
+    // Payload Type Data Length
+    data += ((char)text3.length()); // length low byte
+    data += ((char)0x00); // length high byte
+
+    // Payload Type Data
+    data += text3.toUtf8();
+
+    tcpSocket->write(data);
+
+}
