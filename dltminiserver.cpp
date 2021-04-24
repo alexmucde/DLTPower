@@ -289,7 +289,7 @@ void DLTMiniServer::sendValue3(QString text1,QString text2,QString text3)
 
     // Extended Header (10 Byte)
     data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
-    data += (char)0x02; // NOAR
+    data += (char)0x03; // NOAR
     data += applicationId[0].toLatin1(); // APID
     data += applicationId[1].toLatin1(); // APID
     data += applicationId[2].toLatin1(); // APID
