@@ -27,12 +27,17 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 
     QList<QSerialPortInfo> 	availablePorts  = QSerialPortInfo::availablePorts();
 
-    ui->comboBoxSerialPort->clear();
+    ui->comboBoxSerialPort1->clear();
+    ui->comboBoxSerialPort2->clear();
+    ui->comboBoxSerialPortMultimeter1->clear();
+    ui->comboBoxSerialPortMultimeter2->clear();
 
     for(int num = 0; num<availablePorts.length();num++)
     {
-        ui->comboBoxSerialPort->addItem(availablePorts[num].portName());
-        ui->comboBoxSerialPortMultimeter->addItem(availablePorts[num].portName());
+        ui->comboBoxSerialPort1->addItem(availablePorts[num].portName());
+        ui->comboBoxSerialPort2->addItem(availablePorts[num].portName());
+        ui->comboBoxSerialPortMultimeter1->addItem(availablePorts[num].portName());
+        ui->comboBoxSerialPortMultimeter2->addItem(availablePorts[num].portName());
     }
 
     /*  load global settings */
@@ -67,20 +72,25 @@ void SettingsDialog::on_pushButtonAutoload_clicked()
     settings.setValue("autoload/filename",fileName);
 }
 
-void SettingsDialog::restoreSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer)
+void SettingsDialog::restoreSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2, DLTMultimeter *dltMultimeter1, DLTMultimeter *dltMultimeter2, DLTMiniServer *dltMiniServer)
 {
     /* DLTRelais */
-    ui->lineEditRelaisName1->setText(dltRelais->getRelaisName(1));
-    ui->lineEditRelaisName2->setText(dltRelais->getRelaisName(2));
-    ui->lineEditRelaisName3->setText(dltRelais->getRelaisName(3));
-    ui->lineEditRelaisName4->setText(dltRelais->getRelaisName(4));
-    ui->lineEditRelaisName5->setText(dltRelais->getRelaisName(5));
-    ui->comboBoxSerialPort->setCurrentText(dltRelais->getInterface());
+    ui->lineEditRelaisName1->setText(dltRelais1->getRelaisName(1));
+    ui->lineEditRelaisName2->setText(dltRelais1->getRelaisName(2));
+    ui->lineEditRelaisName3->setText(dltRelais1->getRelaisName(3));
+    ui->lineEditRelaisName4->setText(dltRelais2->getRelaisName(1));
+    ui->lineEditRelaisName5->setText(dltRelais2->getRelaisName(2));
+    ui->lineEditRelaisName6->setText(dltRelais2->getRelaisName(3));
+    ui->comboBoxSerialPort1->setCurrentText(dltRelais1->getInterface());
+    ui->comboBoxSerialPort2->setCurrentText(dltRelais2->getInterface());
 
     /* DLTMultimeter */
-    ui->comboBoxSerialPortMultimeter->setCurrentText(dltMultimeter->getInterface());
-    ui->comboBoxType->setCurrentIndex(dltMultimeter->getType());
-    ui->lineEditPowerName->setText(dltMultimeter->getPowerName());
+    ui->comboBoxSerialPortMultimeter1->setCurrentText(dltMultimeter1->getInterface());
+    ui->comboBoxSerialPortMultimeter2->setCurrentText(dltMultimeter2->getInterface());
+    ui->comboBoxType1->setCurrentIndex(dltMultimeter1->getType());
+    ui->comboBoxType2->setCurrentIndex(dltMultimeter2->getType());
+    ui->lineEditPower1Name->setText(dltMultimeter1->getPowerName());
+    ui->lineEditPower2Name->setText(dltMultimeter2->getPowerName());
 
     /* DLTMiniServer */
     ui->lineEditPort->setText(QString("%1").arg(dltMiniServer->getPort()));
@@ -90,20 +100,25 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais, DLTMultimeter *dltMul
 
 }
 
-void SettingsDialog::backupSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer)
+void SettingsDialog::backupSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2, DLTMultimeter *dltMultimeter1, DLTMultimeter *dltMultimeter2, DLTMiniServer *dltMiniServer)
 {
     /* DLTRelais */
-    dltRelais->setInterface(ui->comboBoxSerialPort->currentText());
-    dltRelais->setRelaisName(1,ui->lineEditRelaisName1->text());
-    dltRelais->setRelaisName(2,ui->lineEditRelaisName2->text());
-    dltRelais->setRelaisName(3,ui->lineEditRelaisName3->text());
-    dltRelais->setRelaisName(4,ui->lineEditRelaisName4->text());
-    dltRelais->setRelaisName(5,ui->lineEditRelaisName5->text());
+    dltRelais1->setInterface(ui->comboBoxSerialPort1->currentText());
+    dltRelais2->setInterface(ui->comboBoxSerialPort2->currentText());
+    dltRelais1->setRelaisName(1,ui->lineEditRelaisName1->text());
+    dltRelais1->setRelaisName(2,ui->lineEditRelaisName2->text());
+    dltRelais1->setRelaisName(3,ui->lineEditRelaisName3->text());
+    dltRelais2->setRelaisName(1,ui->lineEditRelaisName4->text());
+    dltRelais2->setRelaisName(2,ui->lineEditRelaisName5->text());
+    dltRelais2->setRelaisName(3,ui->lineEditRelaisName6->text());
 
     /* DLTMultimeter */
-    dltMultimeter->setInterface(ui->comboBoxSerialPortMultimeter->currentText());
-    dltMultimeter->setType(ui->comboBoxType->currentIndex());
-    dltMultimeter->setPowerName(ui->lineEditPowerName->text());
+    dltMultimeter1->setInterface(ui->comboBoxSerialPortMultimeter1->currentText());
+    dltMultimeter1->setType(ui->comboBoxType1->currentIndex());
+    dltMultimeter1->setPowerName(ui->lineEditPower1Name->text());
+    dltMultimeter2->setInterface(ui->comboBoxSerialPortMultimeter2->currentText());
+    dltMultimeter2->setType(ui->comboBoxType2->currentIndex());
+    dltMultimeter2->setPowerName(ui->lineEditPower2Name->text());
 
     /* DLTMiniServer */
     dltMiniServer->setPort(ui->lineEditPort->text().toUShort());

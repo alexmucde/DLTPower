@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>808</width>
-    <height>759</height>
+    <width>1246</width>
+    <height>695</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -34,116 +34,493 @@
    <bool>true</bool>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="17" column="0">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Relais 5 (D8):</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QLineEdit" name="lineEditRelaisName5"/>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBoxRelais5">
-        <property name="text">
-         <string>ON</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonRelais5Trigger">
-        <property name="text">
-         <string>Trigger</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_5">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
+   <item row="3" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_11">
+     <item>
+      <widget class="QGroupBox" name="groupBox_13">
+       <property name="title">
+        <string>Multimeter/Power Supply 1</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <item>
+         <widget class="QGroupBox" name="groupBox_9">
+          <property name="title">
+           <string>Power</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <item>
+            <widget class="QLineEdit" name="lineEditPower1Name">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxPower1">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_6">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_7">
+          <property name="title">
+           <string>Value</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <item>
+            <widget class="QLineEdit" name="lineEditValue1">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditUnit1">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_14">
+       <property name="title">
+        <string>Multimeter/Power Supply 2</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QGroupBox" name="groupBox_15">
+          <property name="title">
+           <string>Power</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_13">
+           <item>
+            <widget class="QLineEdit" name="lineEditPower2Name">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxPower2">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_8">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_16">
+          <property name="title">
+           <string>Value</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_12">
+           <item>
+            <widget class="QLineEdit" name="lineEditValue2">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="lineEditUnit2">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>24</pointsize>
+              </font>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="10" column="0">
-    <widget class="QGroupBox" name="groupBox_7">
-     <property name="title">
-      <string>Power Supply Value</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_5">
-      <item>
-       <widget class="QLineEdit" name="lineEditValue">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>32</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="lineEditUnit">
-        <property name="font">
-         <font>
-          <family>Arial</family>
-          <pointsize>32</pointsize>
-         </font>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
+   <item row="11" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout_10">
+     <item>
+      <widget class="QGroupBox" name="groupBox_11">
+       <property name="title">
+        <string>Relais Board 1</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="title">
+           <string>Relais 1 (D1):</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QLineEdit" name="lineEditRelaisName1">
+             <property name="text">
+              <string>WUP</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxRelais1">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonRelais1Trigger">
+             <property name="text">
+              <string>Trigger</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_4">
+          <property name="title">
+           <string>Relais 2 (D2):</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <widget class="QLineEdit" name="lineEditRelaisName2">
+             <property name="text">
+              <string>30B</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxRelais2">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonRelais2Trigger">
+             <property name="text">
+              <string>Trigger</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_5">
+          <property name="title">
+           <string>Relais 3 (D6):</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLineEdit" name="lineEditRelaisName3">
+             <property name="text">
+              <string>30F</string>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxRelais3">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonRelais3Trigger">
+             <property name="text">
+              <string>Trigger</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_3">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="groupBox_12">
+       <property name="title">
+        <string>Relais Board 2</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Relais 1 (D1):</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4">
+           <item>
+            <widget class="QLineEdit" name="lineEditRelaisName4">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxRelais4">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonRelais4Trigger">
+             <property name="text">
+              <string>Trigger</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Relais 2 (D2):</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <item>
+            <widget class="QLineEdit" name="lineEditRelaisName5">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxRelais5">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonRelais5Trigger">
+             <property name="text">
+              <string>Trigger</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_10">
+          <property name="title">
+           <string>Relais 3 (D6):</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_9">
+           <item>
+            <widget class="QLineEdit" name="lineEditRelaisName6">
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxRelais6">
+             <property name="text">
+              <string>ON</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="pushButtonRelais6Trigger">
+             <property name="text">
+              <string>Trigger</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+    </layout>
    </item>
-   <item row="15" column="0">
-    <widget class="QGroupBox" name="groupBox_5">
-     <property name="title">
-      <string>Relais 3 (D6):</string>
+   <item row="1" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
      </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_7">
       <item>
-       <widget class="QLineEdit" name="lineEditRelaisName3">
-        <property name="text">
-         <string>30F</string>
+       <widget class="QPushButton" name="pushButtonStart">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
         </property>
-        <property name="readOnly">
-         <bool>true</bool>
+        <property name="text">
+         <string>Start</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QCheckBox" name="checkBoxRelais3">
+       <widget class="QPushButton" name="pushButtonStop">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="text">
-         <string>ON</string>
+         <string>Stop</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonRelais3Trigger">
-        <property name="text">
-         <string>Trigger</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_3">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>
@@ -192,52 +569,6 @@
      </layout>
     </widget>
    </item>
-   <item row="14" column="0">
-    <widget class="QGroupBox" name="groupBox_4">
-     <property name="title">
-      <string>Relais 2 (D2):</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <item>
-       <widget class="QLineEdit" name="lineEditRelaisName2">
-        <property name="text">
-         <string>30B</string>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBoxRelais2">
-        <property name="text">
-         <string>ON</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonRelais2Trigger">
-        <property name="text">
-         <string>Trigger</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="2" column="0">
     <widget class="QGroupBox" name="groupBox_8">
      <property name="title">
@@ -247,195 +578,72 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Relais:</string>
+         <string>Relais1:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLineEdit" name="lineEditStatus">
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Multimeter:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEditStatusMultimeter"/>
-      </item>
-      <item row="0" column="2">
+      <item row="0" column="4">
        <widget class="QLabel" name="label_7">
         <property name="text">
          <string>DLT Server:</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="2">
+      <item row="0" column="2">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Multimeter1:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Relais2:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEditStatus2">
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="4">
        <widget class="QLineEdit" name="lineEditStatusDLT">
         <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QFrame" name="frame">
-     <property name="frameShape">
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Raised</enum>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_7">
-      <item>
-       <widget class="QPushButton" name="pushButtonStart">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Start</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonStop">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Stop</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="13" column="0">
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="title">
-      <string>Relais 1 (D1):</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QLineEdit" name="lineEditRelaisName1">
-        <property name="text">
-         <string>WUP</string>
-        </property>
+      <item row="1" column="2">
+       <widget class="QLineEdit" name="lineEditStatusMultimeter1">
         <property name="readOnly">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QCheckBox" name="checkBoxRelais1">
-        <property name="text">
-         <string>ON</string>
+      <item row="1" column="0">
+       <widget class="QLineEdit" name="lineEditStatus1">
+        <property name="readOnly">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonRelais1Trigger">
-        <property name="text">
-         <string>Trigger</string>
+      <item row="1" column="3">
+       <widget class="QLineEdit" name="lineEditStatusMultimeter2">
+        <property name="readOnly">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item>
-       <spacer name="horizontalSpacer">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="16" column="0">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Relais 4 (D7):</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_4">
-      <item>
-       <widget class="QLineEdit" name="lineEditRelaisName4"/>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBoxRelais4">
+      <item row="0" column="3">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>ON</string>
+         <string>Multimeter2</string>
         </property>
        </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButtonRelais4Trigger">
-        <property name="text">
-         <string>Trigger</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_4">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="11" column="0">
-    <widget class="QGroupBox" name="groupBox_9">
-     <property name="title">
-      <string>Power Supply</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_8">
-      <item>
-       <widget class="QLineEdit" name="lineEditPowerName"/>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBoxPower">
-        <property name="text">
-         <string>ON</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="horizontalSpacer_6">
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>40</width>
-          <height>20</height>
-         </size>
-        </property>
-       </spacer>
       </item>
      </layout>
     </widget>

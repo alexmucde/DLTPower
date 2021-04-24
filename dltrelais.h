@@ -42,13 +42,13 @@ public:
     void setInterface(QString interface) { this->interface = interface; }
 
     // Relais names
-    QString getRelaisName(int num) { if(num>0 && num<6) return relaisName[num-1]; else return QString(); }
-    void setRelaisName(int num,const QString &name) { if(num>0 && num<6) this->relaisName[num-1] = name; }
+    QString getRelaisName(int num) { if(num>0 && num<4) return relaisName[num-1]; else return QString(); }
+    void setRelaisName(int num,const QString &name) { if(num>0 && num<4) this->relaisName[num-1] = name; }
 
     // Settings
     void clearSettings();
-    void writeSettings(QXmlStreamWriter &xml);
-    void readSettings(const QString &filename);
+    void writeSettings(QXmlStreamWriter &xml,int num);
+    void readSettings(const QString &filename,int num);
 
 signals:
 

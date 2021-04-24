@@ -38,8 +38,8 @@ public:
     void setType(int type) { this->type = type; }
 
     void clearSettings();
-    void writeSettings(QXmlStreamWriter &xml);
-    void readSettings(const QString &filename);
+    void writeSettings(QXmlStreamWriter &xml,int num);
+    void readSettings(const QString &filename,int num);
 
     void on();
     void off();
