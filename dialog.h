@@ -50,14 +50,19 @@ private slots:
     void on_pushButtonRelais4Trigger_clicked();
     void on_checkBoxRelais5_clicked(bool checked);
     void on_pushButtonRelais5Trigger_clicked();
+    void on_pushButtonRelais6Trigger_clicked();
+    void on_checkBoxRelais6_clicked(bool checked);
 
     // Status of Relais and DLT connection
-    void statusRelais(QString text);
-    void statusMultimeter(QString text);
+    void statusRelais1(QString text);
+    void statusRelais2(QString text);
+    void statusMultimeter1(QString text);
+    void statusMultimeter2(QString text);
     void statusDlt(QString text);
 
     // value from Multimeter or Power Supply
-    void valueMultimeter(QString value,QString unit);
+    void valueMultimeter1(QString value,QString unit);
+    void valueMultimeter2(QString value,QString unit);
 
     // Settings and Info
     void on_pushButtonSettings_clicked();
@@ -70,13 +75,15 @@ private slots:
     void on_pushButtonStart_clicked();
     void on_pushButtonStop_clicked();
 
-    void on_checkBoxPower_clicked(bool checked);
+    void on_checkBoxPower1_clicked(bool checked);
+    void on_checkBoxPower2_clicked(bool checked);
 
 private:
     Ui::Dialog *ui;
 
-    DLTRelais dltRelais;
-    DLTMultimeter dltMultimeter;
+    DLTRelais dltRelais1,dltRelais2;
+    DLTMultimeter dltMultimeter1;
+    DLTMultimeter dltMultimeter2;
     DLTMiniServer dltMiniServer;
 
     // Settings

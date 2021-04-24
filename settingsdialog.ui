@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
-    <height>373</height>
+    <width>640</width>
+    <height>527</height>
    </rect>
   </property>
   <property name="font">
@@ -16,7 +16,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Settings</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -88,7 +88,7 @@
      </widget>
      <widget class="QWidget" name="TabRelais">
       <attribute name="title">
-       <string>Relais</string>
+       <string>RB1</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
@@ -99,7 +99,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxSerialPort"/>
+        <widget class="QComboBox" name="comboBoxSerialPort1"/>
        </item>
        <item>
         <widget class="QLabel" name="label_6">
@@ -132,9 +132,39 @@
         <widget class="QLineEdit" name="lineEditRelaisName3"/>
        </item>
        <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2">
+      <attribute name="title">
+       <string>RB2</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
         <widget class="QLabel" name="label_8">
          <property name="text">
-          <string>Relais Name 4:</string>
+          <string>Serial Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxSerialPort2"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>Relais Name 1:</string>
          </property>
         </widget>
        </item>
@@ -142,9 +172,9 @@
         <widget class="QLineEdit" name="lineEditRelaisName4"/>
        </item>
        <item>
-        <widget class="QLabel" name="label_9">
+        <widget class="QLabel" name="label_13">
          <property name="text">
-          <string>Relais Name 5:</string>
+          <string>Relais Name 2:</string>
          </property>
         </widget>
        </item>
@@ -152,7 +182,17 @@
         <widget class="QLineEdit" name="lineEditRelaisName5"/>
        </item>
        <item>
-        <spacer name="verticalSpacer_2">
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>Relais Name 3:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditRelaisName6"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_5">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -168,7 +208,7 @@
      </widget>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Multimeter</string>
+       <string>MM/PS1</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
        <item>
@@ -179,7 +219,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxType">
+        <widget class="QComboBox" name="comboBoxType1">
          <item>
           <property name="text">
            <string>Holdpeak HP-90EPC</string>
@@ -200,7 +240,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="comboBoxSerialPortMultimeter"/>
+        <widget class="QComboBox" name="comboBoxSerialPortMultimeter1"/>
        </item>
        <item>
         <widget class="QLabel" name="label_12">
@@ -210,10 +250,71 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditPowerName"/>
+        <widget class="QLineEdit" name="lineEditPower1Name"/>
        </item>
        <item>
         <spacer name="verticalSpacer_4">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_3">
+      <attribute name="title">
+       <string>MM/PS2</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_8">
+       <item>
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string>Type</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxType2">
+         <item>
+          <property name="text">
+           <string>Holdpeak HP-90EPC</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Manson HCS-3302</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_16">
+         <property name="text">
+          <string>Serial Port:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxSerialPortMultimeter2"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_17">
+         <property name="text">
+          <string>Multimeter/Power Supply Name</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditPower2Name"/>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_6">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

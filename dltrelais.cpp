@@ -169,24 +169,22 @@ void DLTRelais::timeout()
 void DLTRelais::clearSettings()
 {
     // clear settings
-    for(int num=0;num<5;num++)
+    for(int num=0;num<3;num++)
         relaisName[num] = QString("Relais%1").arg(num+1);
 }
 
-void DLTRelais::writeSettings(QXmlStreamWriter &xml)
+void DLTRelais::writeSettings(QXmlStreamWriter &xml,int num)
 {
     // Write project settings to XML file
-    xml.writeStartElement("DLTRelais");
+    xml.writeStartElement(QString("DLTRelais%1").arg(num));
         xml.writeTextElement("relaisName1",relaisName[0]);
         xml.writeTextElement("relaisName2",relaisName[1]);
         xml.writeTextElement("relaisName3",relaisName[2]);
-        xml.writeTextElement("relaisName4",relaisName[3]);
-        xml.writeTextElement("relaisName5",relaisName[4]);
         xml.writeTextElement("interface",interface);
     xml.writeEndElement(); // DLTRelais
 }
 
-void DLTRelais::readSettings(const QString &filename)
+void DLTRelais::readSettings(const QString &filename,int num)
 {
     // read settings from XML file
     bool isDLTRelais = false;
@@ -218,20 +216,12 @@ void DLTRelais::readSettings(const QString &filename)
                   {
                       relaisName[2] = xml.readElementText();
                   }
-                  if(xml.name() == QString("relaisName4"))
-                  {
-                      relaisName[3] = xml.readElementText();
-                  }
-                  if(xml.name() == QString("relaisName5"))
-                  {
-                      relaisName[4] = xml.readElementText();
-                  }
                   if(xml.name() == QString("interface"))
                   {
                       interface = xml.readElementText();
                   }
               }
-              else if(xml.name() == QString("DLTRelais"))
+              else if(xml.name() == QString("DLTRelais%1").arg(num))
               {
                     isDLTRelais = true;
               }
@@ -239,7 +229,7 @@ void DLTRelais::readSettings(const QString &filename)
           else if(xml.isEndElement())
           {
               /* Connection, plugin and filter */
-              if(xml.name() == QString("DLTRelais"))
+              if(xml.name() == QString("DLTRelais%1").arg(num))
               {
                     isDLTRelais = false;
               }
@@ -264,10 +254,6 @@ void DLTRelais::trigger(int num)
         serialPort.write("R2T\n");
     else if(num==3)
         serialPort.write("R3T\n");
-    else if(num==4)
-        serialPort.write("R4T\n");
-    else if(num==5)
-        serialPort.write("R5T\n");
 }
 
 void DLTRelais::on(int num)
@@ -281,10 +267,6 @@ void DLTRelais::on(int num)
         serialPort.write("R21\n");
     else if(num==3)
         serialPort.write("R31\n");
-    else if(num==4)
-        serialPort.write("R41\n");
-    else if(num==5)
-        serialPort.write("R51\n");
 }
 
 void DLTRelais::off(int num)
@@ -298,8 +280,4 @@ void DLTRelais::off(int num)
         serialPort.write("R20\n");
     else if(num==3)
         serialPort.write("R30\n");
-    else if(num==4)
-        serialPort.write("R40\n");
-    else if(num==5)
-        serialPort.write("R50\n");
 }

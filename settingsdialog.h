@@ -33,8 +33,8 @@ public:
     explicit SettingsDialog(QWidget *parent = nullptr);
     ~SettingsDialog();
 
-    void restoreSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer);
-    void backupSettings(DLTRelais *dltRelais, DLTMultimeter *dltMultimeter, DLTMiniServer *dltMiniServer);
+    void restoreSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2, DLTMultimeter *dltMultimeter1, DLTMultimeter *dltMultimeter2, DLTMiniServer *dltMiniServer);
+    void backupSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2, DLTMultimeter *dltMultimeter1, DLTMultimeter *dltMultimeter2, DLTMiniServer *dltMiniServer);
 
 private slots:
 

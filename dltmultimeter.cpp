@@ -230,17 +230,17 @@ void DLTMultimeter::clearSettings()
     powerName = "Power";
 }
 
-void DLTMultimeter::writeSettings(QXmlStreamWriter &xml)
+void DLTMultimeter::writeSettings(QXmlStreamWriter &xml,int num)
 {
     /* Write project settings */
-    xml.writeStartElement("DLTMultimeter");
+    xml.writeStartElement(QString("DLTMultimeter%1").arg(num));
         xml.writeTextElement("interface",interface);
         xml.writeTextElement("type",QString("%1").arg(type));
         xml.writeTextElement("powerName",powerName);
     xml.writeEndElement(); // DLTMultimeter
 }
 
-void DLTMultimeter::readSettings(const QString &filename)
+void DLTMultimeter::readSettings(const QString &filename,int num)
 {
     bool isDLTMultimeter = false;
 
@@ -272,7 +272,7 @@ void DLTMultimeter::readSettings(const QString &filename)
                       powerName = xml.readElementText();
                   }
               }
-              else if(xml.name() == QString("DLTMultimeter"))
+              else if(xml.name() == QString("DLTMultimeter%1").arg(num))
               {
                     isDLTMultimeter = true;
               }
@@ -280,7 +280,7 @@ void DLTMultimeter::readSettings(const QString &filename)
           else if(xml.isEndElement())
           {
               /* Connection, plugin and filter */
-              if(xml.name() == QString("DLTMultimeter"))
+              if(xml.name() == QString("DLTMultimeter%1").arg(num))
               {
                     isDLTMultimeter = false;
               }
