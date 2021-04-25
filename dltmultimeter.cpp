@@ -34,6 +34,12 @@ DLTMultimeter::~DLTMultimeter()
 
 void DLTMultimeter::start()
 {
+    if(!active)
+    {
+        status(QString("not active"));
+        return;
+    }
+
     value = 0;
     lastValue = -1;
 
@@ -83,6 +89,11 @@ void DLTMultimeter::start()
 
 void DLTMultimeter::stop()
 {
+    if(!active)
+    {
+        return;
+    }
+
     // stop communication
     status(QString("stopped"));
     qDebug() << "DLTMultimeter: stopped" << interface;
@@ -228,6 +239,7 @@ void DLTMultimeter::clearSettings()
 {
     type = 0;
     powerName = "Power";
+    active = 0;
 }
 
 void DLTMultimeter::writeSettings(QXmlStreamWriter &xml,int num)
@@ -237,6 +249,7 @@ void DLTMultimeter::writeSettings(QXmlStreamWriter &xml,int num)
         xml.writeTextElement("interface",interface);
         xml.writeTextElement("type",QString("%1").arg(type));
         xml.writeTextElement("powerName",powerName);
+        xml.writeTextElement("active",QString("%1").arg(active));
     xml.writeEndElement(); // DLTMultimeter
 }
 
@@ -270,6 +283,10 @@ void DLTMultimeter::readSettings(const QString &filename,int num)
                   else if(xml.name() == QString("powerName"))
                   {
                       powerName = xml.readElementText();
+                  }
+                  if(xml.name() == QString("active"))
+                  {
+                      active = xml.readElementText().toInt();
                   }
               }
               else if(xml.name() == QString("DLTMultimeter%1").arg(num))

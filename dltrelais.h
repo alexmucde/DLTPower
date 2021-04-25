@@ -41,6 +41,10 @@ public:
     QString getInterface() { return interface; }
     void setInterface(QString interface) { this->interface = interface; }
 
+    // Active
+    bool getActive() { return active; }
+    void setActive(bool active) { this->active = active; }
+
     // Relais names
     QString getRelaisName(int num) { if(num>0 && num<4) return relaisName[num-1]; else return QString(); }
     void setRelaisName(int num,const QString &name) { if(num>0 && num<4) this->relaisName[num-1] = name; }
@@ -73,6 +77,7 @@ private:
     // Settings
     QString interface;
     QString relaisName[5];
+    bool active;
 };
 
 #endif // DLT_RELAIS_H

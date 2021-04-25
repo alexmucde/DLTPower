@@ -29,6 +29,12 @@ DLTRelais::~DLTRelais()
 
 void DLTRelais::start()
 {
+    if(!active)
+    {
+        status(QString("not active"));
+        return;
+    }
+
     // start communication
 
     // set serial port parameters
@@ -70,6 +76,11 @@ void DLTRelais::start()
 
 void DLTRelais::stop()
 {
+    if(!active)
+    {
+        return;
+    }
+
     // stop communication
     status(QString("stopped"));
     qDebug() << "DLTRelais: stopped" << interface;
@@ -171,6 +182,8 @@ void DLTRelais::clearSettings()
     // clear settings
     for(int num=0;num<3;num++)
         relaisName[num] = QString("Relais%1").arg(num+1);
+
+    active = 0;
 }
 
 void DLTRelais::writeSettings(QXmlStreamWriter &xml,int num)
@@ -181,6 +194,7 @@ void DLTRelais::writeSettings(QXmlStreamWriter &xml,int num)
         xml.writeTextElement("relaisName2",relaisName[1]);
         xml.writeTextElement("relaisName3",relaisName[2]);
         xml.writeTextElement("interface",interface);
+        xml.writeTextElement("active",QString("%1").arg(active));
     xml.writeEndElement(); // DLTRelais
 }
 
@@ -219,6 +233,10 @@ void DLTRelais::readSettings(const QString &filename,int num)
                   if(xml.name() == QString("interface"))
                   {
                       interface = xml.readElementText();
+                  }
+                  if(xml.name() == QString("active"))
+                  {
+                      active = xml.readElementText().toInt();
                   }
               }
               else if(xml.name() == QString("DLTRelais%1").arg(num))

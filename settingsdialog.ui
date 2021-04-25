@@ -22,7 +22,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>4</number>
      </property>
      <widget class="QWidget" name="tabGeneral">
       <attribute name="title">
@@ -92,6 +92,13 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
+        <widget class="QCheckBox" name="checkBoxRelais1Active">
+         <property name="text">
+          <string>Active</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Serial Port:</string>
@@ -152,6 +159,13 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
+        <widget class="QCheckBox" name="checkBoxRelais2Active">
+         <property name="text">
+          <string>Active</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_8">
          <property name="text">
           <string>Serial Port:</string>
@@ -211,6 +225,13 @@
        <string>MM/PS1</string>
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QCheckBox" name="checkBoxMultimeter1Active">
+         <property name="text">
+          <string>Active</string>
+         </property>
+        </widget>
+       </item>
        <item>
         <widget class="QLabel" name="label_11">
          <property name="text">
@@ -273,6 +294,13 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_8">
        <item>
+        <widget class="QCheckBox" name="checkBoxMultimeter2Active">
+         <property name="text">
+          <string>Active</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_15">
          <property name="text">
           <string>Type</string>
@@ -281,6 +309,11 @@
        </item>
        <item>
         <widget class="QComboBox" name="comboBoxType2">
+         <item>
+          <property name="text">
+           <string>None</string>
+          </property>
+         </item>
          <item>
           <property name="text">
            <string>Holdpeak HP-90EPC</string>

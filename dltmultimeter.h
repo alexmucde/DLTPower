@@ -34,6 +34,10 @@ public:
     QString getInterface() { return interface; }
     void setInterface(QString interface) { this->interface = interface; }
 
+    // Active
+    bool getActive() { return active; }
+    void setActive(bool active) { this->active = active; }
+
     int getType() { return type; }
     void setType(int type) { this->type = type; }
 
@@ -71,6 +75,7 @@ private:
     int type;
     QString interface;
     QString powerName;
+    bool active;
 
     QByteArray serialData;
 
