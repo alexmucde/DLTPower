@@ -83,6 +83,8 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais
     ui->lineEditRelaisName6->setText(dltRelais2->getRelaisName(3));
     ui->comboBoxSerialPort1->setCurrentText(dltRelais1->getInterface());
     ui->comboBoxSerialPort2->setCurrentText(dltRelais2->getInterface());
+    ui->checkBoxRelais1Active->setChecked(dltRelais1->getActive());
+    ui->checkBoxRelais2Active->setChecked(dltRelais2->getActive());
 
     /* DLTMultimeter */
     ui->comboBoxSerialPortMultimeter1->setCurrentText(dltMultimeter1->getInterface());
@@ -91,6 +93,8 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais
     ui->comboBoxType2->setCurrentIndex(dltMultimeter2->getType());
     ui->lineEditPower1Name->setText(dltMultimeter1->getPowerName());
     ui->lineEditPower2Name->setText(dltMultimeter2->getPowerName());
+    ui->checkBoxMultimeter1Active->setChecked(dltMultimeter1->getActive());
+    ui->checkBoxMultimeter2Active->setChecked(dltMultimeter2->getActive());
 
     /* DLTMiniServer */
     ui->lineEditPort->setText(QString("%1").arg(dltMiniServer->getPort()));
@@ -111,6 +115,8 @@ void SettingsDialog::backupSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2
     dltRelais2->setRelaisName(1,ui->lineEditRelaisName4->text());
     dltRelais2->setRelaisName(2,ui->lineEditRelaisName5->text());
     dltRelais2->setRelaisName(3,ui->lineEditRelaisName6->text());
+    dltRelais1->setActive(ui->checkBoxRelais1Active->isChecked());
+    dltRelais2->setActive(ui->checkBoxRelais2Active->isChecked());
 
     /* DLTMultimeter */
     dltMultimeter1->setInterface(ui->comboBoxSerialPortMultimeter1->currentText());
@@ -119,6 +125,8 @@ void SettingsDialog::backupSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2
     dltMultimeter2->setInterface(ui->comboBoxSerialPortMultimeter2->currentText());
     dltMultimeter2->setType(ui->comboBoxType2->currentIndex());
     dltMultimeter2->setPowerName(ui->lineEditPower2Name->text());
+    dltMultimeter1->setActive(ui->checkBoxMultimeter1Active->isChecked());
+    dltMultimeter2->setActive(ui->checkBoxMultimeter2Active->isChecked());
 
     /* DLTMiniServer */
     dltMiniServer->setPort(ui->lineEditPort->text().toUShort());

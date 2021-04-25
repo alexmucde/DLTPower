@@ -240,7 +240,7 @@ void Dialog::statusRelais1(QString text)
     }
 
     // status of Relais communication changed
-    else if(text == "" || text == "stopped")
+    else if(text == "" || text == "stopped" || text == "not active")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::white);
@@ -327,7 +327,7 @@ void Dialog::statusRelais2(QString text)
     }
 
     // status of Relais communication changed
-    else if(text == "" || text == "stopped")
+    else if(text == "" || text == "stopped" || text == "not active")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::white);
@@ -361,7 +361,7 @@ void Dialog::statusMultimeter1(QString text)
 {
     ui->lineEditStatusMultimeter1->setText(text);
 
-    if(text == "" || text == "stopped")
+    if(text == "" || text == "stopped" || text == "not active")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::white);
@@ -391,7 +391,7 @@ void Dialog::statusMultimeter2(QString text)
 {
     ui->lineEditStatusMultimeter2->setText(text);
 
-    if(text == "" || text == "stopped")
+    if(text == "" || text == "stopped" || text == "not active")
     {
         QPalette palette;
         palette.setColor(QPalette::Base,Qt::white);

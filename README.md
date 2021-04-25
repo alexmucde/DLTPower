@@ -116,7 +116,10 @@ Github Sponsors:
 v0.0.4:
 
 * Rename from DLTRelais to DLTPower
-* Integrate DLTMUltimeter
+* Integrate DLTMultimeter
+* Support of Power Supply
+* Support two Relais Boards and two Multimeter/PowerSupplies
+* Add active flag for each device
 
 v0.0.3:
 
