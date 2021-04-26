@@ -16,13 +16,13 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QSerialPortInfo>
 
 DLTMultimeter::DLTMultimeter(QObject *parent) : QObject(parent)
 {
     clearSettings();
 
     value = 0;
-    lastValue = -1;
     type = 0;
     powerName = "Power";
 }
@@ -30,6 +30,34 @@ DLTMultimeter::DLTMultimeter(QObject *parent) : QObject(parent)
 DLTMultimeter::~DLTMultimeter()
 {
     stop();
+}
+
+void DLTMultimeter::checkPortName()
+{
+    /* check if information is stored, if not do not check */
+    if(interfaceSerialNumber.isEmpty() && interfaceProductIdentifier==0 && interfaceVendorIdentifier==0)
+        return;
+
+    /* check if port information still matches port name */
+    if((QSerialPortInfo(interface).serialNumber()!=interfaceSerialNumber ||
+       QSerialPortInfo(interface).productIdentifier()!=interfaceProductIdentifier ||
+       QSerialPortInfo(interface).vendorIdentifier()!=interfaceVendorIdentifier))
+    {
+        qDebug() << "Port" << interface << "not found anymore";
+
+        /* port name has changed, try to find new port name */
+        QList<QSerialPortInfo> 	availablePorts  = QSerialPortInfo::availablePorts();
+        for(int num = 0; num<availablePorts.length();num++)
+        {
+            if(availablePorts[num].serialNumber()==interfaceSerialNumber &&
+               availablePorts[num].productIdentifier()==interfaceProductIdentifier &&
+               availablePorts[num].vendorIdentifier()==interfaceVendorIdentifier)
+            {
+                qDebug() << "Port name has changed from" << interface << "to" << availablePorts[num].portName();
+                interface = availablePorts[num].portName();
+            }
+        }
+    }
 }
 
 void DLTMultimeter::start()
@@ -40,8 +68,10 @@ void DLTMultimeter::start()
         return;
     }
 
+    // start communication
+    checkPortName();
+
     value = 0;
-    lastValue = -1;
 
     // set serial port parameters
     if(type==0) // Holdpeak HP-90EPC
@@ -137,11 +167,7 @@ void DLTMultimeter::readyRead()
                     rawData+=data[num];
                     qDebug() << "DLTMultimeter: Raw Data " << rawData.toHex();
                     calculateValue();
-                    if(lastValue!=value)
-                    {
-                        valueMultimeter(QString("%1").arg(value),unit);
-                        lastValue = value;
-                    }
+                    valueMultimeter(QString("%1").arg(value),unit);
                     watchDogCounter++;
                     qDebug() << "DLTMultimeter: Value received" << interface << value << unit;
                     break;
@@ -211,6 +237,9 @@ void DLTMultimeter::timeout()
             disconnect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
         }
 
+        // check if port name has changed
+        checkPortName();
+
         serialData.clear();
 
         // try to reopen serial port
@@ -240,6 +269,10 @@ void DLTMultimeter::clearSettings()
     type = 0;
     powerName = "Power";
     active = 0;
+
+    interfaceSerialNumber = "";
+    interfaceProductIdentifier = 0;
+    interfaceVendorIdentifier = 0;
 }
 
 void DLTMultimeter::writeSettings(QXmlStreamWriter &xml,int num)
@@ -247,6 +280,9 @@ void DLTMultimeter::writeSettings(QXmlStreamWriter &xml,int num)
     /* Write project settings */
     xml.writeStartElement(QString("DLTMultimeter%1").arg(num));
         xml.writeTextElement("interface",interface);
+        xml.writeTextElement("interfaceSerialNumber",QSerialPortInfo(interface).serialNumber());
+        xml.writeTextElement("interfaceProductIdentifier",QString("%1").arg(QSerialPortInfo(interface).productIdentifier()));
+        xml.writeTextElement("interfaceVendorIdentifier",QString("%1").arg(QSerialPortInfo(interface).vendorIdentifier()));
         xml.writeTextElement("type",QString("%1").arg(type));
         xml.writeTextElement("powerName",powerName);
         xml.writeTextElement("active",QString("%1").arg(active));
@@ -276,6 +312,30 @@ void DLTMultimeter::readSettings(const QString &filename,int num)
                   {
                       interface = xml.readElementText();
                   }
+                  else if(xml.name() == QString("interfaceSerialNumber"))
+                  {
+                      interfaceSerialNumber = xml.readElementText();
+                  }
+                  else if(xml.name() == QString("interfaceProductIdentifier"))
+                  {
+                      interfaceProductIdentifier = xml.readElementText().toUShort();
+                  }
+                  else if(xml.name() == QString("interfaceVendorIdentifier"))
+                  {
+                      interfaceVendorIdentifier = xml.readElementText().toUShort();
+                  }
+                  else if(xml.name() == QString("interfaceSerialNumber"))
+                  {
+                      interfaceSerialNumber = xml.readElementText();
+                  }
+                  else if(xml.name() == QString("interfaceProductIdentifier"))
+                  {
+                      interfaceProductIdentifier = xml.readElementText().toUShort();
+                  }
+                  else if(xml.name() == QString("interfaceVendorIdentifier"))
+                  {
+                      interfaceVendorIdentifier = xml.readElementText().toUShort();
+                  }
                   else if(xml.name() == QString("type"))
                   {
                       type = xml.readElementText().toInt();
@@ -284,7 +344,7 @@ void DLTMultimeter::readSettings(const QString &filename,int num)
                   {
                       powerName = xml.readElementText();
                   }
-                  if(xml.name() == QString("active"))
+                  else if(xml.name() == QString("active"))
                   {
                       active = xml.readElementText().toInt();
                   }

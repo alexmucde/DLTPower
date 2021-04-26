@@ -18,6 +18,7 @@
 #include <QSerialPortInfo>
 #include <QSettings>
 #include <QFileDialog>
+#include <QDebug>
 
 SettingsDialog::SettingsDialog(QWidget *parent) :
     QDialog(parent),
@@ -25,15 +26,16 @@ SettingsDialog::SettingsDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    /* update serial ports list */
     QList<QSerialPortInfo> 	availablePorts  = QSerialPortInfo::availablePorts();
-
     ui->comboBoxSerialPort1->clear();
     ui->comboBoxSerialPort2->clear();
     ui->comboBoxSerialPortMultimeter1->clear();
     ui->comboBoxSerialPortMultimeter2->clear();
-
+    qDebug() << "portName" << "description" << "manufacturer" << "serialNumber" << "productIdentifier" << "vendorIdentifier" << "systemLocation";
     for(int num = 0; num<availablePorts.length();num++)
     {
+        qDebug() << availablePorts[num].portName() << availablePorts[num].description() << availablePorts[num].manufacturer() << availablePorts[num].serialNumber() << availablePorts[num].productIdentifier() << availablePorts[num].vendorIdentifier() << availablePorts[num].systemLocation();
         ui->comboBoxSerialPort1->addItem(availablePorts[num].portName());
         ui->comboBoxSerialPort2->addItem(availablePorts[num].portName());
         ui->comboBoxSerialPortMultimeter1->addItem(availablePorts[num].portName());
