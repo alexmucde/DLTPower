@@ -200,8 +200,8 @@ void DLTMultimeter::readyRead()
                 else if(line.length()==9)
                 {
                     valueMultimeter(QString("%1%2.%3%4").arg(line[4]).arg(line[5]).arg(line[6]).arg(line[7]),"A");
+                    valueMultimeter(QString("%1%2.%3%4").arg(line[0]).arg(line[1]).arg(line[2]).arg(line[3]),"V");
                 }
-
 
                 serialData.remove(0,pos+1);
                 pos = serialData.indexOf('\r');

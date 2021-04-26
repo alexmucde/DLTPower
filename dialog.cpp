@@ -700,16 +700,32 @@ void Dialog::on_pushButtonInfo_clicked()
 
 void Dialog::valueMultimeter1(QString value,QString unit)
 {
-    ui->lineEditUnit1->setText(unit);
-    ui->lineEditValue1->setText(value);
+    if(unit=="A" || unit=="mA")
+    {
+        ui->lineEditUnitA1->setText(unit);
+        ui->lineEditValueA1->setText(value);
+    }
+    if(unit=="V" || unit=="mV")
+    {
+        ui->lineEditUnitV1->setText(unit);
+        ui->lineEditValueV1->setText(value);
+    }
 
     dltMiniServer.sendValue3(dltMultimeter1.getPowerName(),value,unit);
 }
 
 void Dialog::valueMultimeter2(QString value,QString unit)
 {
-    ui->lineEditUnit2->setText(unit);
-    ui->lineEditValue2->setText(value);
+    if(unit=="A" || unit=="mA")
+    {
+        ui->lineEditUnitA2->setText(unit);
+        ui->lineEditValueA2->setText(value);
+    }
+    if(unit=="V" || unit=="mV")
+    {
+        ui->lineEditUnitV2->setText(unit);
+        ui->lineEditValueV2->setText(value);
+    }
 
     dltMiniServer.sendValue3(dltMultimeter2.getPowerName(),value,unit);
 }
