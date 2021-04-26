@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>906</width>
-    <height>725</height>
+    <height>719</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -83,7 +83,7 @@
           <property name="title">
            <string>Value</string>
           </property>
-          <layout class="QFormLayout" name="formLayout">
+          <layout class="QGridLayout" name="gridLayout_4">
            <item row="0" column="0">
             <widget class="QLineEdit" name="lineEditValueV1">
              <property name="font">
@@ -183,7 +183,7 @@
           <property name="title">
            <string>Value</string>
           </property>
-          <layout class="QFormLayout" name="formLayout_2">
+          <layout class="QGridLayout" name="gridLayout_5">
            <item row="0" column="0">
             <widget class="QLineEdit" name="lineEditValueV2">
              <property name="font">
@@ -618,7 +618,7 @@
       <item row="0" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Relais1:</string>
+         <string>Relais Board 1:</string>
         </property>
        </widget>
       </item>
@@ -632,14 +632,14 @@
       <item row="0" column="2">
        <widget class="QLabel" name="label">
         <property name="text">
-         <string>Multimeter1:</string>
+         <string>PS/MM 1:</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Relais2:</string>
+         <string>Relais Board 2:</string>
         </property>
        </widget>
       </item>
@@ -681,7 +681,7 @@
       <item row="0" column="3">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Multimeter2</string>
+         <string>PS/MM 2:</string>
         </property>
        </widget>
       </item>
