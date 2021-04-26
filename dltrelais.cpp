@@ -16,6 +16,7 @@
 
 #include <QDebug>
 #include <QFile>
+#include <QSerialPortInfo>
 
 DLTRelais::DLTRelais(QObject *parent) : QObject(parent)
 {
@@ -27,6 +28,34 @@ DLTRelais::~DLTRelais()
     stop();
 }
 
+void DLTRelais::checkPortName()
+{
+    /* check if information is stored, if not do not check */
+    if(interfaceSerialNumber.isEmpty() && interfaceProductIdentifier==0 && interfaceVendorIdentifier==0)
+        return;
+
+    /* check if port information still matches port name */
+    if((QSerialPortInfo(interface).serialNumber()!=interfaceSerialNumber ||
+       QSerialPortInfo(interface).productIdentifier()!=interfaceProductIdentifier ||
+       QSerialPortInfo(interface).vendorIdentifier()!=interfaceVendorIdentifier))
+    {
+        qDebug() << "Port" << interface << "not found anymore";
+
+        /* port name has changed, try to find new port name */
+        QList<QSerialPortInfo> 	availablePorts  = QSerialPortInfo::availablePorts();
+        for(int num = 0; num<availablePorts.length();num++)
+        {
+            if(availablePorts[num].serialNumber()==interfaceSerialNumber &&
+               availablePorts[num].productIdentifier()==interfaceProductIdentifier &&
+               availablePorts[num].vendorIdentifier()==interfaceVendorIdentifier)
+            {
+                qDebug() << "Port name has changed from" << interface << "to" << availablePorts[num].portName();
+                interface = availablePorts[num].portName();
+            }
+        }
+    }
+}
+
 void DLTRelais::start()
 {
     if(!active)
@@ -36,6 +65,7 @@ void DLTRelais::start()
     }
 
     // start communication
+    checkPortName();
 
     // set serial port parameters
     serialPort.setBaudRate(QSerialPort::Baud115200);
@@ -153,6 +183,9 @@ void DLTRelais::timeout()
             disconnect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
         }
 
+        // check if port name has changed
+        checkPortName();
+
         // try to reopen serial port
         if(serialPort.open(QIODevice::ReadWrite)==true)
         {
@@ -184,6 +217,10 @@ void DLTRelais::clearSettings()
         relaisName[num] = QString("Relais%1").arg(num+1);
 
     active = 0;
+
+    interfaceSerialNumber = "";
+    interfaceProductIdentifier = 0;
+    interfaceVendorIdentifier = 0;
 }
 
 void DLTRelais::writeSettings(QXmlStreamWriter &xml,int num)
@@ -194,6 +231,9 @@ void DLTRelais::writeSettings(QXmlStreamWriter &xml,int num)
         xml.writeTextElement("relaisName2",relaisName[1]);
         xml.writeTextElement("relaisName3",relaisName[2]);
         xml.writeTextElement("interface",interface);
+        xml.writeTextElement("interfaceSerialNumber",QSerialPortInfo(interface).serialNumber());
+        xml.writeTextElement("interfaceProductIdentifier",QString("%1").arg(QSerialPortInfo(interface).productIdentifier()));
+        xml.writeTextElement("interfaceVendorIdentifier",QString("%1").arg(QSerialPortInfo(interface).vendorIdentifier()));
         xml.writeTextElement("active",QString("%1").arg(active));
     xml.writeEndElement(); // DLTRelais
 }
@@ -222,19 +262,31 @@ void DLTRelais::readSettings(const QString &filename,int num)
                   {
                       relaisName[0] = xml.readElementText();
                   }
-                  if(xml.name() == QString("relaisName2"))
+                  else if(xml.name() == QString("relaisName2"))
                   {
                       relaisName[1] = xml.readElementText();
                   }
-                  if(xml.name() == QString("relaisName3"))
+                  else if(xml.name() == QString("relaisName3"))
                   {
                       relaisName[2] = xml.readElementText();
                   }
-                  if(xml.name() == QString("interface"))
+                  else if(xml.name() == QString("interface"))
                   {
                       interface = xml.readElementText();
                   }
-                  if(xml.name() == QString("active"))
+                  else if(xml.name() == QString("interfaceSerialNumber"))
+                  {
+                      interfaceSerialNumber = xml.readElementText();
+                  }
+                  else if(xml.name() == QString("interfaceProductIdentifier"))
+                  {
+                      interfaceProductIdentifier = xml.readElementText().toUShort();
+                  }
+                  else if(xml.name() == QString("interfaceVendorIdentifier"))
+                  {
+                      interfaceVendorIdentifier = xml.readElementText().toUShort();
+                  }
+                  else if(xml.name() == QString("active"))
                   {
                       active = xml.readElementText().toInt();
                   }
@@ -263,6 +315,9 @@ void DLTRelais::readSettings(const QString &filename,int num)
 
 void DLTRelais::trigger(int num)
 {
+    if(!active)
+        return;
+
     // trigger a Relais for 500ms
     qDebug() << "DLTRelais: trigger" << num;
 
@@ -276,6 +331,9 @@ void DLTRelais::trigger(int num)
 
 void DLTRelais::on(int num)
 {
+    if(!active)
+        return;
+
     // set Relais to on
     qDebug() << "DLTRelais: on" << num;
 
@@ -289,6 +347,9 @@ void DLTRelais::on(int num)
 
 void DLTRelais::off(int num)
 {
+    if(!active)
+        return;
+
     // set Relais to off
     qDebug() << "DLTRelais: off" << num;
 
@@ -299,3 +360,4 @@ void DLTRelais::off(int num)
     else if(num==3)
         serialPort.write("R30\n");
 }
+

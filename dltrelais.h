@@ -29,6 +29,7 @@ public:
     ~DLTRelais();
 
     // Start and stop connection
+    void checkPortName();
     void start();
     void stop();
 
@@ -76,6 +77,9 @@ private:
 
     // Settings
     QString interface;
+    QString interfaceSerialNumber;
+    ushort interfaceProductIdentifier;
+    ushort interfaceVendorIdentifier;
     QString relaisName[5];
     bool active;
 };

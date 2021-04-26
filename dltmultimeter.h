@@ -28,6 +28,7 @@ public:
     explicit DLTMultimeter(QObject *parent = nullptr);
     ~DLTMultimeter();
 
+    void checkPortName();
     void start();
     void stop();
 
@@ -74,13 +75,16 @@ private:
 
     int type;
     QString interface;
+    QString interfaceSerialNumber;
+    ushort interfaceProductIdentifier;
+    ushort interfaceVendorIdentifier;
     QString powerName;
     bool active;
 
     QByteArray serialData;
 
     QByteArray rawData;
-    float value,lastValue;
+    float value;
     QString unit;
 
     void calculateValue();
