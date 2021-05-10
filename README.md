@@ -113,6 +113,12 @@ Github Sponsors:
 
 ## Changes
 
+v0.0.5:
+
+* support also voltage in Multimeter
+* Autodetect COM port change
+* Reduce to support only 3 Relais per board
+
 v0.0.4:
 
 * Rename from DLTRelais to DLTPower
