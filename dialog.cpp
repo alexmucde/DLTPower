@@ -16,6 +16,7 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QMessageBox>
+#include <QStringList>
 
 #include "dialog.h"
 #include "ui_dialog.h"
@@ -47,6 +48,8 @@ Dialog::Dialog(bool autostart,QString configuration,QWidget *parent)
     connect(&dltMultimeter1, SIGNAL(status(QString)), this, SLOT(statusMultimeter1(QString)));
     connect(&dltMultimeter2, SIGNAL(status(QString)), this, SLOT(statusMultimeter2(QString)));
     connect(&dltMiniServer, SIGNAL(status(QString)), this, SLOT(statusDlt(QString)));
+
+    connect(&dltMiniServer, SIGNAL(injection(QString)), this, SLOT(injection(QString)));
 
     //connect value slots from Multimeter
     connect(&dltMultimeter1, SIGNAL(valueMultimeter(QString,QString)), this, SLOT(valueMultimeter1(QString,QString)));
@@ -94,6 +97,8 @@ Dialog::~Dialog()
     disconnect(&dltRelais1, SIGNAL(status(QString)), this, SLOT(statusRelais1(QString)));
     disconnect(&dltRelais2, SIGNAL(status(QString)), this, SLOT(statusRelais2(QString)));
     disconnect(&dltMiniServer, SIGNAL(status(QString)), this, SLOT(statusDlt(QString)));
+
+    disconnect(&dltMiniServer, SIGNAL(injection(QString)), this, SLOT(injection(QString)));
 
     disconnect(&dltMultimeter1, SIGNAL(status(QString)), this, SLOT(statusMultimeter1(QString)));
     disconnect(&dltMultimeter1, SIGNAL(valueMultimeter(QString,QString)), this, SLOT(valueMultimeter1(QString,QString)));
@@ -541,12 +546,12 @@ void Dialog::on_checkBoxRelais4_clicked(bool checked)
     if(checked)
     {
         dltRelais2.on(0);
-        dltMiniServer.sendValue2(dltRelais2.getRelaisName(0),"On");
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(1),"On");
     }
     else
     {
         dltRelais2.off(0);
-        dltMiniServer.sendValue2(dltRelais2.getRelaisName(0),"Off");
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(1),"Off");
     }
 }
 
@@ -555,12 +560,12 @@ void Dialog::on_checkBoxRelais5_clicked(bool checked)
     if(checked)
     {
         dltRelais2.on(1);
-        dltMiniServer.sendValue2(dltRelais2.getRelaisName(1),"On");
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(2),"On");
     }
     else
     {
         dltRelais2.off(1);
-        dltMiniServer.sendValue2(dltRelais2.getRelaisName(1),"Off");
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(2),"Off");
     }
 }
 
@@ -570,12 +575,12 @@ void Dialog::on_checkBoxRelais6_clicked(bool checked)
     if(checked)
     {
         dltRelais2.on(2);
-        dltMiniServer.sendValue2(dltRelais2.getRelaisName(2),"On");
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(3),"On");
     }
     else
     {
         dltRelais2.off(2);
-        dltMiniServer.sendValue2(dltRelais2.getRelaisName(2),"Off");
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(3),"Off");
     }
 }
 
@@ -756,4 +761,142 @@ void Dialog::on_checkBoxPower2_clicked(bool checked)
         dltMultimeter2.off();
         dltMiniServer.sendValue2(dltMultimeter2.getPowerName(),"Off");
     }
+}
+
+void Dialog::injection(QString text)
+{
+    QStringList list = text.split(' ');
+
+    qDebug() << "Injection received: " << text;
+
+    if(dltRelais1.getRelaisName(1) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais1->setChecked(true);
+            on_checkBoxRelais1_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais1->setChecked(false);
+            on_checkBoxRelais1_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais1Trigger_clicked();
+        }
+    }
+    else if(dltRelais1.getRelaisName(2) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais2->setChecked(true);
+            on_checkBoxRelais2_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais2->setChecked(false);
+            on_checkBoxRelais2_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais2Trigger_clicked();
+        }
+    }
+    else if(dltRelais1.getRelaisName(3) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais3->setChecked(true);
+            on_checkBoxRelais3_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais3->setChecked(false);
+            on_checkBoxRelais3_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais3Trigger_clicked();
+        }
+    }
+    else if(dltRelais2.getRelaisName(1) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais4->setChecked(true);
+            on_checkBoxRelais4_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais4->setChecked(false);
+            on_checkBoxRelais4_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais4Trigger_clicked();
+        }
+    }
+    else if(dltRelais2.getRelaisName(2) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais5->setChecked(true);
+            on_checkBoxRelais5_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais5->setChecked(false);
+            on_checkBoxRelais5_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais5Trigger_clicked();
+        }
+    }
+    else if(dltRelais2.getRelaisName(3) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais6->setChecked(true);
+            on_checkBoxRelais6_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais6->setChecked(false);
+            on_checkBoxRelais6_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais6Trigger_clicked();
+        }
+    }
+
+    if(dltMultimeter1.getPowerName() == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxPower1->setChecked(true);
+            on_checkBoxPower1_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxPower1->setChecked(false);
+            on_checkBoxPower1_clicked(false);
+        }
+    }
+    else if(dltMultimeter2.getPowerName() == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxPower2->setChecked(true);
+            on_checkBoxPower2_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxPower2->setChecked(false);
+            on_checkBoxPower2_clicked(false);
+        }
+    }
+
 }

@@ -60,6 +60,8 @@ private slots:
     void statusMultimeter2(QString text);
     void statusDlt(QString text);
 
+    void injection(QString text);
+
     // value from Multimeter or Power Supply
     void valueMultimeter1(QString value,QString unit);
     void valueMultimeter2(QString value,QString unit);
