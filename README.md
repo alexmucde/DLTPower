@@ -77,6 +77,13 @@ The Arduino board sends the status of Relais, when it was triggered with the but
 
 The Arduino board sends every second a watchdog signal "WD\n".
 
+## DLT injection commands
+
+The commands are interpreted independent of the service id.
+
+* <Relais name> on/off/trigger
+* <Power name> on/off
+
 ## Installation
 
 To build this SW the Qt Toolchain must be used.
@@ -112,6 +119,10 @@ Github Sponsors:
 [:heart: Sponsor](https://github.com/sponsors/alexmucde)
 
 ## Changes
+
+v0.0.6:
+
+* added DLT Injection feature to control Relais and Power
 
 v0.0.5:
 
