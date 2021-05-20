@@ -255,7 +255,7 @@ void DLTMiniServer::disconnected()
     status("listening");
 }
 
-void DLTMiniServer::sendValue(QString text)
+void DLTMiniServer::sendValue(QString appId,QString ctxId, QString text)
 {
     if(tcpSocket==0 || !tcpSocket->isOpen())
     {
@@ -273,14 +273,14 @@ void DLTMiniServer::sendValue(QString text)
     // Extended Header (10 Byte)
     data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
     data += (char)0x01; // NOAR
-    data += applicationId[0].toLatin1(); // APID
-    data += applicationId[1].toLatin1(); // APID
-    data += applicationId[2].toLatin1(); // APID
-    data += applicationId[3].toLatin1(); // APID
-    data += contextId[0].toLatin1(); // CTID
-    data += contextId[1].toLatin1(); // CTID
-    data += contextId[2].toLatin1(); // CTID
-    data += contextId[3].toLatin1(); // CTID
+    data += appId[0].toLatin1(); // APID
+    data += appId[1].toLatin1(); // APID
+    data += appId[2].toLatin1(); // APID
+    data += appId[3].toLatin1(); // APID
+    data += ctxId[0].toLatin1(); // CTID
+    data += ctxId[1].toLatin1(); // CTID
+    data += ctxId[2].toLatin1(); // CTID
+    data += ctxId[3].toLatin1(); // CTID
 
     // Payload Type Info (4 Byte)
     data += (char)0x00;
@@ -298,7 +298,7 @@ void DLTMiniServer::sendValue(QString text)
     tcpSocket->write(data);
 }
 
-void DLTMiniServer::sendValue2(QString text1,QString text2)
+void DLTMiniServer::sendValue2(QString appId,QString ctxId, QString text1,QString text2)
 {
     if(tcpSocket==0 || !tcpSocket->isOpen())
     {
@@ -316,14 +316,14 @@ void DLTMiniServer::sendValue2(QString text1,QString text2)
     // Extended Header (10 Byte)
     data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
     data += (char)0x02; // NOAR
-    data += applicationId[0].toLatin1(); // APID
-    data += applicationId[1].toLatin1(); // APID
-    data += applicationId[2].toLatin1(); // APID
-    data += applicationId[3].toLatin1(); // APID
-    data += contextId[0].toLatin1(); // CTID
-    data += contextId[1].toLatin1(); // CTID
-    data += contextId[2].toLatin1(); // CTID
-    data += contextId[3].toLatin1(); // CTID
+    data += appId[0].toLatin1(); // APID
+    data += appId[1].toLatin1(); // APID
+    data += appId[2].toLatin1(); // APID
+    data += appId[3].toLatin1(); // APID
+    data += ctxId[0].toLatin1(); // CTID
+    data += ctxId[1].toLatin1(); // CTID
+    data += ctxId[2].toLatin1(); // CTID
+    data += ctxId[3].toLatin1(); // CTID
 
     // Payload Type Info (4 Byte)
     data += (char)0x00;
@@ -355,7 +355,7 @@ void DLTMiniServer::sendValue2(QString text1,QString text2)
 
 }
 
-void DLTMiniServer::sendValue3(QString text1,QString text2,QString text3)
+void DLTMiniServer::sendValue3(QString appId,QString ctxId, QString text1,QString text2,QString text3)
 {
     if(tcpSocket==0 || !tcpSocket->isOpen())
     {
@@ -373,14 +373,14 @@ void DLTMiniServer::sendValue3(QString text1,QString text2,QString text3)
     // Extended Header (10 Byte)
     data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
     data += (char)0x03; // NOAR
-    data += applicationId[0].toLatin1(); // APID
-    data += applicationId[1].toLatin1(); // APID
-    data += applicationId[2].toLatin1(); // APID
-    data += applicationId[3].toLatin1(); // APID
-    data += contextId[0].toLatin1(); // CTID
-    data += contextId[1].toLatin1(); // CTID
-    data += contextId[2].toLatin1(); // CTID
-    data += contextId[3].toLatin1(); // CTID
+    data += appId[0].toLatin1(); // APID
+    data += appId[1].toLatin1(); // APID
+    data += appId[2].toLatin1(); // APID
+    data += appId[3].toLatin1(); // APID
+    data += ctxId[0].toLatin1(); // CTID
+    data += ctxId[1].toLatin1(); // CTID
+    data += ctxId[2].toLatin1(); // CTID
+    data += ctxId[3].toLatin1(); // CTID
 
     // Payload Type Info (4 Byte)
     data += (char)0x00;

@@ -716,7 +716,14 @@ void Dialog::valueMultimeter1(QString value,QString unit)
         ui->lineEditValueV1->setText(value);
     }
 
-    dltMiniServer.sendValue3(dltMultimeter1.getPowerName(),value,unit);
+    if(unit=="A")
+        dltMiniServer.sendValue2("POWR","AMP",dltMultimeter1.getPowerName(),value);
+    else if(unit=="V")
+        dltMiniServer.sendValue2("POWR","VOLT",dltMultimeter1.getPowerName(),value);
+    else if(unit=="mA")
+        dltMiniServer.sendValue2("POWR","MAMP",dltMultimeter1.getPowerName(),value);
+    else if(unit=="mV")
+        dltMiniServer.sendValue2("POWR","MVOL",dltMultimeter1.getPowerName(),value);
 }
 
 void Dialog::valueMultimeter2(QString value,QString unit)
@@ -732,7 +739,14 @@ void Dialog::valueMultimeter2(QString value,QString unit)
         ui->lineEditValueV2->setText(value);
     }
 
-    dltMiniServer.sendValue3(dltMultimeter2.getPowerName(),value,unit);
+    if(unit=="A")
+        dltMiniServer.sendValue2("POWR","AMP",dltMultimeter2.getPowerName(),value);
+    else if(unit=="V")
+        dltMiniServer.sendValue2("POWR","VOLT",dltMultimeter2.getPowerName(),value);
+    else if(unit=="mA")
+        dltMiniServer.sendValue2("POWR","MAMP",dltMultimeter2.getPowerName(),value);
+    else if(unit=="mV")
+        dltMiniServer.sendValue2("POWR","MVOL",dltMultimeter2.getPowerName(),value);
 }
 
 void Dialog::on_checkBoxPower1_clicked(bool checked)
