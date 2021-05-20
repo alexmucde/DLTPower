@@ -31,9 +31,12 @@ public:
     void start();
     void stop();
 
-    void sendValue(QString text);
-    void sendValue2(QString text1,QString text2);
-    void sendValue3(QString text1,QString text2,QString text3);
+    void sendValue(QString text) { sendValue(applicationId,contextId,text); }
+    void sendValue2(QString text1,QString text2) { sendValue2(applicationId,contextId,text1,text2); }
+    void sendValue3(QString text1,QString text2,QString text3) { sendValue3(applicationId,contextId,text1,text2,text3); }
+    void sendValue(QString appId,QString ctxId, QString text);
+    void sendValue2(QString appId,QString ctxId, QString text1,QString text2);
+    void sendValue3(QString appId,QString ctxId, QString text1,QString text2,QString text3);
 
     unsigned short getPort() { return port; }
     void setPort(unsigned short port) { this->port = port; }
