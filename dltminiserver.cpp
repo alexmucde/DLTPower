@@ -255,7 +255,7 @@ void DLTMiniServer::disconnected()
     status("listening");
 }
 
-void DLTMiniServer::sendValue(QString appId,QString ctxId, QString text)
+void DLTMiniServer::sendValue(QString appId,QString ctxId, QString text,int logLevel)
 {
     if(tcpSocket==0 || !tcpSocket->isOpen())
     {
@@ -271,7 +271,7 @@ void DLTMiniServer::sendValue(QString appId,QString ctxId, QString text)
     data += (char)4+10+4+2+text.length(); // length low byte
 
     // Extended Header (10 Byte)
-    data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
+    data += (char)0x01|(char)logLevel<<4; // MSIN: Verbose,DLT_TYPE_LOG
     data += (char)0x01; // NOAR
     data += appId[0].toLatin1(); // APID
     data += appId[1].toLatin1(); // APID
@@ -298,7 +298,7 @@ void DLTMiniServer::sendValue(QString appId,QString ctxId, QString text)
     tcpSocket->write(data);
 }
 
-void DLTMiniServer::sendValue2(QString appId,QString ctxId, QString text1,QString text2)
+void DLTMiniServer::sendValue2(QString appId,QString ctxId, QString text1,QString text2,int logLevel)
 {
     if(tcpSocket==0 || !tcpSocket->isOpen())
     {
@@ -314,7 +314,7 @@ void DLTMiniServer::sendValue2(QString appId,QString ctxId, QString text1,QStrin
     data += (char)4+10+4+2+text1.length()+4+2+text2.length(); // length low byte
 
     // Extended Header (10 Byte)
-    data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
+    data += (char)0x01|(char)logLevel<<4; // MSIN: Verbose,DLT_TYPE_LOG
     data += (char)0x02; // NOAR
     data += appId[0].toLatin1(); // APID
     data += appId[1].toLatin1(); // APID
@@ -355,7 +355,7 @@ void DLTMiniServer::sendValue2(QString appId,QString ctxId, QString text1,QStrin
 
 }
 
-void DLTMiniServer::sendValue3(QString appId,QString ctxId, QString text1,QString text2,QString text3)
+void DLTMiniServer::sendValue3(QString appId,QString ctxId, QString text1,QString text2,QString text3,int logLevel)
 {
     if(tcpSocket==0 || !tcpSocket->isOpen())
     {
@@ -371,7 +371,7 @@ void DLTMiniServer::sendValue3(QString appId,QString ctxId, QString text1,QStrin
     data += (char)4+10+4+2+text1.length()+4+2+text2.length()+4+2+text3.length(); // length low byte
 
     // Extended Header (10 Byte)
-    data += (char)0x41; // MSIN: Verbose,NW_TRACE, CAN 0x25
+    data += (char)0x01|(char)logLevel<<4; // MSIN: Verbose,DLT_TYPE_LOG
     data += (char)0x03; // NOAR
     data += appId[0].toLatin1(); // APID
     data += appId[1].toLatin1(); // APID
