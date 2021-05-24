@@ -80,6 +80,15 @@ private slots:
     void on_checkBoxPower1_clicked(bool checked);
     void on_checkBoxPower2_clicked(bool checked);
 
+    void on_checkBoxRelais7_clicked(bool checked);
+
+    void on_pushButtonRelais7Trigger_clicked();
+
+    void on_checkBoxRelais8_clicked(bool checked);
+
+
+    void on_pushButtonRelais8Trigger_clicked();
+
 private:
     Ui::Dialog *ui;
 

@@ -132,7 +132,10 @@ if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 mkdir %INSTALLATION_DIR%\arduino
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
-mkdir %INSTALLATION_DIR%\arduino\DLTRelais
+mkdir %INSTALLATION_DIR%\arduino\WemosD1MiniRelais3Button
+if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
+
+mkdir %INSTALLATION_DIR%\arduino\WemosD1Relais4Shield
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
 echo *** Copy files ***
@@ -166,7 +169,10 @@ if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 copy %QTDIR%\plugins\platforms\qwindows.dll %INSTALLATION_DIR%\platforms
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
-copy %SOURCE_DIR%\arduino\DLTRelais\DLTRelais.ino %INSTALLATION_DIR%\arduino\DLTRelais
+copy %SOURCE_DIR%\arduino\WemosD1MiniRelais3Button\WemosD1MiniRelais3Button.ino %INSTALLATION_DIR%\arduino\WemosD1MiniRelais3Button
+if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
+
+copy %SOURCE_DIR%\arduino\WemosD1Relais4Shield\WemosD1Relais4Shield.ino %INSTALLATION_DIR%\arduino\WemosD1Relais4Shield
 if %ERRORLEVEL% NEQ 0 GOTO ERROR_HANDLER
 
 copy %BUILD_DIR%\%NAME%.exe %INSTALLATION_DIR%

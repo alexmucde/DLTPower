@@ -5,9 +5,9 @@
 
 WButton button;
 WLed led;
-WRelais relais1(D1);
-WRelais relais2(D2);
-WRelais relais3(D6);
+WRelais relais1(D2);
+WRelais relais2(D3);
+WRelais relais3(D4);
 WSerial serial;
 WTimer timer;
 

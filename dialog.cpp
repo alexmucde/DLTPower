@@ -117,6 +117,8 @@ void Dialog::restoreSettings()
     ui->lineEditRelaisName4->setText(dltRelais2.getRelaisName(1));
     ui->lineEditRelaisName5->setText(dltRelais2.getRelaisName(2));
     ui->lineEditRelaisName6->setText(dltRelais2.getRelaisName(3));
+    ui->lineEditRelaisName7->setText(dltRelais1.getRelaisName(4));
+    ui->lineEditRelaisName8->setText(dltRelais2.getRelaisName(4));
 
     // DLTMultimeter
     ui->lineEditPower1Name->setText(dltMultimeter1.getPowerName());
@@ -159,12 +161,16 @@ void Dialog::on_pushButtonStart_clicked()
     dltRelais1.off(2);
     ui->checkBoxRelais3->setChecked(false);
     dltRelais1.off(3);
-    ui->checkBoxRelais1->setChecked(false);
+    ui->checkBoxRelais7->setChecked(false);
+    dltRelais1.off(4);
+    ui->checkBoxRelais4->setChecked(false);
     dltRelais2.off(1);
-    ui->checkBoxRelais2->setChecked(false);
+    ui->checkBoxRelais5->setChecked(false);
     dltRelais2.off(2);
-    ui->checkBoxRelais3->setChecked(false);
+    ui->checkBoxRelais6->setChecked(false);
     dltRelais2.off(3);
+    ui->checkBoxRelais8->setChecked(false);
+    dltRelais2.off(4);
 
 }
 
@@ -229,10 +235,13 @@ void Dialog::statusRelais1(QString text)
     }
     else if(text=="R40\r\n")
     {
+        ui->checkBoxRelais7->setChecked(false);
         return;
     }
     else if(text=="R41\r\n")
     {
+        ui->checkBoxRelais7->setChecked(true);
+        return;
         return;
     }
     else if(text=="R50\r\n")
@@ -316,10 +325,12 @@ void Dialog::statusRelais2(QString text)
     }
     else if(text=="R40\r\n")
     {
+        ui->checkBoxRelais8->setChecked(false);
         return;
     }
     else if(text=="R41\r\n")
     {
+        ui->checkBoxRelais8->setChecked(true);
         return;
     }
     else if(text=="R50\r\n")
@@ -515,9 +526,9 @@ void Dialog::on_checkBoxRelais3_clicked(bool checked)
 
 void Dialog::on_pushButtonRelais3Trigger_clicked()
 {
-    dltRelais2.trigger(0);
+    dltRelais1.trigger(3);
     ui->checkBoxRelais3->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais2.getRelaisName(0),"Trigger");
+    dltMiniServer.sendValue2(dltRelais1.getRelaisName(3),"Trigger");
 }
 
 void Dialog::on_pushButtonRelais4Trigger_clicked()
@@ -539,6 +550,21 @@ void Dialog::on_pushButtonRelais6Trigger_clicked()
     dltRelais2.trigger(3);
     ui->checkBoxRelais5->setChecked(false);
     dltMiniServer.sendValue2(dltRelais2.getRelaisName(3),"Trigger");
+}
+
+void Dialog::on_pushButtonRelais7Trigger_clicked()
+{
+    dltRelais1.trigger(4);
+    ui->checkBoxRelais7->setChecked(false);
+    dltMiniServer.sendValue2(dltRelais1.getRelaisName(4),"Trigger");
+}
+
+
+void Dialog::on_pushButtonRelais8Trigger_clicked()
+{
+    dltRelais2.trigger(4);
+    ui->checkBoxRelais8->setChecked(false);
+    dltMiniServer.sendValue2(dltRelais2.getRelaisName(4),"Trigger");
 }
 
 void Dialog::on_checkBoxRelais4_clicked(bool checked)
@@ -581,6 +607,34 @@ void Dialog::on_checkBoxRelais6_clicked(bool checked)
     {
         dltRelais2.off(2);
         dltMiniServer.sendValue2(dltRelais2.getRelaisName(3),"Off");
+    }
+}
+
+void Dialog::on_checkBoxRelais7_clicked(bool checked)
+{
+    if(checked)
+    {
+        dltRelais1.on(4);
+        dltMiniServer.sendValue2(dltRelais1.getRelaisName(4),"On");
+    }
+    else
+    {
+        dltRelais1.off(4);
+        dltMiniServer.sendValue2(dltRelais1.getRelaisName(4),"Off");
+    }
+}
+
+void Dialog::on_checkBoxRelais8_clicked(bool checked)
+{
+    if(checked)
+    {
+        dltRelais2.on(4);
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(4),"On");
+    }
+    else
+    {
+        dltRelais2.off(4);
+        dltMiniServer.sendValue2(dltRelais2.getRelaisName(4),"Off");
     }
 }
 
@@ -834,6 +888,23 @@ void Dialog::injection(QString text)
             on_pushButtonRelais3Trigger_clicked();
         }
     }
+    else if(dltRelais1.getRelaisName(4) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais7->setChecked(true);
+            on_checkBoxRelais7_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais7->setChecked(false);
+            on_checkBoxRelais7_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais7Trigger_clicked();
+        }
+    }
     else if(dltRelais2.getRelaisName(1) == list[0])
     {
         if(list[1]=="on")
@@ -885,6 +956,23 @@ void Dialog::injection(QString text)
             on_pushButtonRelais6Trigger_clicked();
         }
     }
+    else if(dltRelais2.getRelaisName(4) == list[0])
+    {
+        if(list[1]=="on")
+        {
+            ui->checkBoxRelais8->setChecked(true);
+            on_checkBoxRelais8_clicked(true);
+        }
+        else if(list[1]=="off")
+        {
+            ui->checkBoxRelais8->setChecked(false);
+            on_checkBoxRelais8_clicked(false);
+        }
+        else if(list[1]=="trigger")
+        {
+            on_pushButtonRelais8Trigger_clicked();
+        }
+    }
 
     if(dltMultimeter1.getPowerName() == list[0])
     {
@@ -914,3 +1002,5 @@ void Dialog::injection(QString text)
     }
 
 }
+
+
