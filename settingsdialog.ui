@@ -139,6 +139,16 @@
         <widget class="QLineEdit" name="lineEditRelaisName3"/>
        </item>
        <item>
+        <widget class="QLabel" name="label_18">
+         <property name="text">
+          <string>Relais Name 4:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditRelaisName7"/>
+       </item>
+       <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
@@ -204,6 +214,16 @@
        </item>
        <item>
         <widget class="QLineEdit" name="lineEditRelaisName6"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_19">
+         <property name="text">
+          <string>Relais Name 4:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEditRelaisName8"/>
        </item>
        <item>
         <spacer name="verticalSpacer_5">

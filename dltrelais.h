@@ -47,8 +47,8 @@ public:
     void setActive(bool active) { this->active = active; }
 
     // Relais names
-    QString getRelaisName(int num) { if(num>0 && num<4) return relaisName[num-1]; else return QString(); }
-    void setRelaisName(int num,const QString &name) { if(num>0 && num<4) this->relaisName[num-1] = name; }
+    QString getRelaisName(int num) { if(num>0 && num<5) return relaisName[num-1]; else return QString(); }
+    void setRelaisName(int num,const QString &name) { if(num>0 && num<5) this->relaisName[num-1] = name; }
 
     // Settings
     void clearSettings();
@@ -80,7 +80,7 @@ private:
     QString interfaceSerialNumber;
     ushort interfaceProductIdentifier;
     ushort interfaceVendorIdentifier;
-    QString relaisName[5];
+    QString relaisName[4];
     bool active;
 };
 
