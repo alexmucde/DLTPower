@@ -48,6 +48,7 @@ public:
 
     void on();
     void off();
+    void setVoltage(float value);
 
     QString getPowerName() { return powerName; }
     void setPowerName(const QString &powerName) { this->powerName = powerName; }

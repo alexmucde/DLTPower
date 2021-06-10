@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>906</width>
-    <height>788</height>
+    <width>922</width>
+    <height>723</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -84,6 +84,16 @@
            <string>Value</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
+           <item row="1" column="0">
+            <widget class="QLineEdit" name="lineEditValueA1">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QLineEdit" name="lineEditValueV1">
              <property name="font">
@@ -107,16 +117,6 @@
              </property>
              <property name="readOnly">
               <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLineEdit" name="lineEditValueA1">
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>16</pointsize>
-              </font>
              </property>
             </widget>
            </item>
