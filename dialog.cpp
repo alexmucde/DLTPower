@@ -837,7 +837,17 @@ void Dialog::injection(QString text)
 
     qDebug() << "Injection received: " << text;
 
-    if(dltRelais1.getRelaisName(1) == list[0])
+    if(list[0]=="VOLTAGE1")
+    {
+        float value = list[1].toFloat();
+        dltMultimeter1.setVoltage(value);
+    }
+    else if(list[0]=="VOLTAGE2")
+    {
+        float value = list[1].toFloat();
+        dltMultimeter2.setVoltage(value);
+    }
+    else if(dltRelais1.getRelaisName(1) == list[0])
     {
         if(list[1]=="on")
         {

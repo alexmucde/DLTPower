@@ -430,6 +430,8 @@ void DLTMultimeter::on()
     if(type==1) // Mason HCS-3302 USB
     {
         serialPort.write("SOUT0\r");
+
+        qDebug() << "DLTMultimeter: power on";
     }
 }
 
@@ -438,5 +440,19 @@ void DLTMultimeter::off()
     if(type==1) // Mason HCS-3302 USB
     {
         serialPort.write("SOUT1\r");
+
+        qDebug() << "DLTMultimeter: power off";
+    }
+}
+
+void DLTMultimeter::setVoltage(float value)
+{
+    if(type==1) // Mason HCS-3302 USB
+    {
+        QString text;
+        text = QString("VOLT%1\r").arg((int)(value*10));
+        serialPort.write(text.toLatin1());
+
+        qDebug() << "DLTMultimeter: setVoltage" << text;
     }
 }

@@ -101,6 +101,8 @@ The commands are interpreted independent of the service id.
 
 * <Relais name> on/off/trigger
 * <Power name> on/off
+* VOLTAGE1 <value>
+* VOLTAGE2 <value>
 
 ## Installation
 
@@ -137,6 +139,10 @@ Github Sponsors:
 [:heart: Sponsor](https://github.com/sponsors/alexmucde)
 
 ## Changes
+
+v0.0.8:
+
+* added DLT injection for setting voltage
 
 v0.0.7:
 
