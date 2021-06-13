@@ -318,22 +318,15 @@ void DLTRelais::readSettings(const QString &filename,int num)
     file.close();
 }
 
-void DLTRelais::trigger(int num)
+void DLTRelais::trigger(int num,unsigned int duration)
 {
     if(!active)
         return;
 
     // trigger a Relais for 500ms
-    qDebug() << "DLTRelais: trigger" << num;
+    qDebug() << "DLTRelais: trigger" << num << duration;
 
-    if(num==1)
-        serialPort.write("R1T\n");
-    else if(num==2)
-        serialPort.write("R2T\n");
-    else if(num==3)
-        serialPort.write("R3T\n");
-    else if(num==4)
-        serialPort.write("R4T\n");
+    serialPort.write(QString("R%1T%2\n").arg(num).arg(duration).toLatin1());
 }
 
 void DLTRelais::on(int num)

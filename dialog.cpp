@@ -484,9 +484,14 @@ void Dialog::on_checkBoxRelais1_clicked(bool checked)
 
 void Dialog::on_pushButtonRelais1Trigger_clicked()
 {
-    dltRelais1.trigger(1);
+    relais1Trigger(500);
+}
+
+void Dialog::relais1Trigger(unsigned int duration)
+{
+    dltRelais1.trigger(1,duration);
     ui->checkBoxRelais1->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais1.getRelaisName(1),"Trigger");
+    dltMiniServer.sendValue3(dltRelais1.getRelaisName(1),"Trigger",QString("%1").arg(duration));
 }
 
 void Dialog::on_checkBoxRelais2_clicked(bool checked)
@@ -505,9 +510,14 @@ void Dialog::on_checkBoxRelais2_clicked(bool checked)
 
 void Dialog::on_pushButtonRelais2Trigger_clicked()
 {
-    dltRelais1.trigger(2);
+    relais2Trigger(500);
+}
+
+void Dialog::relais2Trigger(unsigned int duration)
+{
+    dltRelais1.trigger(2,duration);
     ui->checkBoxRelais2->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais1.getRelaisName(2),"Trigger");
+    dltMiniServer.sendValue3(dltRelais1.getRelaisName(2),"Trigger",QString("%1").arg(duration));
 }
 
 void Dialog::on_checkBoxRelais3_clicked(bool checked)
@@ -526,45 +536,74 @@ void Dialog::on_checkBoxRelais3_clicked(bool checked)
 
 void Dialog::on_pushButtonRelais3Trigger_clicked()
 {
-    dltRelais1.trigger(3);
+    relais3Trigger(500);
+}
+
+void Dialog::relais3Trigger(unsigned int duration)
+{
+    dltRelais1.trigger(3,duration);
     ui->checkBoxRelais3->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais1.getRelaisName(3),"Trigger");
+    dltMiniServer.sendValue3(dltRelais1.getRelaisName(3),"Trigger",QString("%1").arg(duration));
 }
 
 void Dialog::on_pushButtonRelais4Trigger_clicked()
 {
-    dltRelais2.trigger(1);
+    relais4Trigger(500);
+}
+
+void Dialog::relais4Trigger(unsigned int duration)
+{
+    dltRelais2.trigger(1,duration);
     ui->checkBoxRelais4->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais2.getRelaisName(1),"Trigger");
+    dltMiniServer.sendValue3(dltRelais2.getRelaisName(1),"Trigger",QString("%1").arg(duration));
 }
 
 void Dialog::on_pushButtonRelais5Trigger_clicked()
 {
-    dltRelais2.trigger(2);
+    relais5Trigger(500);
+}
+
+void Dialog::relais5Trigger(unsigned int duration)
+{
+    dltRelais2.trigger(2,duration);
     ui->checkBoxRelais5->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais2.getRelaisName(2),"Trigger");
+    dltMiniServer.sendValue3(dltRelais2.getRelaisName(2),"Trigger",QString("%1").arg(duration));
 }
 
 void Dialog::on_pushButtonRelais6Trigger_clicked()
 {
-    dltRelais2.trigger(3);
+    relais6Trigger(500);
+}
+
+void Dialog::relais6Trigger(unsigned int duration)
+{
+    dltRelais2.trigger(3,duration);
     ui->checkBoxRelais5->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais2.getRelaisName(3),"Trigger");
+    dltMiniServer.sendValue3(dltRelais2.getRelaisName(3),"Trigger",QString("%1").arg(duration));
 }
 
 void Dialog::on_pushButtonRelais7Trigger_clicked()
 {
-    dltRelais1.trigger(4);
-    ui->checkBoxRelais7->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais1.getRelaisName(4),"Trigger");
+    relais7Trigger(500);
 }
 
+void Dialog::relais7Trigger(unsigned int duration)
+{
+    dltRelais1.trigger(4,duration);
+    ui->checkBoxRelais7->setChecked(false);
+    dltMiniServer.sendValue3(dltRelais1.getRelaisName(4),"Trigger",QString("%1").arg(duration));
+}
 
 void Dialog::on_pushButtonRelais8Trigger_clicked()
 {
-    dltRelais2.trigger(4);
+    relais8Trigger(500);
+}
+
+void Dialog::relais8Trigger(unsigned int duration)
+{
+    dltRelais2.trigger(4,duration);
     ui->checkBoxRelais8->setChecked(false);
-    dltMiniServer.sendValue2(dltRelais2.getRelaisName(4),"Trigger");
+    dltMiniServer.sendValue3(dltRelais2.getRelaisName(4),"Trigger",QString("%1").arg(duration));
 }
 
 void Dialog::on_checkBoxRelais4_clicked(bool checked)
@@ -861,7 +900,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais1Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais1Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais1Trigger(500);
+            }
         }
     }
     else if(dltRelais1.getRelaisName(2) == list[0])
@@ -878,7 +924,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais2Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais2Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais2Trigger(500);
+            }
         }
     }
     else if(dltRelais1.getRelaisName(3) == list[0])
@@ -895,7 +948,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais3Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais3Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais3Trigger(500);
+            }
         }
     }
     else if(dltRelais1.getRelaisName(4) == list[0])
@@ -912,7 +972,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais7Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais7Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais7Trigger(500);
+            }
         }
     }
     else if(dltRelais2.getRelaisName(1) == list[0])
@@ -929,7 +996,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais4Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais4Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais4Trigger(500);
+            }
         }
     }
     else if(dltRelais2.getRelaisName(2) == list[0])
@@ -946,7 +1020,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais5Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais5Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais5Trigger(500);
+            }
         }
     }
     else if(dltRelais2.getRelaisName(3) == list[0])
@@ -963,7 +1044,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais6Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais6Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais6Trigger(500);
+            }
         }
     }
     else if(dltRelais2.getRelaisName(4) == list[0])
@@ -980,7 +1068,14 @@ void Dialog::injection(QString text)
         }
         else if(list[1]=="trigger")
         {
-            on_pushButtonRelais8Trigger_clicked();
+            if(list.length()>2)
+            {
+                relais8Trigger(list[2].toUInt());
+            }
+            else
+            {
+                relais8Trigger(500);
+            }
         }
     }
 

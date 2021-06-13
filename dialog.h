@@ -101,5 +101,14 @@ private:
     void restoreSettings();
     void updateSettings();
 
+    void relais1Trigger(unsigned int duration);
+    void relais2Trigger(unsigned int duration);
+    void relais3Trigger(unsigned int duration);
+    void relais4Trigger(unsigned int duration);
+    void relais5Trigger(unsigned int duration);
+    void relais6Trigger(unsigned int duration);
+    void relais7Trigger(unsigned int duration);
+    void relais8Trigger(unsigned int duration);
+
 };
 #endif // DIALOG_H
