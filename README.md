@@ -90,6 +90,7 @@ The Arduino SW understands the following commands:
 * "R11\n", "R21\n", "R31\n", "R41\n" Activates Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1)
 * "R10\n", "R20\n", "R30\n", "R40\n" Deactivates Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1)
 * "R1T\n", "R2T\n", "R3T\n", "R4T\n" Trigger Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1) for 500ms
+* "R1T<time in ms>\n", "R2T<time in ms>\n", "R3T<time in ms>\n", "R4T<time in ms>\n" Trigger Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1) for the defined time in ms
 
 The Arduino board sends the status of Relais, when it was triggered with the button with the same command.
 
@@ -100,6 +101,7 @@ The Arduino board sends every second a watchdog signal "WD\n".
 The commands are interpreted independent of the service id.
 
 * <Relais name> on/off/trigger
+* <Relais name> trigger <time in ms>
 * <Power name> on/off
 * VOLTAGE1 <value>
 * VOLTAGE2 <value>
@@ -139,6 +141,11 @@ Github Sponsors:
 [:heart: Sponsor](https://github.com/sponsors/alexmucde)
 
 ## Changes
+
+v0.0.9:
+
+* configurable trigger time by injection
+* user configurable trigger time in Arduino sketch
 
 v0.0.8:
 

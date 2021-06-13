@@ -34,7 +34,7 @@ public:
     void stop();
 
     // Trigger Relais
-    void trigger(int num);
+    void trigger(int num,unsigned int duration);
     void on(int num);
     void off(int num);
 

@@ -15,6 +15,6 @@
 #ifndef VERSION_H
 #define VERSION_H
 
-#define DLT_POWER_VERSION "v0.0.8"
+#define DLT_POWER_VERSION "v0.0.9"
 
 #endif // VERSION_H

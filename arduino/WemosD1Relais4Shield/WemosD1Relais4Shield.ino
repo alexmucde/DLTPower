@@ -70,7 +70,7 @@ void loop()
       break;
     case WSerial::Line:
       String text = serial.line();
-      if(text[0]=='R')
+      if(text.length()>=3 && text[0]=='R')
       {
         if(text[1]>='1' || text[1]<='5')
         {          
@@ -98,14 +98,27 @@ void loop()
           }      
           else if(text[2]=='T')
           {
+            unsigned int duration = 500;
+            if(text.length()>3)
+            {
+              duration = 0;
+              for(int num=3;num<text.length();num++)
+              {
+                if(text[num]>='0' && text[num]<='9')
+                {
+                  duration = duration * 10 + (text[num]-'0');
+                }
+              }
+              duration += 2; // reaction time of Relais
+            }
             if(text[1]=='1')
-              relais1.trigger(500);
+              relais1.trigger(duration);
             else if(text[1]=='2')
-              relais2.trigger(500);
+              relais2.trigger(duration);
             else if(text[1]=='3')
-              relais3.trigger(500);
+              relais3.trigger(duration);
             else if(text[1]=='4')
-              relais4.trigger(500);
+              relais4.trigger(duration);
           }      
         }
       }
