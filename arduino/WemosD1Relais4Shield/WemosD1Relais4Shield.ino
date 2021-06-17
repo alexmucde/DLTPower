@@ -6,7 +6,7 @@ WLed led;
 WRelais relais1(D7);
 WRelais relais2(D6);
 WRelais relais3(D5);
-WRelais relais4(D2);
+WRelais relais4(D4);
 WSerial serial;
 WTimer timer;
 
