@@ -72,8 +72,8 @@ Clone or copy the Wemos Library into the Arduino Libraries folder before compili
 
 The Arduino SW provides the following Features:
 
-* Activate and deactivate three Relais
-* Trigger the Relais for short time (500ms)
+* Activate and deactivate tfour Relais
+* Trigger the Relais for short time (500ms or custom value)
 * If a button shield is connected, a short press triggers the Relais 1 connected to pin D1 (only Wemos D1 Mini)
 * If a button shield is connected, a long press toggles the Relais 2 connected to pin D2 (only Wemos D1 Mini)
 
@@ -87,10 +87,10 @@ https://www.wemos.cc/en/latest/ch340_driver.html
 
 The Arduino SW understands the following commands:
 
-* "R11\n", "R21\n", "R31\n", "R41\n" Activates Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1)
-* "R10\n", "R20\n", "R30\n", "R40\n" Deactivates Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1)
-* "R1T\n", "R2T\n", "R3T\n", "R4T\n" Trigger Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1) for 500ms
-* "R1T<time in ms>\n", "R2T<time in ms>\n", "R3T<time in ms>\n", "R4T<time in ms>\n" Trigger Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D2 (Wemos D1) for the defined time in ms
+* "R11\n", "R21\n", "R31\n", "R41\n" Activates Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D4 (Wemos D1)
+* "R10\n", "R20\n", "R30\n", "R40\n" Deactivates Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D4 (Wemos D1)
+* "R1T\n", "R2T\n", "R3T\n", "R4T\n" Trigger Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D4 (Wemos D1) for 500ms
+* "R1T<time in ms>\n", "R2T<time in ms>\n", "R3T<time in ms>\n", "R4T<time in ms>\n" Trigger Relais connected to pin D1, D2, D6 and D7 (Wemos D1 Mini) or D7, D6, D5, D4 (Wemos D1) for the defined time in ms
 
 The Arduino board sends the status of Relais, when it was triggered with the button with the same command.
 

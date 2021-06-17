@@ -610,12 +610,12 @@ void Dialog::on_checkBoxRelais4_clicked(bool checked)
 {
     if(checked)
     {
-        dltRelais2.on(0);
+        dltRelais2.on(1);
         dltMiniServer.sendValue2(dltRelais2.getRelaisName(1),"On");
     }
     else
     {
-        dltRelais2.off(0);
+        dltRelais2.off(1);
         dltMiniServer.sendValue2(dltRelais2.getRelaisName(1),"Off");
     }
 }
