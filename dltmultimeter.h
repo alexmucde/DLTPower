@@ -91,6 +91,9 @@ private:
     void calculateValue();
     int calculateNumber(unsigned char a,unsigned char b);
 
+    bool readVoltageOngoing;
+    QString voltageCmd;
+
 };
 
 #endif // DLT_MULTIMETER_H
