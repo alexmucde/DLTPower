@@ -25,7 +25,7 @@ The following Hardware is currently supported:
   * Interface: USB Serial
   * Protocol: https://sigrok.org/wiki/Multimeter_ICs#Fortune_Semiconductor_FS9721_LP3
   * USB Driver: https://www.holdpeak.de/download/
-* Power supply: Manson HCS-3302 or compatible (e.g. Voltcraft) [Amazon Germany](https://amzn.to/2QUWQ4D)
+* Power supply: Manson HCS-3302 or Voltcraft PPS-11810 or compatible [Amazon Germany Manson](https://amzn.to/2QUWQ4D) [Amazon Germany Voltcraft](https://amzn.to/3e33EWJ)
   * Interface: USB Serial
   * Protocol: See user manual
 
@@ -56,7 +56,7 @@ Compile, upload and run the SW with the [Arduino IDE](https://www.arduino.cc/en/
 
 Clone or copy the Wemos Library into the Arduino Libraries folder before compiling the sketch.
 
-## Arduino Wemos D1 SW
+## Arduino Wemos D1 SW 4 Relais Shield
 
 The following Arduino SW is needed [WemosD1Relais4Shield.ino](https://github.com/alexmucde/DLTRelais/blob/main/arduino/WemosD1Relais4Shield/WemosD1Relais4Shield.ino)
 
@@ -100,11 +100,11 @@ The Arduino board sends every second a watchdog signal "WD\n".
 
 The commands are interpreted independent of the service id.
 
-* <Relais name> on/off/trigger
-* <Relais name> trigger <time in ms>
-* <Power name> on/off
-* VOLTAGE1 <value>
-* VOLTAGE2 <value>
+* \<Relais name\> on/off/trigger
+* \<Relais name\> trigger \<time in ms\>
+* \<Power name\> on/off
+* VOLTAGE1 \<value\>
+* VOLTAGE2 \<value\>
 
 ## Installation
 
