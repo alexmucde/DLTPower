@@ -142,6 +142,12 @@ Github Sponsors:
 
 ## Changes
 
+v0.1.0:
+
+* Remove automatic port name detection
+* Fix relais pins
+* Configurable trigger time by injection
+
 v0.0.9:
 
 * configurable trigger time by injection
