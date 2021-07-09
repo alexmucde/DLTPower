@@ -53,8 +53,10 @@ void DLTMultimeter::checkPortName()
                availablePorts[num].productIdentifier()==interfaceProductIdentifier &&
                availablePorts[num].vendorIdentifier()==interfaceVendorIdentifier)
             {
-                qDebug() << "Port name has changed from" << interface << "to" << availablePorts[num].portName();
-                interface = availablePorts[num].portName();
+                // The following is not working, if several interfaces have the same name
+                // Must be improved in future, e.g. with Serial Id of each device
+                // qDebug() << "Port name has changed from" << interface << "to" << availablePorts[num].portName();
+                // interface = availablePorts[num].portName();
             }
         }
     }
@@ -69,7 +71,7 @@ void DLTMultimeter::start()
     }
 
     // start communication
-    checkPortName();
+    // checkPortName();
 
     value = 0;
 
@@ -238,7 +240,7 @@ void DLTMultimeter::timeout()
         }
 
         // check if port name has changed
-        checkPortName();
+        // checkPortName();
 
         serialData.clear();
 
