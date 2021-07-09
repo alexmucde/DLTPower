@@ -144,6 +144,7 @@ Github Sponsors:
 
 v0.1.0:
 
+* Fixed set voltage problems
 * Remove automatic port name detection
 * Fix relais pins
 * Configurable trigger time by injection

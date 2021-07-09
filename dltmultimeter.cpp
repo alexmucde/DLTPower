@@ -25,6 +25,7 @@ DLTMultimeter::DLTMultimeter(QObject *parent) : QObject(parent)
     value = 0;
     type = 0;
     powerName = "Power";
+    readVoltageOngoing = false;
 }
 
 DLTMultimeter::~DLTMultimeter()
@@ -117,6 +118,7 @@ void DLTMultimeter::start()
     timer.start(5000);
     watchDogCounter = 0;
     watchDogCounterLast = 0;
+    readVoltageOngoing = false;
 }
 
 void DLTMultimeter::stop()
@@ -203,6 +205,12 @@ void DLTMultimeter::readyRead()
                 {
                     valueMultimeter(QString("%1%2.%3%4").arg(line[4]).arg(line[5]).arg(line[6]).arg(line[7]),"A");
                     valueMultimeter(QString("%1%2.%3%4").arg(line[0]).arg(line[1]).arg(line[2]).arg(line[3]),"V");
+                    readVoltageOngoing = false;
+                    if(!voltageCmd.isEmpty())
+                    {
+                        serialPort.write(voltageCmd.toLatin1());
+                        voltageCmd.clear();
+                    }
                 }
 
                 serialData.remove(0,pos+1);
@@ -215,6 +223,7 @@ void DLTMultimeter::readyRead()
 void DLTMultimeter::timeoutRequest()
 {
     serialPort.write("GETD\r");
+    readVoltageOngoing = true;
 }
 
 void DLTMultimeter::timeout()
@@ -453,7 +462,15 @@ void DLTMultimeter::setVoltage(float value)
     {
         QString text;
         text = QString("VOLT%1\r").arg((int)(value*10));
-        serialPort.write(text.toLatin1());
+
+        if(!readVoltageOngoing)
+        {
+            serialPort.write(text.toLatin1());
+        }
+        else
+        {
+            voltageCmd = text;
+        }
 
         qDebug() << "DLTMultimeter: setVoltage" << text;
     }
