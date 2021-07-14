@@ -81,6 +81,8 @@ void DLTMultimeter::start()
         serialPort.setBaudRate(QSerialPort::Baud2400);
     else if(type==1) // Mason HCS-3302 USB
         serialPort.setBaudRate(QSerialPort::Baud9600);
+    else if(type==2) // WemosD1MiniPower
+        serialPort.setBaudRate(QSerialPort::Baud115200);
     serialPort.setDataBits(QSerialPort::Data8);
     serialPort.setParity(QSerialPort::NoParity);
     serialPort.setStopBits(QSerialPort::OneStop);
@@ -215,6 +217,46 @@ void DLTMultimeter::readyRead()
 
                 serialData.remove(0,pos+1);
                 pos = serialData.indexOf('\r');
+            }
+        }
+    }
+    else if(type==2) // WemosD1MiniPower
+    {
+        // loop as long as data is available
+        while(serialPort.bytesAvailable())
+        {
+            char data[256];
+
+            // read one line form serial port
+            qint64 size = serialPort.readLine(data,sizeof(data));
+
+            if(size>0)
+            {
+                // line is not empty
+                qDebug() << "DLTMultimeter: readLine" << data;
+
+                if(QString(data) == "WDMP\r\n")
+                {
+                    // watchdog message received
+                    watchDogCounter++;
+                }
+                else if(QString(data) == "failed\r\n")
+                {
+                }
+                else if(data[0]=='C')
+                {
+                    QString text = QString(data);
+                    QStringList list = text.split(' ');
+                    float current = list[1].toFloat();
+                    valueMultimeter(QString("%1").arg(current/(float)1000),"A");
+                }
+                else if(data[0]=='V')
+                {
+                    QString text = QString(data);
+                    QStringList list = text.split(' ');
+                    float voltage = list[1].toFloat();
+                    valueMultimeter(QString("%1").arg(voltage),"V");
+                }
             }
         }
     }
