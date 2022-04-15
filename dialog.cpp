@@ -624,12 +624,12 @@ void Dialog::on_checkBoxRelais5_clicked(bool checked)
 {
     if(checked)
     {
-        dltRelais2.on(1);
+        dltRelais2.on(2);
         dltMiniServer.sendValue2(dltRelais2.getRelaisName(2),"On");
     }
     else
     {
-        dltRelais2.off(1);
+        dltRelais2.off(2);
         dltMiniServer.sendValue2(dltRelais2.getRelaisName(2),"Off");
     }
 }
@@ -639,12 +639,12 @@ void Dialog::on_checkBoxRelais6_clicked(bool checked)
 {
     if(checked)
     {
-        dltRelais2.on(2);
+        dltRelais2.on(3);
         dltMiniServer.sendValue2(dltRelais2.getRelaisName(3),"On");
     }
     else
     {
-        dltRelais2.off(2);
+        dltRelais2.off(3);
         dltMiniServer.sendValue2(dltRelais2.getRelaisName(3),"Off");
     }
 }

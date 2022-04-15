@@ -72,7 +72,7 @@ Clone or copy the Wemos Library into the Arduino Libraries folder before compili
 
 The Arduino SW provides the following Features:
 
-* Activate and deactivate tfour Relais
+* Activate and deactivate up to four Relais
 * Trigger the Relais for short time (500ms or custom value)
 * If a button shield is connected, a short press triggers the Relais 1 connected to pin D1 (only Wemos D1 Mini)
 * If a button shield is connected, a long press toggles the Relais 2 connected to pin D2 (only Wemos D1 Mini)
@@ -141,6 +141,11 @@ Github Sponsors:
 [:heart: Sponsor](https://github.com/sponsors/alexmucde)
 
 ## Changes
+
+v0.1.1:
+
+* Fix Relais Board 2 activating wrong Relais
+* Update build script to Qt 5.15.2 and MSVC 2019
 
 v0.1.0:
 
