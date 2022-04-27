@@ -97,6 +97,8 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais
     ui->comboBoxType2->setCurrentIndex(dltMultimeter2->getType());
     ui->lineEditPower1Name->setText(dltMultimeter1->getPowerName());
     ui->lineEditPower2Name->setText(dltMultimeter2->getPowerName());
+    ui->lineEditPower1SubstractCurrent->setText(QString("%1").arg(dltMultimeter1->getSubstractCurrent()));
+    ui->lineEditPower2SubstractCurrent->setText(QString("%1").arg(dltMultimeter2->getSubstractCurrent()));
     ui->checkBoxMultimeter1Active->setChecked(dltMultimeter1->getActive());
     ui->checkBoxMultimeter2Active->setChecked(dltMultimeter2->getActive());
 
@@ -128,9 +130,11 @@ void SettingsDialog::backupSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2
     dltMultimeter1->setInterface(ui->comboBoxSerialPortMultimeter1->currentText());
     dltMultimeter1->setType(ui->comboBoxType1->currentIndex());
     dltMultimeter1->setPowerName(ui->lineEditPower1Name->text());
+    dltMultimeter1->setSubstractCurrent(ui->lineEditPower1SubstractCurrent->text().toFloat());
     dltMultimeter2->setInterface(ui->comboBoxSerialPortMultimeter2->currentText());
     dltMultimeter2->setType(ui->comboBoxType2->currentIndex());
     dltMultimeter2->setPowerName(ui->lineEditPower2Name->text());
+    dltMultimeter2->setSubstractCurrent(ui->lineEditPower2SubstractCurrent->text().toFloat());
     dltMultimeter1->setActive(ui->checkBoxMultimeter1Active->isChecked());
     dltMultimeter2->setActive(ui->checkBoxMultimeter2Active->isChecked());
 

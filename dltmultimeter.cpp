@@ -205,7 +205,8 @@ void DLTMultimeter::readyRead()
                 }
                 else if(line.length()==9)
                 {
-                    valueMultimeter(QString("%1%2.%3%4").arg(line[4]).arg(line[5]).arg(line[6]).arg(line[7]),"A");
+                    float current = (QString("%1%2.%3%4").arg(line[4]).arg(line[5]).arg(line[6]).arg(line[7])).toFloat() - substractCurrent;
+                    valueMultimeter(QString("%1").arg(current),"A");
                     valueMultimeter(QString("%1%2.%3%4").arg(line[0]).arg(line[1]).arg(line[2]).arg(line[3]),"V");
                     readVoltageOngoing = false;
                     if(!voltageCmd.isEmpty())
@@ -268,6 +269,16 @@ void DLTMultimeter::timeoutRequest()
     readVoltageOngoing = true;
 }
 
+float DLTMultimeter::getSubstractCurrent() const
+{
+    return substractCurrent;
+}
+
+void DLTMultimeter::setSubstractCurrent(float newSubstractCurrent)
+{
+    substractCurrent = newSubstractCurrent;
+}
+
 void DLTMultimeter::timeout()
 {
     // watchdog timeout
@@ -322,6 +333,7 @@ void DLTMultimeter::clearSettings()
     type = 0;
     powerName = "Power";
     active = 0;
+    substractCurrent = 0;
 
     interfaceSerialNumber = "";
     interfaceProductIdentifier = 0;
@@ -338,6 +350,7 @@ void DLTMultimeter::writeSettings(QXmlStreamWriter &xml,int num)
         xml.writeTextElement("interfaceVendorIdentifier",QString("%1").arg(QSerialPortInfo(interface).vendorIdentifier()));
         xml.writeTextElement("type",QString("%1").arg(type));
         xml.writeTextElement("powerName",powerName);
+        xml.writeTextElement("substractCurrent",QString("%1").arg(substractCurrent));
         xml.writeTextElement("active",QString("%1").arg(active));
     xml.writeEndElement(); // DLTMultimeter
 }
@@ -396,6 +409,10 @@ void DLTMultimeter::readSettings(const QString &filename,int num)
                   else if(xml.name() == QString("powerName"))
                   {
                       powerName = xml.readElementText();
+                  }
+                  else if(xml.name() == QString("substractCurrent"))
+                  {
+                      substractCurrent = xml.readElementText().toFloat();
                   }
                   else if(xml.name() == QString("active"))
                   {

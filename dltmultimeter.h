@@ -53,6 +53,9 @@ public:
     QString getPowerName() { return powerName; }
     void setPowerName(const QString &powerName) { this->powerName = powerName; }
 
+    float getSubstractCurrent() const;
+    void setSubstractCurrent(float newSubstractCurrent);
+
 signals:
 
     void status(QString text);
@@ -80,6 +83,7 @@ private:
     ushort interfaceProductIdentifier;
     ushort interfaceVendorIdentifier;
     QString powerName;
+    float substractCurrent;
     bool active;
 
     QByteArray serialData;

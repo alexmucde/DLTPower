@@ -142,6 +142,10 @@ Github Sponsors:
 
 ## Changes
 
+v0.1.2:
+
+* Added feature to substract current
+
 v0.1.1:
 
 * Fix Relais Board 2 activating wrong Relais
