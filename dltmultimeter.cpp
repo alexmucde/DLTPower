@@ -520,7 +520,9 @@ void DLTMultimeter::setVoltage(float value)
     if(type==1) // Mason HCS-3302 USB
     {
         QString text;
-        text = QString("VOLT%1\r").arg((int)(value*10));
+        
+        // Voltage set cmd sintax: VOLT### (### is the voltage in dV)
+        text = QString("VOLT%L1\r").arg((int)(value*10), 3, 10, QLatin1Char('0'));
 
         if(!readVoltageOngoing)
         {
