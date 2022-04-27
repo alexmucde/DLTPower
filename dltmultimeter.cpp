@@ -521,7 +521,7 @@ void DLTMultimeter::setVoltage(float value)
     {
         QString text;
         
-        // Voltage set cmd sintax: VOLT### (### is the voltage in dV)
+        // Voltage set cmd syntax: VOLT### (### is the voltage in dV)
         text = QString("VOLT%L1\r").arg((int)(value*10), 3, 10, QLatin1Char('0'));
 
         if(!readVoltageOngoing)

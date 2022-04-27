@@ -144,6 +144,7 @@ Github Sponsors:
 
 v0.1.2:
 
+* Fix PS/MM setVoltage to match the 3-digit syntax 
 * Added feature to substract current
 
 v0.1.1:
