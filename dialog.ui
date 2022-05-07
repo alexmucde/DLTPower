@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>922</width>
-    <height>723</height>
+    <width>928</width>
+    <height>628</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -84,8 +84,31 @@
            <string>Value</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="3">
+            <widget class="QLineEdit" name="lineEditUnitV1">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+             <property name="readOnly">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0">
             <widget class="QLineEdit" name="lineEditValueA1">
+             <property name="font">
+              <font>
+               <family>Arial</family>
+               <pointsize>16</pointsize>
+              </font>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QLineEdit" name="lineEditUnitA1">
              <property name="font">
               <font>
                <family>Arial</family>
@@ -107,26 +130,23 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEditUnitV1">
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>16</pointsize>
-              </font>
+           <item row="0" column="4">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxPower1">
+             <property name="maximum">
+              <double>24.000000000000000</double>
              </property>
-             <property name="readOnly">
-              <bool>true</bool>
+             <property name="singleStep">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="value">
+              <double>12.000000000000000</double>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QLineEdit" name="lineEditUnitA1">
-             <property name="font">
-              <font>
-               <family>Arial</family>
-               <pointsize>16</pointsize>
-              </font>
+           <item row="0" column="5">
+            <widget class="QPushButton" name="SetPower1">
+             <property name="text">
+              <string>Set</string>
              </property>
             </widget>
            </item>
@@ -184,8 +204,8 @@
            <string>Value</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_5">
-           <item row="0" column="0">
-            <widget class="QLineEdit" name="lineEditValueV2">
+           <item row="0" column="3">
+            <widget class="QLineEdit" name="lineEditUnitV2">
              <property name="font">
               <font>
                <family>Arial</family>
@@ -197,8 +217,8 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEditUnitV2">
+           <item row="0" column="0">
+            <widget class="QLineEdit" name="lineEditValueV2">
              <property name="font">
               <font>
                <family>Arial</family>
@@ -220,13 +240,33 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
+           <item row="1" column="3">
             <widget class="QLineEdit" name="lineEditUnitA2">
              <property name="font">
               <font>
                <family>Arial</family>
                <pointsize>16</pointsize>
               </font>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4">
+            <widget class="QDoubleSpinBox" name="doubleSpinBoxPower2">
+             <property name="maximum">
+              <double>24.000000000000000</double>
+             </property>
+             <property name="singleStep">
+              <double>0.500000000000000</double>
+             </property>
+             <property name="value">
+              <double>12.000000000000000</double>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <widget class="QPushButton" name="pushButtonSetPower2">
+             <property name="text">
+              <string>Set</string>
              </property>
             </widget>
            </item>

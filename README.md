@@ -142,6 +142,10 @@ Github Sponsors:
 
 ## Changes
 
+v0.1.3:
+
+* UI to set voltage for power supplies
+
 v0.1.2:
 
 * Fix PS/MM setVoltage to match the 3-digit syntax 

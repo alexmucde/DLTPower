@@ -89,6 +89,10 @@ private slots:
 
     void on_pushButtonRelais8Trigger_clicked();
 
+    void on_SetPower1_clicked();
+
+    void on_pushButtonSetPower2_clicked();
+
 private:
     Ui::Dialog *ui;
 

@@ -880,11 +880,13 @@ void Dialog::injection(QString text)
     {
         float value = list[1].toFloat();
         dltMultimeter1.setVoltage(value);
+        ui->doubleSpinBoxPower1->setValue(value);
     }
     else if(list[0]=="VOLTAGE2")
     {
         float value = list[1].toFloat();
         dltMultimeter2.setVoltage(value);
+        ui->doubleSpinBoxPower2->setValue(value);
     }
     else if(dltRelais1.getRelaisName(1) == list[0])
     {
@@ -1108,4 +1110,14 @@ void Dialog::injection(QString text)
 
 }
 
+void Dialog::on_SetPower1_clicked()
+{
+    dltMultimeter1.setVoltage(ui->doubleSpinBoxPower1->value());
+}
+
+
+void Dialog::on_pushButtonSetPower2_clicked()
+{
+    dltMultimeter2.setVoltage(ui->doubleSpinBoxPower2->value());
+}
 
