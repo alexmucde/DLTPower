@@ -83,6 +83,8 @@ void DLTMultimeter::start()
         serialPort.setBaudRate(QSerialPort::Baud9600);
     else if(type==2) // WemosD1MiniPower
         serialPort.setBaudRate(QSerialPort::Baud115200);
+    else if(type==3) // OWON XDM1041
+        serialPort.setBaudRate(QSerialPort::Baud115200);
     serialPort.setDataBits(QSerialPort::Data8);
     serialPort.setParity(QSerialPort::NoParity);
     serialPort.setStopBits(QSerialPort::OneStop);
@@ -112,6 +114,12 @@ void DLTMultimeter::start()
         timerRequest.start(1000);
         connect(&timerRequest, SIGNAL(timeout()), this, SLOT(timeoutRequest()));
     }
+    if(type==3) // OWON XDM1041
+    {
+        timerRequest.start(1000);
+        connect(&timerRequest, SIGNAL(timeout()), this, SLOT(timeoutRequest()));
+        serialPort.write("CONF:CURR\r\n");
+    }
 
     serialData.clear();
 
@@ -135,6 +143,11 @@ void DLTMultimeter::stop()
     qDebug() << "DLTMultimeter: stopped" << interface;
 
     if(type==1) // Mason HCS-3302 USB
+    {
+        timerRequest.stop();
+        disconnect(&timerRequest, SIGNAL(timeout()), this, SLOT(timeoutRequest()));
+    }
+    if(type==3) // OWON XDM1041
     {
         timerRequest.stop();
         disconnect(&timerRequest, SIGNAL(timeout()), this, SLOT(timeoutRequest()));
@@ -261,12 +274,50 @@ void DLTMultimeter::readyRead()
             }
         }
     }
+    else if(type==3) // OWON XDM1041
+    {
+        // loop as long as data is available
+        while(serialPort.bytesAvailable())
+        {
+            // read one line form serial port
+            serialData += serialPort.readAll();
+
+            int pos;
+            pos = serialData.indexOf('\r');
+            while(pos!=-1)
+            {
+                QString line(serialData.mid(0,pos));
+                line.remove('\n');
+
+                qDebug() << "DLTMultimeter: readLine" << line;
+
+                if(!line.isEmpty())
+                {
+                    watchDogCounter++;
+                    double current = line.toFloat();
+                    valueMultimeter(QString("%1").arg(current,0,'g',3),"A");
+                }
+
+                serialData.remove(0,pos+1);
+                pos = serialData.indexOf('\r');
+            }
+        }
+    }
 }
 
 void DLTMultimeter::timeoutRequest()
 {
-    serialPort.write("GETD\r");
-    readVoltageOngoing = true;
+    if(type==1) // Mason HCS-3302 USB
+    {
+        serialPort.write("GETD\r");
+        readVoltageOngoing = true;
+    }
+    if(type==3) // OWON XDM1041
+    {
+        serialPort.write("MEAS?\r\n");
+        readVoltageOngoing = true;
+    }
+
 }
 
 float DLTMultimeter::getSubstractCurrent() const

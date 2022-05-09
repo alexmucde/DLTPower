@@ -142,6 +142,10 @@ Github Sponsors:
 
 ## Changes
 
+v0.1.4:
+
+* Support OWON XDM1041 Multimeter
+
 v0.1.3:
 
 * UI to set voltage for power supplies
