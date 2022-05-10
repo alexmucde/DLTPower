@@ -25,6 +25,10 @@ The following Hardware is currently supported:
   * Interface: USB Serial
   * Protocol: https://sigrok.org/wiki/Multimeter_ICs#Fortune_Semiconductor_FS9721_LP3
   * USB Driver: https://www.holdpeak.de/download/
+* Multimeter: OWON XDM1041
+  * Interface: USB Serial
+  * Protocol: https://github.com/TheHWcave/OWON-XDM1041/blob/main/SCPI/XDM1041-SCPI.pdf
+  * USB Driver: Same as Arduinow Wemos D1
 * Power supply: Manson HCS-3302 or Voltcraft PPS-11810 or compatible [Amazon Germany Manson](https://amzn.to/2QUWQ4D) [Amazon Germany Voltcraft](https://amzn.to/3e33EWJ)
   * Interface: USB Serial
   * Protocol: See user manual
