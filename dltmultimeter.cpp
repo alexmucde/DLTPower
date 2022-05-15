@@ -218,8 +218,9 @@ void DLTMultimeter::readyRead()
                 }
                 else if(line.length()==9)
                 {
-                    float current = (QString("%1%2.%3%4").arg(line[4]).arg(line[5]).arg(line[6]).arg(line[7])).toFloat() - substractCurrent;
-                    valueMultimeter(QString("%1").arg(current),"A");
+                    double current = (QString("%1%2.%3%4%5").arg(line[4]).arg(line[5]).arg(line[6]).arg(line[7]).arg(line[8])).toDouble() - substractCurrent;
+//                    valueMultimeter(QString("%1").arg(current),"A");
+                    valueMultimeter(QString::number(current, 'f', 3),"A");
                     valueMultimeter(QString("%1%2.%3%4").arg(line[0]).arg(line[1]).arg(line[2]).arg(line[3]),"V");
                     readVoltageOngoing = false;
                     if(!voltageCmd.isEmpty())
@@ -295,7 +296,8 @@ void DLTMultimeter::readyRead()
                 {
                     watchDogCounter++;
                     double current = line.toFloat();
-                    valueMultimeter(QString("%1").arg(current,0,'g',3),"A");
+//                    valueMultimeter(QString("%1").arg(current,0,'g',3),"A");
+                    valueMultimeter(QString::number(current, 'f', 3),"A");
                 }
 
                 serialData.remove(0,pos+1);

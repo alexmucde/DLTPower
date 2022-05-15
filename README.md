@@ -148,6 +148,7 @@ Github Sponsors:
 
 v0.1.4:
 
+* Cleanup current output
 * Support OWON XDM1041 Multimeter
 
 v0.1.3:
