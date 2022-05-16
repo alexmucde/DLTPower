@@ -99,6 +99,32 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="label_22">
+         <property name="text">
+          <string>Type:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxRelaisBoardType1">
+         <item>
+          <property name="text">
+           <string>Wemos Mini D1 (3 Relais)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Wemos D1 (4 Relais)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Arduino Boards</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label">
          <property name="text">
           <string>Serial Port:</string>
@@ -173,6 +199,32 @@
          <property name="text">
           <string>Active</string>
          </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_23">
+         <property name="text">
+          <string>Type:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="comboBoxRelaisBoardType2">
+         <item>
+          <property name="text">
+           <string>Wemos Mini D1 (3 Relais)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Wemos D1 (4 Relais)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Arduino Boards</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item>

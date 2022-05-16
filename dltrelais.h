@@ -55,6 +55,9 @@ public:
     void writeSettings(QXmlStreamWriter &xml,int num);
     void readSettings(const QString &filename,int num);
 
+    int getType() const;
+    void setType(int newType);
+
 signals:
 
     // Called when status changed
@@ -76,6 +79,7 @@ private:
     unsigned int watchDogCounter,watchDogCounterLast;
 
     // Settings
+    int type;
     QString interface;
     QString interfaceSerialNumber;
     ushort interfaceProductIdentifier;

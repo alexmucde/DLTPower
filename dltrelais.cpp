@@ -20,7 +20,7 @@
 
 DLTRelais::DLTRelais(QObject *parent) : QObject(parent)
 {
-    clearSettings();
+    clearSettings();    
 }
 
 DLTRelais::~DLTRelais()
@@ -82,8 +82,11 @@ void DLTRelais::start()
     {
         // open with success
 
-        // prevent flash mode of Wemos D1 mini
-        serialPort.setDataTerminalReady(false);
+        // prevent flash mode of Wemos D1 mini and Wemos D1, not for Arduino boards
+        if(type==2) // Arduino Boards
+            serialPort.setDataTerminalReady(true);
+        else
+            serialPort.setDataTerminalReady(false);
 
         // connect slot to receive data from serial port
         connect(&serialPort, SIGNAL(readyRead()), this, SLOT(readyRead()));
@@ -212,9 +215,20 @@ void DLTRelais::timeout()
     }
 }
 
+int DLTRelais::getType() const
+{
+    return type;
+}
+
+void DLTRelais::setType(int newType)
+{
+    type = newType;
+}
+
 void DLTRelais::clearSettings()
 {
     // clear settings
+    type = 0;
     for(int num=0;num<4;num++)
         relaisName[num] = QString("Relais%1").arg(num+1);
 
@@ -237,6 +251,7 @@ void DLTRelais::writeSettings(QXmlStreamWriter &xml,int num)
         xml.writeTextElement("interfaceSerialNumber",QSerialPortInfo(interface).serialNumber());
         xml.writeTextElement("interfaceProductIdentifier",QString("%1").arg(QSerialPortInfo(interface).productIdentifier()));
         xml.writeTextElement("interfaceVendorIdentifier",QString("%1").arg(QSerialPortInfo(interface).vendorIdentifier()));
+        xml.writeTextElement("type",QString("%1").arg(type));
         xml.writeTextElement("active",QString("%1").arg(active));
     xml.writeEndElement(); // DLTRelais
 }
@@ -292,6 +307,10 @@ void DLTRelais::readSettings(const QString &filename,int num)
                   else if(xml.name() == QString("interfaceVendorIdentifier"))
                   {
                       interfaceVendorIdentifier = xml.readElementText().toUShort();
+                  }
+                  else if(xml.name() == QString("type"))
+                  {
+                      type = xml.readElementText().toInt();
                   }
                   else if(xml.name() == QString("active"))
                   {

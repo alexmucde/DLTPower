@@ -148,6 +148,7 @@ Github Sponsors:
 
 v0.1.4:
 
+* Support Arduino boards setting DTR to true
 * Cleanup current output
 * Support OWON XDM1041 Multimeter
 

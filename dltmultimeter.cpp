@@ -23,7 +23,6 @@ DLTMultimeter::DLTMultimeter(QObject *parent) : QObject(parent)
     clearSettings();
 
     value = 0;
-    type = 0;
     powerName = "Power";
     readVoltageOngoing = false;
 }

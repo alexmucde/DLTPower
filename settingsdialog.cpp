@@ -89,6 +89,8 @@ void SettingsDialog::restoreSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais
     ui->comboBoxSerialPort2->setCurrentText(dltRelais2->getInterface());
     ui->checkBoxRelais1Active->setChecked(dltRelais1->getActive());
     ui->checkBoxRelais2Active->setChecked(dltRelais2->getActive());
+    ui->comboBoxRelaisBoardType1->setCurrentIndex(dltRelais1->getType());
+    ui->comboBoxRelaisBoardType2->setCurrentIndex(dltRelais2->getType());
 
     /* DLTMultimeter */
     ui->comboBoxSerialPortMultimeter1->setCurrentText(dltMultimeter1->getInterface());
@@ -125,6 +127,8 @@ void SettingsDialog::backupSettings(DLTRelais *dltRelais1, DLTRelais *dltRelais2
     dltRelais2->setRelaisName(4,ui->lineEditRelaisName8->text());
     dltRelais1->setActive(ui->checkBoxRelais1Active->isChecked());
     dltRelais2->setActive(ui->checkBoxRelais2Active->isChecked());
+    dltRelais1->setType(ui->comboBoxRelaisBoardType1->currentIndex());
+    dltRelais2->setType(ui->comboBoxRelaisBoardType2->currentIndex());
 
     /* DLTMultimeter */
     dltMultimeter1->setInterface(ui->comboBoxSerialPortMultimeter1->currentText());
