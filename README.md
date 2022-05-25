@@ -146,6 +146,10 @@ Github Sponsors:
 
 ## Changes
 
+v0.1.5:
+
+* Reduce Debug output
+
 v0.1.4:
 
 * Support Arduino boards setting DTR to true

@@ -183,11 +183,11 @@ void DLTMultimeter::readyRead()
                 case 0xe0:
                     data.clear();
                     rawData+=data[num];
-                    qDebug() << "DLTMultimeter: Raw Data " << rawData.toHex();
+                    //qDebug() << "DLTMultimeter: Raw Data " << rawData.toHex();
                     calculateValue();
                     valueMultimeter(QString("%1").arg(value),unit);
                     watchDogCounter++;
-                    qDebug() << "DLTMultimeter: Value received" << interface << value << unit;
+                    //qDebug() << "DLTMultimeter: Value received" << interface << value << unit;
                     break;
                 default:
                     rawData+=data[num];
@@ -209,7 +209,7 @@ void DLTMultimeter::readyRead()
             {
                 QString line(serialData.mid(0,pos));
 
-                qDebug() << "DLTMultimeter: readLine" << line;
+                //qDebug() << "DLTMultimeter: readLine" << line;
 
                 if(line=="OK")
                 {
@@ -247,7 +247,7 @@ void DLTMultimeter::readyRead()
             if(size>0)
             {
                 // line is not empty
-                qDebug() << "DLTMultimeter: readLine" << data;
+                //qDebug() << "DLTMultimeter: readLine" << data;
 
                 if(QString(data) == "WDMP\r\n")
                 {
@@ -289,7 +289,7 @@ void DLTMultimeter::readyRead()
                 QString line(serialData.mid(0,pos));
                 line.remove('\n');
 
-                qDebug() << "DLTMultimeter: readLine" << line;
+                //qDebug() << "DLTMultimeter: readLine" << line;
 
                 if(!line.isEmpty())
                 {
@@ -585,6 +585,6 @@ void DLTMultimeter::setVoltage(float value)
             voltageCmd = text;
         }
 
-        qDebug() << "DLTMultimeter: setVoltage" << text;
+        //qDebug() << "DLTMultimeter: setVoltage" << text;
     }
 }

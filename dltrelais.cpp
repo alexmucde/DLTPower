@@ -150,7 +150,7 @@ void DLTRelais::readyRead()
         if(size>0)
         {
             // line is not empty
-            qDebug() << "DLTRelais: readLine" << data;
+            //qDebug() << "DLTRelais: readLine" << data;
 
             if(QString(data) == "WD\r\n")
             {
